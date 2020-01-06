@@ -125,7 +125,7 @@
     </div>
 
     <p>
-        <a class="button" href="/">Back</a>
+        <a class="button" href="/awp-1-giannossazos/public/">Back</a>
     </p>
 
 @endsection

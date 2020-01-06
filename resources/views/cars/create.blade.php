@@ -92,7 +92,7 @@
                 </div>
             </div>
 
-            @error ('gearbox')
+            @error ('transmission')
             <div class="notification is-warning">
                 <p>
                     {{ $message }}
@@ -134,13 +134,12 @@
             <div class="field">
                 <button class="button is-primary" type="submit">Add Car</button>
             </div>
-
         </fieldset>
     </form>
 </div>
 
 <p>
-    <a class="button" href="/">Back</a>
+    <a class="button" href="/awp-1-giannossazos/public/" >Back</a>
 </p>
 
 @endsection

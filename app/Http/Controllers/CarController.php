@@ -13,6 +13,7 @@ class CarController extends Controller
         'model' => 'required|min:3|max:64',
         'year' => 'required|min:4|max:4',
         'type' => 'required|min:2|max:256',
+        'fuel_type' => 'required|min:2|max:256',
         'transmission' => 'required|min:2|max:256',
         'doors' => 'required|min:1|max:256',
         'price' => 'required|min:2|max:256',
@@ -22,7 +23,8 @@ class CarController extends Controller
         'model.required' => 'The model is required.',
         'year.required' => 'The year cannot be empty.',
         'type.required' => 'The type is required.',
-        'transmission.required' => 'The comment cannot be empty.',
+        'fuel_type.required' => 'The fuel type is required',
+        'transmission.required' => 'The gearbox is required',
         'doors.required' => 'The no. of doors are required.',
         'price.required' => 'The price cannot be empty.',
     ];
