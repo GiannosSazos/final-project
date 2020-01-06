@@ -25,7 +25,7 @@
                         Year
                     </label>
                     <div class="control">
-                        <input class="input" type="integer" name="year" placeholder="Enter Year of Make">
+                        <input class="input" type="integer" name="year" value="{{$car->year}}" placeholder="Enter Year of Make">
                     </div>
                 </div>
 
@@ -41,7 +41,7 @@
                         Type
                     </label>
                     <div class="control">
-                        <input class="input" type="string" name="type" placeholder="Enter Car Type">
+                        <input class="input" type="string" name="type" value="{{$car->type}}" placeholder="Enter Car Type">
                     </div>
                 </div>
 
@@ -57,7 +57,7 @@
                         Fuel
                     </label>
                     <div class="control">
-                        <input class="input" type="string" name="fuel_type" placeholder="Enter Car's Fuel Type">
+                        <input class="input" type="string" name="fuel_type" value="{{$car->fuel_type}}" placeholder="Enter Car's Fuel Type">
                     </div>
                 </div>
 
@@ -73,11 +73,11 @@
                         Gearbox
                     </label>
                     <div class="control">
-                        <input class="input" type="string" name="transmission" placeholder="Enter Gearbox Type">
+                        <input class="input" type="string" name="transmission" value="{{$car->transmission}}" placeholder="Enter Gearbox Type">
                     </div>
                 </div>
 
-                @error ('gearbox')
+                @error ('transmission')
                 <div class="notification is-warning">
                     <p>
                         {{ $message }}
@@ -89,7 +89,7 @@
                         Doors
                     </label>
                     <div class="control">
-                        <input class="input" type="integer" name="doors" placeholder="Enter Number of Doors">
+                        <input class="input" type="integer" name="doors" value="{{$car->doors}}" placeholder="Enter Number of Doors">
                     </div>
                 </div>
 
@@ -105,7 +105,7 @@
                         Price
                     </label>
                     <div class="control">
-                        <input class="input" type="integer" name="price" placeholder="Enter Price">
+                        <input class="input" type="integer" name="price" value="{{$car->price}}" placeholder="Enter Price">
                     </div>
                 </div>
 

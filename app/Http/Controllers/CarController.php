@@ -108,8 +108,10 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update( Car $car)
+    public function update( Car $car,   Request $request)
     {
+        $request -> validate (self::RULES, self::MESSAGES);
+
         $car -> update (request(['year']));
         $car -> update (request(['type']));
         $car -> update (request(['fuel_type']));
