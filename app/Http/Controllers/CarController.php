@@ -7,8 +7,26 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    const CARS_PER_PAGE = 5;
 
-    const CARS_PER_PAGE =5;
+    const RULES = [
+        'model' => 'required|min:3|max:64',
+        'year' => 'required|min:4|max:4',
+        'type' => 'required|min:2|max:256',
+        'transmission' => 'required|min:2|max:256',
+        'doors' => 'required|min:1|max:256',
+        'price' => 'required|min:2|max:256',
+    ];
+
+    const MESSAGES = [
+        'model.required' => 'The model is required.',
+        'year.required' => 'The year cannot be empty.',
+        'type.required' => 'The type is required.',
+        'transmission.required' => 'The comment cannot be empty.',
+        'doors.required' => 'The no. of doors are required.',
+        'price.required' => 'The price cannot be empty.',
+    ];
+
     /**
      * Display a listing of the resource.
      *
@@ -16,9 +34,9 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::paginate(self::CARS_PER_PAGE);
+        $cars = Car::paginate (self::CARS_PER_PAGE);
 
-        return view ('index', compact('cars'));
+        return view ('index') -> with (['cars' => $cars]);
     }
 
     /**
@@ -28,7 +46,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        return view ('cars.create');
     }
 
     /**
@@ -39,7 +57,23 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request -> validate (self::RULES, self::MESSAGES);
+
+
+
+        Car::create ([
+
+            'model' => $request -> input ('model'),
+            'year' => $request -> input ('year'),
+            'type' => $request -> input ('type'),
+            'fuel_type' => $request -> input ('fuel_type'),
+            'transmission' => $request -> input ('transmission'),
+            'doors' => $request -> input ('doors'),
+            'price' => $request -> input ('price'),
+
+        ]);
+
+        return redirect () -> action ('CarController@index');
     }
 
     /**
@@ -50,7 +84,8 @@ class CarController extends Controller
      */
     public function show(Car $car)
     {
-        //
+        return view ('cars.show', compact ('car'));
+
     }
 
     /**
@@ -61,7 +96,7 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        //
+        return view ('cars.edit', compact ('car'));
     }
 
     /**
@@ -71,9 +106,16 @@ class CarController extends Controller
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Car $car)
+    public function update( Car $car)
     {
-        //
+        $car -> update (request(['year']));
+        $car -> update (request(['type']));
+        $car -> update (request(['fuel_type']));
+        $car -> update (request(['transmission']));
+        $car -> update (request(['doors']));
+        $car -> update (request(['price']));
+
+        return redirect () -> action ('CarController@index');
     }
 
     /**
@@ -84,6 +126,7 @@ class CarController extends Controller
      */
     public function destroy(Car $car)
     {
-        //
+        $car -> delete ();
+        return redirect () -> action ('CarController@index');
     }
 }

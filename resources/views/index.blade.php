@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends ('layouts.app')
 
-    <title>Car Dealership</title>
+@section ('page_title')
+    Car Dealership
+@endsection
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-    <link rel="icon"       type="image/png"       href="{{ asset ('images/carfavicon.png') }}" />
-    <link href="{{ asset ('css/design.css') }}"       rel="stylesheet" />
+@section ('page_heading')
+    Inventory
+@endsection
+
+@section ('content')
+
+    <div class="container main-table">
+        <div class="box">
+
+            @if (count ($cars) > 0)
 
 
-
-</head>
-<body>
 <table class="table is-striped is-hoverable">
     <thead>
     <th>Car</th>
@@ -27,11 +29,39 @@
             <td>{{ $c -> model }}</td>
             <td>{{ $c -> year }}</td>
             <td>£{{$c -> price }}</td>
+            <td>
+                <a class="button"
+                   href="car/{{ $c -> id }}/">
+                    <ion-icon name="eye"></ion-icon>
+                </a>
+            </td>
+            <td>
+                <a class="button"
+                   href="car/{{ $c -> id }}/edit">
+                    <ion-icon name="create"></ion-icon>
+                </a>
+            </td>
+            <td>
+                <a class="button"
+                   href="car/{{ $c -> id }}/delete/">
+                    <ion-icon name="trash"></ion-icon>  </a></td>
         </tr>
     @endforeach
     </tbody>
 </table>
 
 {{$cars->links()}}
-</body>
-</html>
+            @else
+                <div class="notification is-info">
+                    <p>
+                        The inventroy is empty. Why not add a car?
+                    </p>
+                </div>
+            @endif
+        </div>
+        <div class="box">
+            <a class="button is-primary" href="add/">Add Car</a>
+        </div>
+    </div>
+    @endsection
+
