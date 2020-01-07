@@ -17,7 +17,14 @@
             <fieldset>
 
                 @csrf
-
+                <div class="field">
+                    <label class="label">
+                        Model
+                    </label>
+                    <div class="control">
+                        <input class="input" type="String" name="model" value="{{$car->model}}" readonly>
+                    </div>
+                </div>
 
 
                 <div class="field">
