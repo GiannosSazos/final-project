@@ -3,9 +3,9 @@
 @section ('page_title')
     Car Dealership | Edit
 @endsection
-
+@if (Auth::check())
 @section ('page_heading')
-    Edit details of {{$car->model}}
+    Edit details
 @endsection
 
 @section ('content')
@@ -136,3 +136,6 @@
     </p>
 
 @endsection
+@else
+    <script>window.location='/awp-1-giannossazos/public/login/';</script>
+@endif

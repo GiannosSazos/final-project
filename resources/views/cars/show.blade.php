@@ -3,7 +3,7 @@
 @section ('page_title')
    Car Dealership | Details
 @endsection
-
+@if (Auth::check())
 @section ('page_heading')
     Car: {{ $car -> model }}
 @endsection
@@ -45,3 +45,6 @@
     </p>
 
 @endsection
+@else
+    <script>window.location='/awp-1-giannossazos/public/login/';</script>
+@endif

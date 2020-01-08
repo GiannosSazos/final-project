@@ -5,6 +5,8 @@
     Car Dealership
 @endsection
 
+@if (Auth::check())
+
 @section ('page_heading')
     Inventory
 @endsection
@@ -17,40 +19,40 @@
             @if (count ($cars) > 0)
 
 
-<table class="table is-striped is-hoverable">
-    <thead>
-    <th>Car</th>
-   <th>Year</th>
-    <th>Price</th>
-    </thead>
-    <tbody>
-    @foreach ($cars as $c)
-        <tr>
-            <td>{{ $c -> model }}</td>
-            <td>{{ $c -> year }}</td>
-            <td>£{{$c -> price }}</td>
-            <td>
-                <a class="button"
-                   href="car/{{ $c -> id }}/">
-                    <ion-icon name="eye"></ion-icon>
-                </a>
-            </td>
-            <td>
-                <a class="button"
-                   href="car/{{ $c -> id }}/edit">
-                    <ion-icon name="create"></ion-icon>
-                </a>
-            </td>
-            <td>
-                <a class="button"
-                   href="car/{{ $c -> id }}/delete/">
-                    <ion-icon name="trash"></ion-icon>  </a></td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+                <table class="table is-striped is-hoverable">
+                    <thead>
+                    <th>Car</th>
+                    <th>Year</th>
+                    <th>Price</th>
+                    </thead>
+                    <tbody>
+                    @foreach ($cars as $c)
+                        <tr>
+                            <td>{{ $c -> model }}</td>
+                            <td>{{ $c -> year }}</td>
+                            <td>£{{$c -> price }}</td>
+                            <td>
+                                <a class="button"
+                                   href="car/{{ $c -> id }}/">
+                                    <ion-icon name="eye"></ion-icon>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="button"
+                                   href="car/{{ $c -> id }}/edit">
+                                    <ion-icon name="create"></ion-icon>
+                                </a>
+                            </td>
+                            <td>
+                                <a class="button"
+                                   href="car/{{ $c -> id }}/delete/">
+                                    <ion-icon name="trash"></ion-icon>  </a></td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
 
-{{$cars->links()}}
+                {{$cars->links()}}
             @else
                 <div class="notification is-info">
                     <p>
@@ -61,7 +63,11 @@
         </div>
         <div class="box">
             <a class="button is-primary" href="add/">Add Car</a>
+            <a class="button is-secondary" href="logout/">Log Out</a>
         </div>
     </div>
-    @endsection
+@endsection
+@else
+    <script>window.location='login/';</script>
+@endif
 
