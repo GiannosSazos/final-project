@@ -6,7 +6,7 @@
 @if (Auth::check())
 @section ('page_heading')
     <center>
-    Edit details
+        Edit details
     </center>
 @endsection
 

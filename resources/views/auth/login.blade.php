@@ -16,7 +16,7 @@
 
                     <div class="control has-icons-left">
                         <input id="email" type="email" class="input is-rounded @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                             <span class="icon is-small is-left">
+                        <span class="icon is-small is-left">
                             <ion-icon name="mail"></ion-icon>
                           </span>
                         @error('email')
@@ -62,10 +62,10 @@
                         </button>
 
 
-                            <a class="button is-secondary" href="{{ route('register') }}">
+                        <a class="button is-secondary" href="{{ route('register') }}">
                             {{ __('Register') }}
                         </a>
-                        <a class="btn btn-link" href="{{ route('register') }}">
+                        <a class="btn btn-link" href="{{ route('login') }}">
                             {{ __('Forgot Password?') }}
                         </a>
 

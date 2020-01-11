@@ -36,10 +36,43 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::paginate (self::CARS_PER_PAGE);
 
-        return view ('index') -> with (['cars' => $cars]);
+        $queries = [];
+        $columns = [
+            'type',
+            'transmission',
+            'fuel_type',
+            'doors'
+        ];
+
+
+        foreach ($columns as $column) {
+            if (request()->has($column)) {
+                $cars = Car::where($column, request($column))
+                    ->paginate(self::CARS_PER_PAGE)
+                    ->appends($column, request($column));
+                $queries[$column] = request($column);
+                return view('index')->with(['cars' => $cars]);
+            }
+        }
+        if (request()->has('year')){
+            $cars=Car::orderBy('year',request('year'))
+                ->paginate(self::CARS_PER_PAGE)
+                ->appends('year', request('year'));
+
+            return view('index')->with(['cars' => $cars]);
+        }
+        if (request()->has('price')){
+            $cars=Car::orderBy('price',request('price'))
+                ->paginate(self::CARS_PER_PAGE)
+                ->appends('price', request('price'));
+
+            return view('index')->with(['cars' => $cars]);
+        }
+        $cars = Car::paginate(self::CARS_PER_PAGE);
+        return view('index')->with(['cars' => $cars]);
     }
+
 
     /**
      * Show the form for creating a new resource.

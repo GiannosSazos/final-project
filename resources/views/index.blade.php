@@ -5,6 +5,13 @@
     Car Dealership
 @endsection
 
+@section ('page_heading')
+    <center>
+        Car Dealership
+    </center>
+@endsection
+
+
 @if (Auth::check())
 
 
@@ -13,6 +20,34 @@
     <center>
         <div class="box">
 
+            <div style="text-align: left;">
+                Type:
+                <a href="?type=small">Small</a> |
+                <a href="?type=hatchback">Hatchback</a> |
+                <a href="?type=sedan">Sedan</a> |
+                <a href="?type=coupe">Coupe</a> |
+                <a href="?type=SUV">SUV</a> |
+                <a href="?type=convertible">Convertible</a><br>
+                Transmission:
+                <a href="?transmission=automatic">Automatic</a> |
+                <a href="?transmission=manual">Manual</a>
+                <br>
+                Fuel Type:
+                <a href="?fuel_type=diesel">Diesel</a> |
+                <a href="?fuel_Type=petrol">Petrol</a>
+                <br>
+                Doors:
+                <a href="?doors=2">2</a> |
+                <a href="?doors=4">4</a>
+            </div>
+            <div style="text-align: right;">
+                Sort by Price:
+                <a href="?price=asc">Ascending</a> |
+                <a href="?price=desc">Descending</a><br>
+                Sort by Year:
+                <a href="?year=asc">Ascending</a> |
+                <a href="?year=desc">Descending</a>
+            </div>
             <form action = "" method="POST">
 
                 <fieldset>
@@ -20,7 +55,7 @@
                     @csrf
                     <input style="text-align:center;" class="input is-rounded" type="string" name="keyword" placeholder="Search Car by Model">
                     <button style="margin:5px;"  class="button is-primary is-rounded"  type="submit"><ion-icon name="search"></ion-icon></button>
-                    <button style="margin:5px;" class="button is-secondary is-rounded" href="home/"  >Show All Cars</button>
+                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/"  >Show All Cars</button>
 
 
 
@@ -70,9 +105,9 @@
                     </tbody>
                 </table>
 
-                <div class="pagination-center">
-                    {{$cars->links()}}
-                </div>
+
+                {{$cars->links()}}
+
                 <br>
                 <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Car</a>
                 <a style="margin:5px;" class="button is-danger is-rounded" href="logout/">Log Out</a>
