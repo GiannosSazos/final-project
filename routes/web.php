@@ -23,3 +23,5 @@ Route::get('/home', 'CarController@index');
 Route::post('/home', 'CarController@search');
 
 Route::get('/logout','Auth\LoginController@logout');
+
+

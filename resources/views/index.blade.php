@@ -7,41 +7,41 @@
 
 @if (Auth::check())
 
-@section ('page_heading')
-    Inventory
-@endsection
+
 
 @section ('content')
-    <div class="box">
+    <center>
+        <div class="box">
 
-        <form action = "" method="POST">
+            <form action = "" method="POST">
 
-            <fieldset>
+                <fieldset>
 
-                @csrf
+                    @csrf
+                    <input style="text-align:center;" class="input is-rounded" type="string" name="keyword" placeholder="Search Car by Model">
+                    <button style="margin:5px;"  class="button is-primary is-rounded"  type="submit"><ion-icon name="search"></ion-icon></button>
+                    <button style="margin:5px;" class="button is-secondary is-rounded" href="home/"  >Show All Cars</button>
 
-                <div class="field">
-                    <label class="label">
-                      Search Inventory
-                    </label>
 
-                        <input class="keyword" type="string" name="keyword" placeholder="Search Car by Model">
-                        <button class="button is-primary"  type="submit"><ion-icon name="search"></ion-icon></button>
-                    <button class="button is-secondary" href="home/"  >Show All Cars</button>
 
-                </div>
-            </fieldset>
-        </form>
-    </div>
-    <div class="box">
+
+                </fieldset>
+            </form>
+        </div>
+        <div class="box">
             @if (count ($cars) > 0)
 
 
-                <table class="table is-striped is-hoverable">
+                <table class="table is-striped is-hoverable is-fullwidth">
+
                     <thead>
                     <th>Model</th>
                     <th>Year</th>
                     <th>Price</th>
+                    <th>View</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+
                     </thead>
                     <tbody>
                     @foreach ($cars as $c)
@@ -70,7 +70,12 @@
                     </tbody>
                 </table>
 
-                {{$cars->links()}}
+                <div class="pagination-center">
+                    {{$cars->links()}}
+                </div>
+                <br>
+                <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Car</a>
+                <a style="margin:5px;" class="button is-danger is-rounded" href="logout/">Log Out</a>
             @else
                 <div class="notification is-info">
                     <p>
@@ -79,12 +84,9 @@
                 </div>
             @endif
         </div>
-
-            <a class="button is-primary" href="add/">Add Car</a>
-            <a class="button is-secondary" href="logout/">Log Out</a>
-
-    </div>
-    </div>
+        </div>
+        </div>
+    </center>
 @endsection
 @else
     <script>window.location='login/';</script>

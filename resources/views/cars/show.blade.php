@@ -5,13 +5,15 @@
 @endsection
 @if (Auth::check())
 @section ('page_heading')
+    <center>
     Car: {{ $car -> model }}
+    </center>
 @endsection
 
 @section ('content')
 
     <div class="box">
-        <table class="table is-striped">
+        <table class="table is-striped is-fullwidth">
             <tbody>
             <tr>
                 <td>Year:</td>
@@ -38,11 +40,13 @@
                 <td>£{{ $car -> price }}</td>
             </tr>
             </tbody>
+
         </table>
+        <a class="button" href="/awp-1-giannossazos/public/home">Back</a>
     </div>
-    <p>
-        <a class="button" href="/awp-1-giannossazos/public/">Back</a>
-    </p>
+
+
+
 
 @endsection
 @else

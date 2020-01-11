@@ -5,7 +5,9 @@
 @endsection
 @if (Auth::check())
 @section ('page_heading')
+    <center>
     Edit details
+    </center>
 @endsection
 
 @section ('content')
@@ -22,7 +24,7 @@
                         Model
                     </label>
                     <div class="control">
-                        <input class="input" type="String" name="model" value="{{$car->model}}" readonly>
+                        <input class="input is-rounded" type="String" name="model" value="{{$car->model}}" readonly>
                     </div>
                 </div>
 
@@ -32,7 +34,7 @@
                         Year
                     </label>
                     <div class="control">
-                        <input class="input" type="integer" name="year" value="{{$car->year}}" placeholder="Enter Year of Make">
+                        <input class="input is-rounded" type="integer" name="year" value="{{$car->year}}" placeholder="Enter Year of Make">
                     </div>
                 </div>
 
@@ -48,7 +50,7 @@
                         Type
                     </label>
                     <div class="control">
-                        <input class="input" type="string" name="type" value="{{$car->type}}" placeholder="Enter Car Type">
+                        <input class="input is-rounded" type="string" name="type" value="{{$car->type}}" placeholder="Enter Car Type">
                     </div>
                 </div>
 
@@ -64,7 +66,7 @@
                         Fuel
                     </label>
                     <div class="control">
-                        <input class="input" type="string" name="fuel_type" value="{{$car->fuel_type}}" placeholder="Enter Car's Fuel Type">
+                        <input class="input is-rounded" type="string" name="fuel_type" value="{{$car->fuel_type}}" placeholder="Enter Car's Fuel Type">
                     </div>
                 </div>
 
@@ -80,7 +82,7 @@
                         Gearbox
                     </label>
                     <div class="control">
-                        <input class="input" type="string" name="transmission" value="{{$car->transmission}}" placeholder="Enter Gearbox Type">
+                        <input class="input is-rounded" type="string" name="transmission" value="{{$car->transmission}}" placeholder="Enter Gearbox Type">
                     </div>
                 </div>
 
@@ -96,7 +98,7 @@
                         Doors
                     </label>
                     <div class="control">
-                        <input class="input" type="integer" name="doors" value="{{$car->doors}}" placeholder="Enter Number of Doors">
+                        <input class="input is-rounded" type="integer" name="doors" value="{{$car->doors}}" placeholder="Enter Number of Doors">
                     </div>
                 </div>
 
@@ -112,7 +114,7 @@
                         Price
                     </label>
                     <div class="control">
-                        <input class="input" type="integer" name="price" value="{{$car->price}}" placeholder="Enter Price">
+                        <input class="input is-rounded" type="integer" name="price" value="{{$car->price}}" placeholder="Enter Price">
                     </div>
                 </div>
 
@@ -124,16 +126,17 @@
                 </div>
                 @enderror
                 <div class="field">
-                    <button class="button is-primary" type="submit">Update Details</button>
+                    <button  style="margin:5px;" class="button is-primary is-rounded" type="submit">Update Details</button>
+                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-1-giannossazos/public/home">Back</button>
                 </div>
 
             </fieldset>
         </form>
     </div>
 
-    <p>
-        <a class="button" href="/awp-1-giannossazos/public/">Back</a>
-    </p>
+
+
+
 
 @endsection
 @else

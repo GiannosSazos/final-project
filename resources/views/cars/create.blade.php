@@ -5,7 +5,9 @@
 @endsection
 @if (Auth::check())
 @section ('page_heading')
+    <center>
     Add a New Car
+    </center>
 @endsection
 
 @section ('content')
@@ -23,7 +25,7 @@
                     Model
                 </label>
                 <div class="control">
-                    <input class="input" type="string" name="model" placeholder="Enter Model">
+                    <input class="input is-rounded" type="string" name="model" placeholder="Enter Model">
                 </div>
             </div>
 
@@ -40,7 +42,7 @@
                     Year
                 </label>
                 <div class="control">
-                    <input class="input" type="integer" name="year" placeholder="Enter Year of Make">
+                    <input class="input is-rounded" type="integer" name="year" placeholder="Enter Year of Make">
                 </div>
             </div>
 
@@ -56,7 +58,7 @@
                     Type
                 </label>
                 <div class="control">
-                    <input class="input" type="string" name="type" placeholder="Enter Car Type">
+                    <input class="input is-rounded" type="string" name="type" placeholder="Enter Car Type">
                 </div>
             </div>
 
@@ -72,7 +74,7 @@
                     Fuel
                 </label>
                 <div class="control">
-                    <input class="input" type="string" name="fuel_type" placeholder="Enter Car's Fuel Type">
+                    <input class="input is-rounded" type="string" name="fuel_type" placeholder="Enter Car's Fuel Type">
                 </div>
             </div>
 
@@ -88,7 +90,7 @@
                     Gearbox
                 </label>
                 <div class="control">
-                    <input class="input" type="string" name="transmission" placeholder="Enter Gearbox Type">
+                    <input class="input is-rounded" type="string" name="transmission" placeholder="Enter Gearbox Type">
                 </div>
             </div>
 
@@ -104,7 +106,7 @@
                     Doors
                 </label>
                 <div class="control">
-                    <input class="input" type="integer" name="doors" placeholder="Enter Number of Doors">
+                    <input class="input is-rounded" type="integer" name="doors" placeholder="Enter Number of Doors">
                 </div>
             </div>
 
@@ -120,7 +122,7 @@
                     Price
                 </label>
                 <div class="control">
-                    <input class="input" type="integer" name="price" placeholder="Enter Price">
+                    <input class="input is-rounded" type="integer" name="price" placeholder="Enter Price">
                 </div>
             </div>
 
@@ -132,15 +134,16 @@
             </div>
             @enderror
             <div class="field">
-                <button class="button is-primary" type="submit">Add Car</button>
+                <button class="button is-primary is-rounded" type="submit">Add Car</button>
+                <a class="button is-rounded" href="/awp-1-giannossazos/public/home" >Back</a>
             </div>
         </fieldset>
     </form>
 </div>
 
-<p>
-    <a class="button" href="/awp-1-giannossazos/public/" >Back</a>
-</p>
+
+
+
 
 @endsection
 @else
