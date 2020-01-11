@@ -12,16 +12,34 @@
 @endsection
 
 @section ('content')
+    <div class="box">
 
-    <div class="container main-table">
-        <div class="box">
+        <form action = "" method="POST">
 
+            <fieldset>
+
+                @csrf
+
+                <div class="field">
+                    <label class="label">
+                      Search Inventory
+                    </label>
+
+                        <input class="keyword" type="string" name="keyword" placeholder="Search Car by Model">
+                        <button class="button is-primary"  type="submit"><ion-icon name="search"></ion-icon></button>
+                    <button class="button is-secondary" href="home/"  >Show All Cars</button>
+
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    <div class="box">
             @if (count ($cars) > 0)
 
 
                 <table class="table is-striped is-hoverable">
                     <thead>
-                    <th>Car</th>
+                    <th>Model</th>
                     <th>Year</th>
                     <th>Price</th>
                     </thead>
@@ -61,10 +79,11 @@
                 </div>
             @endif
         </div>
-        <div class="box">
+
             <a class="button is-primary" href="add/">Add Car</a>
             <a class="button is-secondary" href="logout/">Log Out</a>
-        </div>
+
+    </div>
     </div>
 @endsection
 @else

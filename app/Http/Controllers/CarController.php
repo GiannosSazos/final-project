@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    const CARS_PER_PAGE = 5;
+    const CARS_PER_PAGE = 10;
 
     const RULES = [
         'model' => 'required|min:3|max:64',
@@ -49,6 +49,12 @@ class CarController extends Controller
     public function create()
     {
         return view ('cars.create');
+    }
+    public function search(Request $request){
+        $search=$request->get('keyword');
+        $cars = Car::where('model', 'LIKE', '%' . $search . '%')->paginate(self::CARS_PER_PAGE);
+
+        return view('index',['cars'=>$cars]);
     }
 
     /**
