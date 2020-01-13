@@ -30,14 +30,13 @@ class CarController extends Controller
     ];
 
     /**
-     * Display a listing of the resource.
+     * Shows the default index page if nothing is searched
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(){
 
-        $queries = [];
+
         $columns = [
             'type',
             'transmission',
@@ -45,16 +44,18 @@ class CarController extends Controller
             'doors'
         ];
 
-
+        /**Checks what column is sent in the request and filters the data.*/
         foreach ($columns as $column) {
             if (request()->has($column)) {
                 $cars = Car::where($column, request($column))
                     ->paginate(self::CARS_PER_PAGE)
                     ->appends($column, request($column));
-                $queries[$column] = request($column);
+
                 return view('index')->with(['cars' => $cars]);
             }
         }
+
+        /**Sorting by year*/
         if (request()->has('year')){
             $cars=Car::orderBy('year',request('year'))
                 ->paginate(self::CARS_PER_PAGE)
@@ -62,6 +63,8 @@ class CarController extends Controller
 
             return view('index')->with(['cars' => $cars]);
         }
+
+        /**Sorting by price */
         if (request()->has('price')){
             $cars=Car::orderBy('price',request('price'))
                 ->paginate(self::CARS_PER_PAGE)
@@ -75,7 +78,7 @@ class CarController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Returns the create view
      *
      * @return \Illuminate\Http\Response
      */
@@ -83,15 +86,20 @@ class CarController extends Controller
     {
         return view ('cars.create');
     }
+
+    /** Gets the string from the searchbar and displays the data of what the user searched for */
     public function search(Request $request){
+
         $search=$request->get('keyword');
-        $cars = Car::where('model', 'LIKE', '%' . $search . '%')->paginate(self::CARS_PER_PAGE);
+        $cars = Car::where('model', 'LIKE', '%' . $search . '%')
+            ->paginate(self::CARS_PER_PAGE)
+            ->appends($search, request($search));
 
         return view('index',['cars'=>$cars]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Grabs the user's input and add the new item to the database
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -118,7 +126,7 @@ class CarController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified view
      *
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
@@ -130,7 +138,7 @@ class CarController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified car
      *
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
@@ -141,7 +149,7 @@ class CarController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Get the user's input and update the data of an already existing item
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Car  $car
@@ -162,7 +170,7 @@ class CarController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete data
      *
      * @param  \App\Car  $car
      * @return \Illuminate\Http\Response
