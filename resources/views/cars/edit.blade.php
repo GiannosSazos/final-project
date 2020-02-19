@@ -133,10 +133,17 @@
                     </p>
                 </div>
                 @enderror
+                @if (isset ($car -> updating_user))
+                    <tr>
+                        <td class="table-row-label">Last Updated By:</td>
+                        <td>{{ $car -> updating_user-> name }}</td>
+                    </tr><br>
+                @endif
                 <div class="field">
                     <button  style="margin:5px;" class="button is-primary is-rounded" type="submit">Update Details</button>
                     <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-1-giannossazos/public/home">Back</button>
                 </div>
+
 
             </fieldset>
         </form>

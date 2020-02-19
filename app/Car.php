@@ -8,6 +8,7 @@ class Car extends Model
 {
    protected $fillable=[
        'user_id',
+       'updating_user_id',
        'model',
        'year',
        'type',
@@ -21,4 +22,7 @@ class Car extends Model
    public function user(){
        return $this -> belongsTo (User::class);
    }
+    public function updating_user(){
+        return $this -> belongsTo (User::class);
+    }
 }

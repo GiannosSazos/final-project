@@ -171,6 +171,7 @@ class CarController extends Controller
         $car -> update (['transmission' => $request -> transmission]);
         $car -> update (['doors' => $request -> doors]);
         $car -> update (['price' => $request -> price]);
+        $car -> update(['updating_user_id' => Auth::user()->id]);
 
         return redirect () -> action ('CarController@index');
     }
