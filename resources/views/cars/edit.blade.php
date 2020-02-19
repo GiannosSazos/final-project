@@ -139,6 +139,4 @@
 
 
 @endsection
-@else
-    <script>window.location='/awp-1-giannossazos/public/login/';</script>
-@endif
+

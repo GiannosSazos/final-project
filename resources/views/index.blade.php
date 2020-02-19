@@ -11,10 +11,6 @@
     </center>
 @endsection
 
-<!--Checks if someone who tries to access the webpage directly from the URL is logged in.-->
-@if (Auth::check())
-
-
 
 @section ('content')
     <center>
@@ -144,8 +140,5 @@
     </center>
 @endsection
 
-<!--If someone tries to access the webpage from the URL directly but is not logged in, he will be redirected to the login page.-->
-@else
-    <script>window.location='login/';</script>
-@endif
+
 

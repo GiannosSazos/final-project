@@ -3,7 +3,7 @@
 @section ('page_title')
     Car Dealership | Add a Car
 @endsection
-@if (Auth::check())
+
 @section ('page_heading')
     <center>
     Add a New Car
@@ -146,6 +146,4 @@
 
 
 @endsection
-@else
-    <script>window.location='login/';</script>
-@endif
+

@@ -180,4 +180,9 @@ class CarController extends Controller
         $car -> delete ();
         return redirect () -> action ('CarController@index');
     }
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 }
