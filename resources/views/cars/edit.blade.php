@@ -127,7 +127,7 @@
                 @enderror
                 <div class="field">
                     <button  style="margin:5px;" class="button is-primary is-rounded" type="submit">Update Details</button>
-                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-1-giannossazos/public/home">Back</button>
+                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-2-giannossazos/public/home">Back</button>
                 </div>
 
             </fieldset>

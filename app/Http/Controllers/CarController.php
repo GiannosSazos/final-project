@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Car;
 use Illuminate\Http\Request;
+use Auth;
 
 class CarController extends Controller
 {
+
     const CARS_PER_PAGE = 10;
 
     const RULES = [
@@ -17,6 +19,7 @@ class CarController extends Controller
         'transmission' => 'required|min:2|max:256',
         'doors' => 'required|min:1|max:256',
         'price' => 'required|min:2|max:256',
+        
     ];
 
     const MESSAGES = [
@@ -27,6 +30,7 @@ class CarController extends Controller
         'transmission.required' => 'The gearbox is required',
         'doors.required' => 'The no. of doors are required.',
         'price.required' => 'The price cannot be empty.',
+
     ];
 
     /**
@@ -35,7 +39,6 @@ class CarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(){
-
 
         $columns = [
             'type',
@@ -106,6 +109,7 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
+
         $request -> validate (self::RULES, self::MESSAGES);
 
 
@@ -119,6 +123,7 @@ class CarController extends Controller
             'transmission' => $request -> input ('transmission'),
             'doors' => $request -> input ('doors'),
             'price' => $request -> input ('price'),
+
 
         ]);
 
