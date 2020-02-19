@@ -3,7 +3,7 @@
 @section ('page_title')
     Car Dealership | Edit
 @endsection
-@if (Auth::check())
+
 @section ('page_heading')
     <center>
         Edit details
@@ -19,10 +19,14 @@
             <fieldset>
 
                 @csrf
-                <label class="label">
-                    Seller
-                </label>
-
+                <div class="field">
+                    <label class="label">
+                        Seller
+                    </label>
+                    <div class="control">
+                        <input class="input is-rounded" type="String" name="model" value="{{$car->user->name}}" readonly>
+                    </div>
+                </div>
                 <div class="field">
                     <label class="label">
                         Model
@@ -131,7 +135,7 @@
                 @enderror
                 <div class="field">
                     <button  style="margin:5px;" class="button is-primary is-rounded" type="submit">Update Details</button>
-                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-2-giannossazos/public/home">Back</button>
+                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-1-giannossazos/public/home">Back</button>
                 </div>
 
             </fieldset>

@@ -39,6 +39,10 @@
                 <td>Price:</td>
                 <td>£{{ $car -> price }}</td>
             </tr>
+            <tr>
+                <td>Seller:</td>
+                <td>{{ $car -> user -> name}}</td>
+            </tr>
             </tbody>
 
         </table>
