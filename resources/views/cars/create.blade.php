@@ -19,6 +19,12 @@
         <fieldset>
 
             @csrf
+            <label class="label">
+                Seller
+            </label>
+            <input class="input is-rounded" type="text"
+                   name="name" value="{{ Auth::user () -> name }}"
+                   readonly>
 
             <div class="field">
                 <label class="label">

@@ -19,7 +19,7 @@ class CarController extends Controller
         'transmission' => 'required|min:2|max:256',
         'doors' => 'required|min:1|max:256',
         'price' => 'required|min:2|max:256',
-        
+
     ];
 
     const MESSAGES = [
@@ -123,6 +123,7 @@ class CarController extends Controller
             'transmission' => $request -> input ('transmission'),
             'doors' => $request -> input ('doors'),
             'price' => $request -> input ('price'),
+            'user_id' => Auth::user()->id,
 
 
         ]);

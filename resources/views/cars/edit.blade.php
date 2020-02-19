@@ -19,6 +19,10 @@
             <fieldset>
 
                 @csrf
+                <label class="label">
+                    Seller
+                </label>
+
                 <div class="field">
                     <label class="label">
                         Model
