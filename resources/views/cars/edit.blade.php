@@ -12,7 +12,7 @@
 
 @section ('content')
 
-    <div class="box">
+    <div class="box" align="center" style="width: 500px; margin: 0 auto;">
 
         <form action = "" method="POST">
 
@@ -23,17 +23,16 @@
                     <label class="label">
                         Seller
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="String" name="model" value="{{$car->user->name}}" readonly>
-                    </div>
+
+                        <input class="input is-rounded" type="String" name="model" value="{{$car->user->name}}" readonly style="width: 250px; text-align: center">
+
                 </div>
                 <div class="field">
                     <label class="label">
                         Model
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="String" name="model" value="{{$car->model}}" readonly>
-                    </div>
+
+                        <input class="input is-rounded" type="String" name="model" value="{{$car->model}}" readonly style="width: 250px; text-align: center">
                 </div>
 
 
@@ -41,8 +40,31 @@
                     <label class="label">
                         Year
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="integer" name="year" value="{{$car->year}}" placeholder="Enter Year of Make">
+                    <div class="select is-rounded">
+                        <select name="year" style="width: 250px;text-align-last: center;">
+                            <option>2000</option>
+                            <option>2001</option>
+                            <option>2002</option>
+                            <option>2003</option>
+                            <option>2004</option>
+                            <option>2005</option>
+                            <option>2006</option>
+                            <option>2007</option>
+                            <option>2008</option>
+                            <option>2009</option>
+                            <option>2010</option>
+                            <option>2011</option>
+                            <option>2012</option>
+                            <option>2013</option>
+                            <option>2014</option>
+                            <option>2015</option>
+                            <option>2016</option>
+                            <option>2017</option>
+                            <option>2018</option>
+                            <option>2019</option>
+                            <option>2020</option>
+
+                        </select>
                     </div>
                 </div>
 
@@ -57,8 +79,16 @@
                     <label class="label">
                         Type
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="string" name="type" value="{{$car->type}}" placeholder="Enter Car Type">
+                    <div class="select is-rounded">
+                        <select name="type" style="width: 250px;text-align-last: center;">
+                            <option>Convertible</option>
+                            <option>Coupe</option>
+                            <option>Hatchback</option>
+                            <option>MPV</option>
+                            <option>Sedan</option>
+                            <option>Small</option>
+                            <option>SUV</option>
+                        </select>
                     </div>
                 </div>
 
@@ -73,8 +103,13 @@
                     <label class="label">
                         Fuel
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="string" name="fuel_type" value="{{$car->fuel_type}}" placeholder="Enter Car's Fuel Type">
+                    <div class="select is-rounded">
+                        <select name="fuel_type" style="width: 250px;text-align-last: center;">
+                            <option>Gas</option>
+                            <option>Diesel</option>
+                            <option>Hybrid</option>
+                            <option>Electric</option>
+                        </select>
                     </div>
                 </div>
 
@@ -85,14 +120,19 @@
                     </p>
                 </div>
                 @enderror
+
                 <div class="field">
                     <label class="label">
                         Gearbox
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="string" name="transmission" value="{{$car->transmission}}" placeholder="Enter Gearbox Type">
+                    <div class="select is-rounded">
+                        <select name="transmission"style="width: 250px;text-align-last: center;">
+                            <option>Manual</option>
+                            <option>Automatic</option>
+                        </select>
                     </div>
                 </div>
+
 
                 @error ('transmission')
                 <div class="notification is-warning">
@@ -101,12 +141,17 @@
                     </p>
                 </div>
                 @enderror
-                <div class="field">
+
+                <div class="field" >
                     <label class="label">
                         Doors
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="integer" name="doors" value="{{$car->doors}}" placeholder="Enter Number of Doors">
+                    <div class="select is-rounded">
+                        <select name="doors" style="width: 250px; text-align-last: center;">
+                            <option>2</option>
+                            <option>4</option>
+                            <option>6</option>
+                        </select>
                     </div>
                 </div>
 
@@ -121,9 +166,9 @@
                     <label class="label">
                         Price
                     </label>
-                    <div class="control">
-                        <input class="input is-rounded" type="integer" name="price" value="{{$car->price}}" placeholder="Enter Price">
-                    </div>
+
+                    <input class="input is-rounded" type="integer" value="{{$car->price}}" name="price" placeholder="Enter Price" style="width: 250px; text-align: center">
+
                 </div>
 
                 @error ('price')
@@ -133,25 +178,26 @@
                     </p>
                 </div>
                 @enderror
-                @if (isset ($car -> updating_user))
-                    <tr>
-                        <td class="table-row-label">Last Updated By:</td>
-                        <td>{{ $car -> updating_user-> name }}</td>
-                    </tr><br>
-                @endif
                 <div class="field">
-                    <button  style="margin:5px;" class="button is-primary is-rounded" type="submit">Update Details</button>
-                    <button style="margin:5px;" class="button is-secondary is-rounded" href="/awp-1-giannossazos/public/home">Back</button>
+                    <button class="button is-primary is-rounded" type="submit">Add Car</button>
+                    <a class="button is-rounded" href="/awp-2-giannossazos/public/home" >Back</a>
                 </div>
-
-
             </fieldset>
         </form>
     </div>
+    @if (isset ($car -> updating_user))
+        <div style="text-align:center">
+    <tr>
+        <td class="table-row-label">Last Updated By:</td>
+        <td>{{ $car -> updating_user-> name }}</td>
+        <td class="table-row-label">on {{ $car -> updated_at-> format ('l jS F') }} at {{ $car -> updated_at-> format ('H:i') }} </td>
+
+    </tr>
+        </div>
+    @endif
 
 
 
 
 
 @endsection
-
