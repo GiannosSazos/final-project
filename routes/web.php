@@ -23,7 +23,7 @@ Route::post ('/car/{car}/edit/', 'CarController@update');
 
 
 
-Auth::routes();
+
 /**After successfully logging in the user will be directed to the main page*/
 Route::get('/home', 'CarController@index');
 /**After returning a POST method from the home page (where the search bar is) the search function will be executed via the CarController and if it fetches anything it will display the fetched data*/
@@ -31,6 +31,12 @@ Route::post('/home', 'CarController@search');
 
 /**This route is from the logout button. Logs out the user and directs him back to the login.blade view*/
 Route::get('/logout','Auth\LoginController@logout');
+
+Auth::routes(['verify' => true]);
+
+Route::get('profile', function () {
+    // Only verified users may enter...
+})->middleware('verified');
 
 
 

@@ -1,28 +1,43 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+@extends ('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
+@section ('page_title')
+    Car Dealership
+@endsection
+
+@section ('page_heading')
+    <div class="card-text">
+    <center>
+        E-Mail Verification
+    </center>
+    </div>
+@endsection
+
+
+@section ('content')
+<div class="container" style="width: 500px" align="center">
+
             <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+
 
                 <div class="card-body">
                     @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
+                        <div class="notification is-primary" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif
-
-                    {{ __('Before proceeding, please check your email for a verification link.') }}
-                    {{ __('If you did not receive the email') }},
+                        {{ __('Almost done! We sent an email to') }}<br>
+                        <b>{{Auth::user() -> email}}</b><br><br>
+                    {{ __('Click the link in the E-Mail to complete your registration.') }}<br><br>
+                    {{ __('Still can\'t find the E-Mail?') }}
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+
+                        <button type="submit " class="button is-primary is-rounded">{{ __('Resend E-Mail') }}</button>
                     </form>
+                    <br>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+
 @endsection

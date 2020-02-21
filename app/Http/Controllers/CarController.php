@@ -38,7 +38,8 @@ class CarController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(){
+    public function index()
+    {
 
         $columns = [
             'type',
@@ -59,8 +60,8 @@ class CarController extends Controller
         }
 
         /**Sorting by year*/
-        if (request()->has('year')){
-            $cars=Car::orderBy('year',request('year'))
+        if (request()->has('year')) {
+            $cars = Car::orderBy('year', request('year'))
                 ->paginate(self::CARS_PER_PAGE)
                 ->appends('year', request('year'));
 
@@ -68,8 +69,8 @@ class CarController extends Controller
         }
 
         /**Sorting by price */
-        if (request()->has('price')){
-            $cars=Car::orderBy('price',request('price'))
+        if (request()->has('price')) {
+            $cars = Car::orderBy('price', request('price'))
                 ->paginate(self::CARS_PER_PAGE)
                 ->appends('price', request('price'));
 
@@ -87,109 +88,108 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view ('cars.create');
+        return view('cars.create');
     }
 
     /** Gets the string from the searchbar and displays the data of what the user searched for */
-    public function search(Request $request){
+    public function search(Request $request)
+    {
 
-        $search=$request->get('keyword');
+        $search = $request->get('keyword');
         $cars = Car::where('model', 'LIKE', '%' . $search . '%')
             ->paginate(self::CARS_PER_PAGE)
             ->appends($search, request($search));
 
-        return view('index',['cars'=>$cars]);
+        return view('index', ['cars' => $cars]);
     }
 
     /**
      * Grabs the user's input and add the new item to the database
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
 
-        $request -> validate (self::RULES, self::MESSAGES);
+        $request->validate(self::RULES, self::MESSAGES);
 
 
+        Car::create([
 
-        Car::create ([
-
-            'model' => $request -> input ('model'),
-            'year' => $request -> input ('year'),
-            'type' => $request -> input ('type'),
-            'fuel_type' => $request -> input ('fuel_type'),
-            'transmission' => $request -> input ('transmission'),
-            'doors' => $request -> input ('doors'),
-            'price' => $request -> input ('price'),
+            'model' => $request->input('model'),
+            'year' => $request->input('year'),
+            'type' => $request->input('type'),
+            'fuel_type' => $request->input('fuel_type'),
+            'transmission' => $request->input('transmission'),
+            'doors' => $request->input('doors'),
+            'price' => $request->input('price'),
             'user_id' => Auth::user()->id,
 
 
         ]);
 
-        return redirect () -> action ('CarController@index');
+        return redirect()->action('CarController@index');
     }
 
     /**
      * Display the specified view
      *
-     * @param  \App\Car  $car
+     * @param \App\Car $car
      * @return \Illuminate\Http\Response
      */
     public function show(Car $car)
     {
-        return view ('cars.show', compact ('car'));
+        return view('cars.show', compact('car'));
 
     }
 
     /**
      * Show the form for editing the specified car
      *
-     * @param  \App\Car  $car
+     * @param \App\Car $car
      * @return \Illuminate\Http\Response
      */
     public function edit(Car $car)
     {
-        return view ('cars.edit', compact ('car'));
+        return view('cars.edit', compact('car'));
     }
 
     /**
      * Get the user's input and update the data of an already existing item
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Car  $car
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Car $car
      * @return \Illuminate\Http\Response
      */
-    public function update( Car $car, Request $request)
+    public function update(Car $car, Request $request)
     {
-        $request -> validate (self::RULES, self::MESSAGES);
+        $request->validate(self::RULES, self::MESSAGES);
 
-        $car -> update (['year' => $request -> year]);
-        $car -> update (['type' => $request -> type]);
-        $car -> update (['fuel_type' => $request -> fuel_type]);
-        $car -> update (['transmission' => $request -> transmission]);
-        $car -> update (['doors' => $request -> doors]);
-        $car -> update (['price' => $request -> price]);
-        $car -> update(['updating_user_id' => Auth::user()->id]);
+        $car->update(['year' => $request->year]);
+        $car->update(['type' => $request->type]);
+        $car->update(['fuel_type' => $request->fuel_type]);
+        $car->update(['transmission' => $request->transmission]);
+        $car->update(['doors' => $request->doors]);
+        $car->update(['price' => $request->price]);
+        $car->update(['updating_user_id' => Auth::user()->id]);
 
-        return redirect () -> action ('CarController@index');
+        return redirect()->action('CarController@index');
     }
 
     /**
      * Delete data
      *
-     * @param  \App\Car  $car
+     * @param \App\Car $car
      * @return \Illuminate\Http\Response
      */
     public function destroy(Car $car)
     {
-        $car -> delete ();
-        return redirect () -> action ('CarController@index');
+        $car->delete();
+        return redirect()->action('CarController@index');
     }
-
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 }
