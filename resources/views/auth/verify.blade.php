@@ -6,11 +6,11 @@
 @endsection
 
 @section ('page_heading')
-    <div class="card-text">
+
     <center>
         E-Mail Verification
     </center>
-    </div>
+
 @endsection
 
 
@@ -30,7 +30,7 @@
                         <b>{{Auth::user() -> email}}</b><br><br>
                     {{ __('Click the link in the E-Mail to complete your registration.') }}<br><br>
                     {{ __('Still can\'t find the E-Mail?') }}
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    <form  method="POST" action="{{ route('verification.resend') }}">
                         @csrf
 
                         <button type="submit " class="button is-primary is-rounded">{{ __('Resend E-Mail') }}</button>
