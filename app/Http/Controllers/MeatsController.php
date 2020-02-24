@@ -115,46 +115,46 @@ class MeatsController extends Controller
     /**
      * Display the specified view
      *
-     * @param \App\Meat $meat
+     * @param \App\Meats $meats
      * @return \Illuminate\Http\Response
      */
-    public function show(Meat $meat)
+    public function show(Meats $meats)
     {
-        return view('meats.show', compact('meat'));
+        return view('meats.show', compact('meats'));
 
     }
 
     /**
-     * Show the form for editing the specified meat
+     * Show the form for editing the specified meats
      *
-     * @param \App\Meat $meat
+     * @param \App\Meats $meats
      * @return \Illuminate\Http\Response
      */
-    public function edit(Meat $meat)
+    public function edit(Meats $meats)
     {
-        return view('meats.edit', compact('meat'));
+        return view('meats.edit', compact('meats'));
     }
 
     /**
      * Get the user's input and update the data of an already existing item
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Meat $meat
+     * @param \App\Meats $meats
      * @return \Illuminate\Http\Response
      */
-    public function update(Meat $meat, Request $request)
+    public function update(Meats $meats, Request $request)
     {
         $request->validate(self::RULES, self::MESSAGES);
 
-        $meat->update(['year' => $request->year]);
-        $meat->update(['type' => $request->type]);
-        $meat->update(['fuel_type' => $request->fuel_type]);
-        $meat->update(['transmission' => $request->transmission]);
-        $meat->update(['doors' => $request->doors]);
-        $meat->update(['price' => $request->price]);
-        $meat->update(['updating_user_id' => Auth::user()->id]);
+        $meats->update(['year' => $request->year]);
+        $meats->update(['type' => $request->type]);
+        $meats->update(['fuel_type' => $request->fuel_type]);
+        $meats->update(['transmission' => $request->transmission]);
+        $meats->update(['doors' => $request->doors]);
+        $meats->update(['price' => $request->price]);
+        $meats->update(['updating_user_id' => Auth::user()->id]);
 
-        return redirect()->action('MeatController@index');
+        return redirect()->action('MeatsController@index');
     }
 
     /**
@@ -163,10 +163,10 @@ class MeatsController extends Controller
      * @param \App\Meat $meat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Meat $meat)
+    public function destroy(Meats $meats)
     {
-        $meat->delete();
-        return redirect()->action('MeatController@index');
+        $meats->delete();
+        return redirect()->action('MeatsController@index');
     }
     public function __construct()
     {

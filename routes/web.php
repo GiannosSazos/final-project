@@ -6,7 +6,7 @@
 
 
 /**Redirects to the show.blade view and outputs all the data of a particular item in the database*/
-Route::get ('/meat/{meat}/', 'MeatsController@show');
+Route::get ('/meat/{meats}/', 'MeatsController@show');
 
 /** Redirects to the create.blade view where the user will be able to add a new item in the database*/
 Route::get ('/add/', 'MeatsController@create');

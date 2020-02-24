@@ -1,12 +1,12 @@
 @extends ('layouts.app')
 
 @section ('page_title')
-   Car Dealership | Details
+   Vendor Store | Details
 @endsection
 
 @section ('page_heading')
     <center>
-    Car: {{ $car -> model }}
+    Meat: {{ $meats -> model }}
     </center>
 @endsection
 
@@ -17,36 +17,36 @@
             <tbody>
             <tr>
                 <td>Year:</td>
-                <td>{{ $car -> year }}</td>
+                <td>{{ $meats -> year }}</td>
             </tr>
             <tr>
                 <td>Type:</td>
-                <td>{{ $car -> type }}</td>
+                <td>{{ $meats -> type }}</td>
             </tr>
             <tr>
                 <td>Fuel:</td>
-                <td>{{ $car -> fuel_type }}</td>
+                <td>{{ $meats -> fuel_type }}</td>
             </tr>
             <tr>
                 <td>Gearbox:</td>
-                <td>{{ $car -> transmission }}</td>
+                <td>{{ $meats -> transmission }}</td>
             </tr>
             <tr>
                 <td>Doors:</td>
-                <td>{{ $car -> doors}}</td>
+                <td>{{ $meats -> doors}}</td>
             </tr>
             <tr>
                 <td>Price:</td>
-                <td>£{{ $car -> price }}</td>
+                <td>£{{ $meats -> price }}</td>
             </tr>
             <tr>
                 <td>Seller:</td>
-                <td>{{ $car -> user -> name}}</td>
+                <td>{{ $meats -> user -> name}}</td>
             </tr>
             </tbody>
 
         </table>
-        <a class="button" href="/awp-2-giannossazos/public/home">Back</a>
+        <a class="button" href="/final-project/public/home">Back</a>
     </div>
 
 
