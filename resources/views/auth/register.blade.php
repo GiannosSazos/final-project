@@ -2,7 +2,7 @@
 
 @section ('page_heading')
     <center>
-        Register to Car Dealership
+        Register to Vendor Store
     </center>
 @endsection
 

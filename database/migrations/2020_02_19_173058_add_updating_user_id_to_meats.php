@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUserIdToCars extends Migration
+class AddUpdatingUserIdToMeats extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class AddUserIdToCars extends Migration
      */
     public function up()
     {
-        Schema::table('cars', function (Blueprint $table) {
-            $table -> unsignedBigInteger ('user_id');
-            $table -> foreign ('user_id') -> references ('id')->on('users');
+        Schema::table('meats', function (Blueprint $table) {
+            $table -> unsignedBigInteger ('updating_user_id') -> nullable ();
+            $table -> foreign ('updating_user_id')
+                -> references ('id')
+                -> on ('users');
         });
     }
 
@@ -26,7 +28,7 @@ class AddUserIdToCars extends Migration
      */
     public function down()
     {
-        Schema::table('cars', function (Blueprint $table) {
+        Schema::table('meats', function (Blueprint $table) {
             //
         });
     }

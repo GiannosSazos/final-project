@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 @extends ('layouts.app')
 
-@section ('page_title')
-    Car Dealership
-@endsection
-
 @section ('page_heading')
 
     <center>

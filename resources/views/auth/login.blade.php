@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section ('page_heading')
     <center>
-        Login to Car Dealership
+        Login to Vendor Store
     </center>
 @endsection
 @section('content')
