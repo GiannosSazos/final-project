@@ -2,11 +2,11 @@
 
 /**After given a particular URL, here is where we give directions and make the webpage execute some functions by going in the MeatsController*/
 
-
+Route::get('/', 'MeatsController@index');
 
 
 /**Redirects to the show.blade view and outputs all the data of a particular item in the database*/
-Route::get ('/meat/{meats}/', 'MeatsController@show');
+Route::get ('/meat/{meat}/', 'MeatsController@show');
 
 /** Redirects to the create.blade view where the user will be able to add a new item in the database*/
 Route::get ('/add/', 'MeatsController@create');

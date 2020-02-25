@@ -32,9 +32,9 @@
                         <option>Lamb</option>
                         <option>Pork</option>
                         <option>Poultry</option>
-                        <option>Sausages</option>
-                        <option>Steaks</option>
-                        <option>Burgers</option>
+                        <option>Sausage</option>
+                        <option>Steak</option>
+                        <option>Burger</option>
 
                     </select>
                 </div>
@@ -99,7 +99,7 @@
                 <label class="label">
                     Description
                 </label>
-                <input class="input is-rounded" type="text" name="price"  style="width: 250px; text-align: center">
+                <input class="input is-rounded" type="text" name="description"  style="width: 250px; text-align: center">
             </div>
 
             <div class="field">

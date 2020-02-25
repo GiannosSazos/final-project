@@ -23,9 +23,9 @@
             <a href="?kind=lamb">Lamb</a> |
             <a href="?kind=pork">Pork</a> |
             <a href="?kind=poultry">Poultry</a> |
-            <a href="?kind=sausages">Sausages</a> |
-            <a href="?kind=steaks">Steaks</a> |
-            <a href="?kind=burgers">Burgers</a> |
+            <a href="?kind=sausage">Sausage</a> |
+            <a href="?kind=steak">Steak</a> |
+            <a href="?kind=burger">Burger</a> |
 
         </div>
 
@@ -52,12 +52,12 @@
         <div class="box">
 
             <!--if there is data in the database, show the data...-->
-            @if (count ($meats) > 0)
+            @if (count ($meat) > 0)
 
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
-                    <th>Cut</th>
                     <th>Kind</th>
+                    <th>Cut</th>
                     <th>Price Per Kilo</th>
                     <th>Details</th>
                     <th>Edit</th>
@@ -65,16 +65,16 @@
 
                     </thead>
                     <tbody>
-                    @foreach ($meats as $c)
+                    @foreach ($meat as $m)
                         <tr>
-                            <td>{{ $c -> cut }}</td>
-                            <td>{{ $c -> kind }}</td>
-                            <td>£{{$c -> price_per_kg }}</td>
+                            <td>{{ $m -> kind }}</td>
+                            <td>{{ $m -> cut }}</td>
+                            <td>£{{$m -> price_per_kg }}</td>
 
                             <!--View details button-->
                             <td>
                                 <a class="button"
-                                   href="meat/{{ $c -> id }}/">
+                                   href="meat/{{ $m -> id }}/">
                                     <ion-icon name="eye"></ion-icon>
                                 </a>
                             </td>
@@ -82,7 +82,7 @@
                             <!--Edit details button-->
                             <td>
                                 <a class="button"
-                                   href="meat/{{ $c -> id }}/edit">
+                                   href="meat/{{ $m -> id }}/edit">
                                     <ion-icon name="create"></ion-icon>
                                 </a>
                             </td>
@@ -90,7 +90,7 @@
                             <!--Delete meat from database button-->
                             <td>
                                 <a class="button"
-                                   href="meat/{{ $c -> id }}/delete/">
+                                   href="meat/{{ $m -> id }}/delete/">
                                     <ion-icon name="trash"></ion-icon>  </a></td>
                         </tr>
                     @endforeach
@@ -98,7 +98,7 @@
                 </table>
 
                 <!--Display the numbers for the pages-->
-                {{$meats->links()}}
+                {{$meat->links()}}
 
 
                 <br>

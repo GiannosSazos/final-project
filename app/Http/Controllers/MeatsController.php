@@ -14,15 +14,19 @@ class MeatsController extends Controller
     const RULES = [
         'kind' => 'required',
         'cut' => 'required',
-        'price_per_kg' => 'required',
+        'price_per_kg' => 'required|numeric',
+
 
 
     ];
 
     const MESSAGES = [
-        'kind.required' => 'The type is required.',
-        'cut.required' => 'The cut cannot be empty.',
-        'price_per_kg.required' => 'The price is required.',
+        'kind.required' => 'The type is required',
+        'cut.required' => 'The cut cannot be empty',
+        'price_per_kg.required' => 'The price is required',
+        'price_per_kg.integer' => 'The price must be a number',
+        'kind.required' => 'The type is required',
+
 
     ];
 
@@ -42,25 +46,25 @@ class MeatsController extends Controller
         /**Checks what column is sent in the request and filters the data.*/
         foreach ($columns as $column) {
             if (request()->has($column)) {
-                $meats = Meats::where($column, request($column))
+                $meat = Meats::where($column, request($column))
                     ->paginate(self::MEATS_PER_PAGE)
                     ->appends($column, request($column));
 
-                return view('index')->with(['meats' => $meats]);
+                return view('index')->with(['meat' => $meat]);
             }
         }
 
 
         /**Sorting by price */
         if (request()->has('price_per_kg')) {
-            $meats = Meats::orderBy('price_per_kg', request('price_per_kg'))
+            $meat = Meats::orderBy('price_per_kg', request('price_per_kg'))
                 ->paginate(self::MEATS_PER_PAGE)
                 ->appends('price_per_kg', request('price_per_kg'));
 
-            return view('index')->with(['meats' => $meats]);
+            return view('index')->with(['meat' => $meat]);
         }
-        $meats= Meats::paginate(self::MEATS_PER_PAGE);
-        return view('index')->with(['meats' => $meats]);
+        $meat= Meats::paginate(self::MEATS_PER_PAGE);
+        return view('index')->with(['meat' => $meat]);
     }
 
 
@@ -79,11 +83,12 @@ class MeatsController extends Controller
     {
 
         $search = $request->get('keyword');
-        $meats = Meats::where('kind', 'LIKE', '%' . $search . '%')
+        $meat = Meats::where('kind', 'LIKE', '%' . $search . '%')
+            ->orWhere('cut','LIKE','%'.$search.'%')
             ->paginate(self::MEATS_PER_PAGE)
             ->appends($search, request($search));
 
-        return view('index', ['meats' => $meats]);
+        return view('index', ['meat' => $meat]);
     }
 
     /**
@@ -115,44 +120,43 @@ class MeatsController extends Controller
     /**
      * Display the specified view
      *
-     * @param \App\Meats $meats
+     * @param \App\Meats $meat
      * @return \Illuminate\Http\Response
      */
-    public function show(Meats $meats)
+    public function show(Meats $meat)
     {
-        return view('meats.show', compact('meats'));
+        return view('meats.show', compact('meat'));
 
     }
 
     /**
      * Show the form for editing the specified meats
      *
-     * @param \App\Meats $meats
+     * @param \App\Meats $meat
      * @return \Illuminate\Http\Response
      */
-    public function edit(Meats $meats)
+    public function edit(Meats $meat)
     {
-        return view('meats.edit', compact('meats'));
+        return view('meats.edit', compact('meat'));
     }
 
     /**
      * Get the user's input and update the data of an already existing item
      *
      * @param \Illuminate\Http\Request $request
-     * @param \App\Meats $meats
+     * @param \App\Meats $meat
      * @return \Illuminate\Http\Response
      */
-    public function update(Meats $meats, Request $request)
+    public function update(Meats $meat, Request $request)
     {
         $request->validate(self::RULES, self::MESSAGES);
 
-        $meats->update(['year' => $request->year]);
-        $meats->update(['type' => $request->type]);
-        $meats->update(['fuel_type' => $request->fuel_type]);
-        $meats->update(['transmission' => $request->transmission]);
-        $meats->update(['doors' => $request->doors]);
-        $meats->update(['price' => $request->price]);
-        $meats->update(['updating_user_id' => Auth::user()->id]);
+
+        $meat->update(['kind' => $request->kind]);
+        $meat->update(['cut' => $request->cut]);
+        $meat->update(['price_per_kg' => $request->price_per_kg]);
+        $meat->update(['description' => $request->description]);
+        $meat->update(['updating_user_id' => Auth::user()->id]);
 
         return redirect()->action('MeatsController@index');
     }
@@ -163,9 +167,9 @@ class MeatsController extends Controller
      * @param \App\Meat $meat
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Meats $meats)
+    public function destroy(Meats $meat)
     {
-        $meats->delete();
+        $meat->delete();
         return redirect()->action('MeatsController@index');
     }
     public function __construct()

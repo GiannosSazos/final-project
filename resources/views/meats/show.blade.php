@@ -6,43 +6,34 @@
 
 @section ('page_heading')
     <center>
-    Meat: {{ $meats -> model }}
+    Meat: {{ $meat -> cut }}
+        {{ $meat -> kind }}
     </center>
 @endsection
 
 @section ('content')
 
-    <div class="box">
+    <div class="box" style="width: 500px; margin: 0 auto;" align="center">
         <table class="table is-striped is-fullwidth">
             <tbody>
             <tr>
-                <td>Year:</td>
-                <td>{{ $meats -> year }}</td>
+                <td>Kind:</td>
+                <td>{{ $meat -> kind }}</td>
             </tr>
             <tr>
-                <td>Type:</td>
-                <td>{{ $meats -> type }}</td>
+                <td>Cut:</td>
+                <td>{{ $meat -> cut }}</td>
             </tr>
             <tr>
-                <td>Fuel:</td>
-                <td>{{ $meats -> fuel_type }}</td>
+                <td>Price per Kilo:</td>
+                <td>£{{ $meat -> price_per_kg }}</td>
             </tr>
-            <tr>
-                <td>Gearbox:</td>
-                <td>{{ $meats -> transmission }}</td>
-            </tr>
-            <tr>
-                <td>Doors:</td>
-                <td>{{ $meats -> doors}}</td>
-            </tr>
-            <tr>
-                <td>Price:</td>
-                <td>£{{ $meats -> price }}</td>
-            </tr>
-            <tr>
-                <td>Seller:</td>
-                <td>{{ $meats -> user -> name}}</td>
-            </tr>
+            @if (isset ($meat -> description))
+                    <tr>
+                        <td>Description:</td>
+                        <td>{{ $meat->description }}</td>
+                    </tr>
+            @endif
             </tbody>
 
         </table>
@@ -53,4 +44,8 @@
 
 
 @endsection
+
+
+
+
 
