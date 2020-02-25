@@ -14,7 +14,7 @@
 @section ('content')
 
     <div class="box" style="width: 500px; margin: 0 auto;" align="center">
-        <table class="table is-striped is-fullwidth">
+        <table class="table is-striped is-fullwidth" >
             <tbody>
             <tr>
                 <td>Kind:</td>
@@ -30,8 +30,8 @@
             </tr>
             @if (isset ($meat -> description))
                     <tr>
-                        <td>Description:</td>
-                        <td>{{ $meat->description }}</td>
+                        <td >Description:</td>
+                        <td style="word-break: break-all">{{ $meat->description }}</td>
                     </tr>
             @endif
             </tbody>
