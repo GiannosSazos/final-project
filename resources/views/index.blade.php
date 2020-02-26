@@ -60,8 +60,10 @@
                     <th>Cut</th>
                     <th>Price Per Kilo</th>
                     <th>Details</th>
+                    @if ((Auth::user()->hasAnyRole('admin')))
                     <th>Edit</th>
                     <th>Delete</th>
+                        @endif
 
                     </thead>
                     <tbody>
@@ -80,6 +82,7 @@
                             </td>
 
                             <!--Edit details button-->
+                            @if ((Auth::user()->hasAnyRole('admin')))
                             <td>
                                 <a class="button"
                                    href="meat/{{ $m -> id }}/edit">
@@ -87,12 +90,14 @@
                                 </a>
                             </td>
 
+
                             <!--Delete meat from database button-->
                             <td>
                                 <a class="button"
                                    href="meat/{{ $m -> id }}/delete/">
                                     <ion-icon name="trash"></ion-icon>  </a></td>
                         </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>
@@ -103,7 +108,9 @@
 
                 <br>
                 <!--Add meat to database button-->
-                <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Meat</a>
+                @if ((Auth::user()->hasAnyRole('admin')))
+                    <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Meat</a>
+                @endif
 
                 <!--Log out button-->
                 <a style="margin:5px;" class="button is-danger is-rounded" href="logout/">Log Out</a>
@@ -118,7 +125,9 @@
                     </p>
 
                 </div>
+                @if ((Auth::user()->hasAnyRole('admin')))
                 <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Meat</a>
+                @endif
                 <a style="margin:5px;" class="button is-danger is-rounded" href="logout/">Log Out</a>
             @endif
         </div>
