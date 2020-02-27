@@ -112,8 +112,7 @@
                     <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Meat</a>
                 @endif
 
-                <!--Log out button-->
-                <a style="margin:5px;" class="button is-danger is-rounded" href="logout/">Log Out</a>
+
 
                 <!--if there is not data in the database display this.-->
             @else
@@ -128,7 +127,6 @@
                 @if ((Auth::user()->hasAnyRole('admin')))
                 <a style="margin:5px;" class="button is-primary is-rounded" href="add/">Add Meat</a>
                 @endif
-                <a style="margin:5px;" class="button is-danger is-rounded" href="logout/">Log Out</a>
             @endif
         </div>
         </div>

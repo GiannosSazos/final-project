@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +13,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
 
     <link rel="stylesheet" href="{{ asset ('css/design.css') }}" />
+
+    @if(Auth::check())
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+
+
+            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item">
+                    Contact Us
+                </a>
+
+                <a class="navbar-item">
+                   About Us
+                </a>
+                <a class="navbar-item">
+                    Report an Issue
+                </a>
+                @if ((Auth::user()->hasAnyRole('admin')))
+                <a class="navbar-item">
+                    Admin Panel
+                </a>
+                    @endif
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <a class="button is-primary is-round" href="view_profile/">
+                            <strong>Profile</strong>
+                        </a>
+                        <a class="button is-danger is-round" href="logout/">
+                            Log out
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+        <br>
+        @endif
 </head>
 <body>
 
