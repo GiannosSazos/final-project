@@ -7,7 +7,7 @@
 
 @section ('page_heading')
     <center>
-        Vendor Shop
+        Admin Panel
     </center>
 @endsection
 
@@ -52,7 +52,7 @@
         <div class="box">
 
             <!--if there is data in the database, show the data...-->
-            @if (count ($meat) > 0)
+            @if (count ($user) > 0)
 
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
@@ -67,16 +67,16 @@
 
                     </thead>
                     <tbody>
-                    @foreach ($meat as $m)
+                    @foreach ($user as $u)
                         <tr>
-                            <td>{{ $m -> kind }}</td>
-                            <td>{{ $m -> cut }}</td>
-                            <td>£{{$m -> price_per_kg }}</td>
+                            <td>{{ $u -> kind }}</td>
+                            <td>{{ $u -> cut }}</td>
+                            <td>£{{$u -> price_per_kg }}</td>
 
                             <!--View details button-->
                             <td>
                                 <a class="button"
-                                   href="meat/{{ $m -> id }}/">
+                                   href="meat/{{ $u -> id }}/">
                                     <ion-icon name="eye"></ion-icon>
                                 </a>
                             </td>
@@ -85,7 +85,7 @@
                             @if ((Auth::user()->hasAnyRole('admin')))
                             <td>
                                 <a class="button"
-                                   href="meat/{{ $m -> id }}/edit">
+                                   href="meat/{{ $u -> id }}/edit">
                                     <ion-icon name="create"></ion-icon>
                                 </a>
                             </td>
@@ -94,7 +94,7 @@
                             <!--Delete meat from database button-->
                             <td>
                                 <a class="button"
-                                   href="meat/{{ $m -> id }}/delete/">
+                                   href="meat/{{ $u -> id }}/delete/">
                                     <ion-icon name="trash"></ion-icon>  </a></td>
                         </tr>
                         @endif
@@ -103,7 +103,7 @@
                 </table>
 
                 <!--Display the numbers for the pages-->
-                {{$meat->links()}}
+                {{$user->links()}}
 
 
                 <br>

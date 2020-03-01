@@ -51,7 +51,7 @@
 
 
 
-                                <button type="submit" class="button is-rounded is-primary">
+                                <button type="submit" class="button is-rounded is-link">
                                     {{ __('Reset Password') }}
                                 </button>
 

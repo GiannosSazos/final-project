@@ -43,6 +43,16 @@ Route::get('profile', function () {
 })->middleware('verified');
 
 
+/**User Routes*/
+
+Route::get ('/view_profile', 'UsersController@show');
+
+
+Route::get ('/edit_details', 'UsersController@edit');
+Route::post ('/edit_details', 'UsersController@update');
+Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth','auth.admin']);
+
+
 
 
 

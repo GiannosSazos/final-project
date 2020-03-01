@@ -17,7 +17,7 @@
 
                 <div class="card-body">
                     @if (session('status'))
-                        <div class="notification is-primary" role="alert">
+                        <div class="notification is-dark" role="alert">
                             {{ session('status') }}
                         </div>
                     @endif
@@ -41,7 +41,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <br><button type="submit" class="button is-rounded is-primary">
+                                <br><button type="submit" class="button is-rounded is-link">
                                     {{ __('Send Password Reset Link') }}
                                 </button>
                             </div>

@@ -121,11 +121,9 @@
             </div>
 
             <div class="field">
-                <button class="button is-primary is-rounded" type="submit">Submit Changes</button>
-                <a class="button is-rounded" href="/final-project/public/home" >Back</a>
+                <button class="button is-link is-rounded" type="submit">Submit Changes</button>
+                <a class="button  is-rounded" href="javascript:history.back()">Back</a>
             </div>
-
-
         </fieldset>
     </form>
 </div>

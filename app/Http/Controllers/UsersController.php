@@ -3,30 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Meats;
+use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Http\Response;
 
-class MeatsController extends Controller
+class UsersController extends Controller
 {
 
     const MEATS_PER_PAGE = 10;
 
     const RULES = [
-        'kind' => 'required',
-        'cut' => 'required',
-        'price_per_kg' => 'required|numeric',
+
+        'personal_address' => 'required',
+        'personal_telephone' => 'required',
+        'email' => 'required',
+        'password' => 'required',
 
 
 
     ];
 
     const MESSAGES = [
-        'kind.required' => 'The type is required',
-        'cut.required' => 'The cut cannot be empty',
-        'price_per_kg.required' => 'The price is required',
-        'price_per_kg.integer' => 'The price must be a number',
-        'kind.required' => 'The type is required',
+
+        'personal_address.required' => 'The personal address is required',
+        'personal_telephone.required' => 'The personal telephone is required',
+        'email.required' => 'The email is required',
+        'password.required' => 'The password is required',
 
 
     ];
@@ -64,8 +67,8 @@ class MeatsController extends Controller
 
             return view('index')->with(['meat' => $meat]);
         }
-        $meat= Meats::paginate(self::MEATS_PER_PAGE);
-        return view('index')->with(['meat' => $meat]);
+        $user= User::paginate(self::MEATS_PER_PAGE);
+        return view('users.index')->with(['user' => $user]);
     }
 
 
@@ -121,45 +124,52 @@ class MeatsController extends Controller
     /**
      * Display the specified view
      *
-     * @param Meats $meat
+     * @param \App\Meats $meat
      * @return Response
      */
-    public function show(Meats $meat)
+    public function show(User $user)
     {
-        return view('meats.show', compact('meat'));
+        return view('users.show', compact('user'));
 
     }
 
     /**
      * Show the form for editing the specified meats
      *
-     * @param Meats $meat
+     * @param User $user
      * @return Response
      */
-    public function edit(Meats $meat)
+    public function edit(User $user)
     {
-        return view('meats.edit', compact('meat'));
+        return view('users.edit', compact('user'));
     }
 
     /**
      * Get the user's input and update the data of an already existing item
      *
+     * @param User $user
      * @param Request $request
-     * @param Meats $meat
      * @return Response
      */
-    public function update(Meats $meat, Request $request)
+    public function update(User $user, Request $request)
     {
-        $request->validate(self::RULES, self::MESSAGES);
+        if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
+            $request->validate(self::RULES, self::MESSAGES);
 
 
-        $meat->update(['kind' => $request->kind]);
-        $meat->update(['cut' => $request->cut]);
-        $meat->update(['price_per_kg' => $request->price_per_kg]);
-        $meat->update(['description' => $request->description]);
-        $meat->update(['updating_user_id' => Auth::user()->id]);
+            $user=User::where('id',Auth::user()->id);
+            $user->update(['restaurant_name' => $request->restaurant_name]);
+            $user->update(['restaurant_address' => $request->restaurant_address]);
+            $user->update(['restaurant_telephone' => $request->restaurant_telephone]);
+            $user->update(['personal_address' => $request->personal_address]);
+            $user->update(['personal_telephone' => $request->personal_telephone]);
+            $user->update(['email' => $request->email]);
 
-        return redirect()->action('MeatsController@index');
+            return redirect()->action('UsersController@show');
+        }else{
+            return redirect()->action('UsersController@edit');
+        }
+
     }
 
     /**
@@ -168,10 +178,10 @@ class MeatsController extends Controller
      * @param \App\Meat $meat
      * @return Response
      */
-    public function destroy(Meats $meat)
+    public function destroy(User $user)
     {
-        $meat->delete();
-        return redirect()->action('MeatsController@index');
+        $user->delete();
+        return redirect()->action('UsersController@index');
     }
     public function __construct()
     {

@@ -3,6 +3,9 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="{{ asset ('images/vendorfavicon.png') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css" />
+    <br><br>
     <title>
         @yield ('page_title', 'Vendor Store')
     </title>
@@ -15,7 +18,7 @@
     <link rel="stylesheet" href="{{ asset ('css/design.css') }}" />
 
     @if(Auth::check())
-    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
 
 
@@ -28,6 +31,10 @@
 
         <div id="navbarBasicExample" class="navbar-menu">
             <div class="navbar-start">
+
+                <a class="navbar-item" href="/final-project/public/home">
+                    Home
+                </a>
                 <a class="navbar-item">
                     Contact Us
                 </a>
@@ -39,7 +46,7 @@
                     Report an Issue
                 </a>
                 @if ((Auth::user()->hasAnyRole('admin')))
-                <a class="navbar-item">
+                <a class="navbar-item" href="/final-project/public/admin_panel">
                     Admin Panel
                 </a>
                     @endif
@@ -48,10 +55,10 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-primary is-round" href="view_profile/">
-                            <strong>Profile</strong>
+                        <a class="button is-link is-round" href="/final-project/public/view_profile">
+                           Profile
                         </a>
-                        <a class="button is-danger is-round" href="logout/">
+                        <a class="button is-secondary is-round" href="/final-project/public/logout">
                             Log out
                         </a>
                     </div>

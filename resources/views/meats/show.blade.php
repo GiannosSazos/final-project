@@ -37,7 +37,7 @@
             </tbody>
 
         </table>
-        <a class="button" href="/final-project/public/home">Back</a>
+        <a class="button  is-rounded" href="javascript:history.back()">Back</a>
     </div>
 
 

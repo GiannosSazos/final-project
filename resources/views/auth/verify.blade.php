@@ -18,7 +18,7 @@
 
                 <div class="card-body">
                     @if (session('resent'))
-                        <div class="notification is-primary" role="alert">
+                        <div class="notification is-dark" role="alert">
                             {{ __('A fresh verification link has been sent to your email address.') }}
                         </div>
                     @endif
@@ -29,7 +29,7 @@
                     <form  method="POST" action="{{ route('verification.resend') }}">
                         @csrf
 
-                        <button type="submit " class="button is-primary is-rounded">{{ __('Resend E-Mail') }}</button>
+                        <button type="submit " class="button is-link is-rounded">{{ __('Resend E-Mail') }}</button>
                     </form>
                     <br>
                 </div>
