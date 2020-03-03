@@ -115,7 +115,7 @@ class MeatsController extends Controller
 
         ]);
 
-        return redirect()->action('MeatsController@index');
+        return redirect()->action('MeatsController@index')->with('added', 'A new meat has been added successfully!');
     }
 
     /**
@@ -152,14 +152,14 @@ class MeatsController extends Controller
     {
         $request->validate(self::RULES, self::MESSAGES);
 
-
+        $id=$meat->id;
         $meat->update(['kind' => $request->kind]);
         $meat->update(['cut' => $request->cut]);
         $meat->update(['price_per_kg' => $request->price_per_kg]);
         $meat->update(['description' => $request->description]);
         $meat->update(['updating_user_id' => Auth::user()->id]);
 
-        return redirect()->action('MeatsController@index');
+        return redirect("meat/{$id}")->with('updated', 'The details have been updated');
     }
 
     /**
@@ -171,7 +171,7 @@ class MeatsController extends Controller
     public function destroy(Meats $meat)
     {
         $meat->delete();
-        return redirect()->action('MeatsController@index');
+        return redirect()->action('MeatsController@index')->with('deleted', $meat-> kind.' ' .$meat->cut. ' has been deleted from the inventory');
     }
     public function __construct()
     {

@@ -13,11 +13,6 @@
 @section ('content')
 
     <div class="box" style="width: 500px; margin: 0 auto;" align="center">
-        @if(session()->has('success'))
-            <div class="notification is-primary">
-                {{ session()->get('success') }}
-            </div>
-        @endif
         <table class="table is-striped is-fullwidth" >
             <tbody>
             <tr>
@@ -54,9 +49,7 @@
             </tbody>
 
         </table>
-        @if ($user->id === Auth::user()->id)
-        <a class="button is-rounded is-link" href="/final-project/public/edit_details">Edit Details</a>
-        @endif
+        <a class="button is-rounded is-link" href="edit_details">Edit Details</a>
         <a class="button is-rounded" href="javascript:history.back()">Back</a>
     </div>
 

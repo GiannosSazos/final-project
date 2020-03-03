@@ -55,7 +55,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-link is-round" href="/final-project/public/view_profile">
+                        <a class="button is-link is-round" href="/final-project/public/user/{{Auth::user()-> id}}">
                            Profile
                         </a>
                         <a class="button is-secondary is-round" href="/final-project/public/logout">

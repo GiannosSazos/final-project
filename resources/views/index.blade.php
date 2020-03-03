@@ -51,6 +51,17 @@
         <!--Making the table where all the data for the meats will be displayed-->
         <div class="box">
 
+                @if(session()->has('added'))
+                    <div class="notification is-primary">
+                        {{ session()->get('added') }}
+                    </div>
+                @endif
+                    @if(session()->has('deleted'))
+                        <div class="notification is-danger">
+                            {{ session()->get('deleted') }}
+                        </div>
+                    @endif
+
             <!--if there is data in the database, show the data...-->
             @if (count ($meat) > 0)
 

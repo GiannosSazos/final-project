@@ -11,7 +11,7 @@ use Illuminate\Http\Response;
 class UsersController extends Controller
 {
 
-    const MEATS_PER_PAGE = 10;
+    const USERS_PER_PAGE = 10;
 
     const RULES = [
 
@@ -41,33 +41,33 @@ class UsersController extends Controller
      */
     public function index()
     {
-
-        $columns = [
-            'kind',
-
-        ];
-
-        /**Checks what column is sent in the request and filters the data.*/
-        foreach ($columns as $column) {
-            if (request()->has($column)) {
-                $meat = Meats::where($column, request($column))
-                    ->paginate(self::MEATS_PER_PAGE)
-                    ->appends($column, request($column));
-
-                return view('index')->with(['meat' => $meat]);
-            }
-        }
-
-
-        /**Sorting by price */
-        if (request()->has('price_per_kg')) {
-            $meat = Meats::orderBy('price_per_kg', request('price_per_kg'))
-                ->paginate(self::MEATS_PER_PAGE)
-                ->appends('price_per_kg', request('price_per_kg'));
-
-            return view('index')->with(['meat' => $meat]);
-        }
-        $user= User::paginate(self::MEATS_PER_PAGE);
+//
+//        $columns = [
+//            'kind',
+//
+//        ];
+//
+//        /**Checks what column is sent in the request and filters the data.*/
+//        foreach ($columns as $column) {
+//            if (request()->has($column)) {
+//                $meat = Meats::where($column, request($column))
+//                    ->paginate(self::MEATS_PER_PAGE)
+//                    ->appends($column, request($column));
+//
+//                return view('index')->with(['meat' => $meat]);
+//            }
+//        }
+//
+//
+//        /**Sorting by price */
+//        if (request()->has('price_per_kg')) {
+//            $meat = Meats::orderBy('price_per_kg', request('price_per_kg'))
+//                ->paginate(self::MEATS_PER_PAGE)
+//                ->appends('price_per_kg', request('price_per_kg'));
+//
+//            return view('index')->with(['meat' => $meat]);
+//        }
+        $user= User::paginate(self::USERS_PER_PAGE);
         return view('users.index')->with(['user' => $user]);
     }
 
@@ -156,7 +156,7 @@ class UsersController extends Controller
         if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
             $request->validate(self::RULES, self::MESSAGES);
 
-
+            $id=Auth::user()->id;
             $user=User::where('id',Auth::user()->id);
             $user->update(['restaurant_name' => $request->restaurant_name]);
             $user->update(['restaurant_address' => $request->restaurant_address]);
@@ -165,9 +165,9 @@ class UsersController extends Controller
             $user->update(['personal_telephone' => $request->personal_telephone]);
             $user->update(['email' => $request->email]);
 
-            return redirect()->action('UsersController@show');
+            return redirect("user/{$id}")->with('success', 'Your details have been updated');
         }else{
-            return redirect()->action('UsersController@edit');
+            return redirect()->action('UsersController@edit')->with('failure', 'Incorrect Password');
         }
 
     }
@@ -181,7 +181,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->action('UsersController@index');
+         with('deleted','User ' .$user-> name.  ' has been removed');
     }
     public function __construct()
     {

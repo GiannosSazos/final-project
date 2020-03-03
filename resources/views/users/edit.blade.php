@@ -11,7 +11,11 @@
 
         <div class="box">
 
-
+            @if(session()->has('failure'))
+                <div class="notification is-danger">
+                    {{ session()->get('failure') }}
+                </div>
+            @endif
             <div class="card-body">
                 <form method="POST" action="">
                     @csrf
@@ -121,7 +125,7 @@
                     <div class="form-group row">
                         <label for="password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
                         <div class="control has-icons-left">
-                            <input id="password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="password">
+                            <input id="password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="password" required>
                             <span class="icon is-small is-left">
                             <ion-icon name="key"></ion-icon>
                           </span>
@@ -130,6 +134,8 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
+
+
                         </div>
                     </div>
                     <br>

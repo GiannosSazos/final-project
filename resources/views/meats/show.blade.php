@@ -14,6 +14,11 @@
 @section ('content')
 
     <div class="box" style="width: 500px; margin: 0 auto;" align="center">
+        @if(session()->has('updated'))
+            <div class="notification is-primary">
+                {{ session()->get('updated') }}
+            </div>
+        @endif
         <table class="table is-striped is-fullwidth" >
             <tbody>
             <tr>
