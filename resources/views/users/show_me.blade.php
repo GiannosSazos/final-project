@@ -6,7 +6,7 @@
 
 @section ('page_heading')
     <center>
-   {{$user->name}}'s Profile
+   {{Auth::user()->name}}'s Profile
     </center>
 @endsection
 
@@ -17,39 +17,40 @@
             <tbody>
             <tr>
                 <td>Name:</td>
-                <td>{{  $user -> name }}</td>
+                <td>{{  Auth::user() -> name }}</td>
             </tr>
-            @if (isset ($user -> restaurant_name))
+            @if (isset (Auth::user() -> restaurant_name))
             <tr>
                 <td>Restaurant Name:</td>
-                <td>{{ $user -> restaurant_name }}</td>
+                <td>{{ Auth::user() -> restaurant_name }}</td>
             </tr>
             <tr>
                 <td>Restaurant Address:</td>
-                <td>{{ $user -> restaurant_address}}</td>
+                <td>{{ Auth::user() -> restaurant_address}}</td>
             </tr>
             <tr>
                 <td>Restaurant Telephone:</td>
-                <td>{{ $user -> restaurant_telephone }}</td>
+                <td>{{ Auth::user() -> restaurant_telephone }}</td>
             </tr>
             @endif
             <tr>
                 <td>Personal Address:</td>
-                <td>{{ $user -> personal_address }}</td>
+                <td>{{ Auth::user() -> personal_address }}</td>
             </tr>
             <tr>
                 <td>Personal Telephone:</td>
-                <td>{{$user -> personal_telephone }}</td>
+                <td>{{Auth::user() -> personal_telephone }}</td>
             </tr>
 
                     <tr>
                         <td >E-Mail:</td>
-                        <td style="word-break: break-all">{{ $user->email }}</td>
+                        <td style="word-break: break-all">{{ Auth::user()->email }}</td>
                     </tr>
             </tbody>
 
         </table>
-        <a class="button is-rounded is-link" href="edit_details">Edit Details</a>
+             <a class="button is-rounded is-link" href="/final-project/public/edit_my_profile">Edit Details</a>
+            <a class="button is-danger is-rounded" href="/final-project/public/delete_my_profile">Delete</a>
         <a class="button is-rounded" href="javascript:history.back()">Back</a>
     </div>
 

@@ -54,10 +54,9 @@
             </tbody>
 
         </table>
-        @if ($user->id === Auth::user()->id)
-        <a class="button is-rounded is-link" href="/final-project/public/edit_details">Edit Details</a>
-        @endif
-        <a class="button is-rounded" href="javascript:history.back()">Back</a>
+            <a class="button is-rounded is-link" href="/final-project/public/user/{{Auth::user()->id}}/edit">Edit Details</a>
+            <a class="button is-danger is-rounded" href="/final-project/public/user/{{ $user -> id }}/delete/">Delete</a>
+            <a class="button is-rounded" href="javascript:history.back()">Back</a>
     </div>
 
 

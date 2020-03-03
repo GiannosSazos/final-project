@@ -42,6 +42,8 @@
             </tbody>
 
         </table>
+            <a class="button is-rounded is-link" href="/final-project/public/meat/{{$meat->id}}/edit">Edit Details</a>
+            <a class="button is-danger is-rounded" href="/final-project/public/meat/{{ $meat -> id }}/delete/">Delete</a>
         <a class="button  is-rounded" href="javascript:history.back()">Back</a>
     </div>
 

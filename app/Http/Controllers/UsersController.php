@@ -133,6 +133,11 @@ class UsersController extends Controller
         return view('users.show', compact('user'));
 
     }
+    public function showMe(User $user)
+    {
+        return view('users.show_me', compact('user'));
+
+    }
 
     /**
      * Show the form for editing the specified meats
@@ -144,6 +149,12 @@ class UsersController extends Controller
     {
         return view('users.edit', compact('user'));
     }
+
+    public function editMe(User $user)
+    {
+        return view('users.edit_me', compact('user'));
+    }
+
 
     /**
      * Get the user's input and update the data of an already existing item
@@ -157,8 +168,7 @@ class UsersController extends Controller
         if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
             $request->validate(self::RULES, self::MESSAGES);
 
-            $id=Auth::user()->id;
-            $user=User::where('id',Auth::user()->id);
+            $id=$user->id;
             $user->update(['restaurant_name' => $request->restaurant_name]);
             $user->update(['restaurant_address' => $request->restaurant_address]);
             $user->update(['restaurant_telephone' => $request->restaurant_telephone]);
@@ -167,6 +177,25 @@ class UsersController extends Controller
             $user->update(['email' => $request->email]);
 
             return redirect("user/{$id}")->with('success', 'Your details have been updated');
+        }else{
+            return redirect()->action('UsersController@edit')->with('failure', 'Incorrect Password');
+        }
+
+    }
+    public function updateMe(User $user, Request $request)
+    {
+        if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
+            $request->validate(self::RULES, self::MESSAGES);
+
+            $user=User::where('id',Auth::user()->id);
+            $user->update(['restaurant_name' => $request->restaurant_name]);
+            $user->update(['restaurant_address' => $request->restaurant_address]);
+            $user->update(['restaurant_telephone' => $request->restaurant_telephone]);
+            $user->update(['personal_address' => $request->personal_address]);
+            $user->update(['personal_telephone' => $request->personal_telephone]);
+            $user->update(['email' => $request->email]);
+
+            return redirect("my_profile")->with('success', 'Your details have been updated');
         }else{
             return redirect()->action('UsersController@edit')->with('failure', 'Incorrect Password');
         }
@@ -183,6 +212,13 @@ class UsersController extends Controller
     {
         $user->delete();
         return redirect()->action('UsersController@index')->with('deleted','User ' .$user-> name.  ' has been removed');
+    }
+
+    public function destroyMe(User $user)
+    {
+        $user=User::where('id',Auth::user()->id);
+        $user->delete();
+        return redirect()->action('auth.login');
     }
     public function __construct()
     {

@@ -142,14 +142,14 @@
                             <ion-icon name="key"></ion-icon>
                           </span>
                         </div>
-                    </div>
+                    </div><br>
                     <div class="form-group row">
-                    <input value="Admin" name="admin" class="product-list" type="checkbox">Admin<br>
-                    <input value="Employee" name="employee"  type="checkbox">Employee<br>
-                    <input value="Customer" name="customer"  type="checkbox">Customer<br>
+                    <input value="Admin" name="admin" class="role-list" type="checkbox">Admin &nbsp;
+                    <input value="Employee" name="employee" class="role-list" type="checkbox">Employee &nbsp;
+                    <input value="Customer" name="customer" class="role-list"  type="checkbox">Customer &nbsp;
                     <script type="text/javascript">
-                        $('.product-list').on('change', function() {
-                            $('.product-list').not(this).prop('checked', false);
+                        $('.role-list').on('change', function() {
+                            $('.role-list').not(this).prop('checked', false);
                         });
                     </script>
                     </div>

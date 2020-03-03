@@ -6,8 +6,13 @@
 @endsection
 @section('content')
     <div class="container">
-
+        <label for="welcome" class="label">Welcome! If you do not have an account please contact us <u><a href='about_us'>here</a></u>!</label>
         <div class="box">
+            @if(session()->has('failed'))
+                <div class="notification is-danger">
+                    {{ session()->get('failed') }}
+                </div>
+            @endif
             <form method="POST" action="{{ route('login') }}">
                 @csrf
 

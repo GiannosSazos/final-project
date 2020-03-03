@@ -1,5 +1,6 @@
-<?php
 
+<?php
+Use App\User;
 /**After given a particular URL, here is where we give directions and make the webpage execute some functions by going in the MeatsController*/
 Route::get('/', 'MeatsController@index');
 
@@ -44,12 +45,17 @@ Auth::routes(['verify' => true]);
 
 /**User Routes*/
 
-Route::get ('/user/{user}/', 'UsersController@show');
-Route::get ('/user/{Auth::user()-id}/', 'UsersController@show');
+Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth','auth.admin']);
 
 
-Route::get ('/edit_details', 'UsersController@edit');
-Route::post ('/edit_details', 'UsersController@update');
+Route::get ('/my_profile', 'UsersController@showMe');
+Route::get ('/edit_my_profile', 'UsersController@editMe');
+Route::post ('/edit_my_profile', 'UsersController@updateMe');
+Route::get ('/delete_my_profile', 'UsersController@destroyMe');
+
+
+Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth','auth.admin']);
+Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth','auth.admin']);
 Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth','auth.admin']);
 Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth','auth.admin']);
 

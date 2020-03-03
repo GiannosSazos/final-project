@@ -36,10 +36,6 @@
                     Home
                 </a>
                 <a class="navbar-item">
-                    Contact Us
-                </a>
-
-                <a class="navbar-item">
                    About Us
                 </a>
                 <a class="navbar-item">
@@ -55,7 +51,7 @@
             <div class="navbar-end">
                 <div class="navbar-item">
                     <div class="buttons">
-                        <a class="button is-link is-round" href="/final-project/public/user/{{Auth::user()-> id}}">
+                        <a class="button is-link is-round" href="/final-project/public/my_profile/">
                            Profile
                         </a>
                         <a class="button is-secondary is-round" href="/final-project/public/logout">
