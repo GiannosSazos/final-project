@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Meats;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
 use Auth;
@@ -43,7 +44,7 @@ class UsersController extends Controller
     {
 //
 //        $columns = [
-//            'kind',
+//            'name',
 //
 //        ];
 //
@@ -181,7 +182,7 @@ class UsersController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-         with('deleted','User ' .$user-> name.  ' has been removed');
+        return redirect()->action('UsersController@index')->with('deleted','User ' .$user-> name.  ' has been removed');
     }
     public function __construct()
     {

@@ -5,15 +5,14 @@
         Register to Vendor Store
     </center>
 @endsection
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 @section('content')
     <div class="container">
 
         <div class="box">
 
-
             <div class="card-body">
-                <form method="POST" action="{{ route('register') }}">
+                <form method="POST">
                     @csrf
 
                     <div class="form-group row">
@@ -144,13 +143,23 @@
                           </span>
                         </div>
                     </div>
+                    <div class="form-group row">
+                    <input value="Admin" name="admin" class="product-list" type="checkbox">Admin<br>
+                    <input value="Employee" name="employee"  type="checkbox">Employee<br>
+                    <input value="Customer" name="customer"  type="checkbox">Customer<br>
+                    <script type="text/javascript">
+                        $('.product-list').on('change', function() {
+                            $('.product-list').not(this).prop('checked', false);
+                        });
+                    </script>
+                    </div>
                     <br>
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
-                            <button type="submit" class="button is-link">
+                            <button type="submit" class="button is-link" href="admin_panel">
                                 {{ __('Register') }}
                             </button>
-                            <a class="button is-secondary" href="/final-project/public/">
+                            <a class="button is-secondary" href="admin_panel">
                                 {{ __('Back') }}
                             </a>
                         </div>

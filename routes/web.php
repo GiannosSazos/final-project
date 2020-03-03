@@ -37,10 +37,9 @@ Route::get('/logout','Auth\LoginController@logout');
 
 
 Auth::routes(['verify' => true]);
-
-Route::get('profile', function () {
-    // Only verified users may enter...
-})->middleware('verified');
+//Route::get('profile', function () {
+//    // Only verified users may enter...
+//})->middleware('verified');
 
 
 /**User Routes*/
@@ -52,6 +51,8 @@ Route::get ('/user/{Auth::user()-id}/', 'UsersController@show');
 Route::get ('/edit_details', 'UsersController@edit');
 Route::post ('/edit_details', 'UsersController@update');
 Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth','auth.admin']);
+Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth','auth.admin']);
+
 Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth','auth.admin']);
 
 

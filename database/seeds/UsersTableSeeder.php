@@ -13,12 +13,14 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
 
-        $adminRole = Role::where('name','admin')->first();
-        $managerRole = Role::where('name','manager')->first();
+        $adminRole = Role::where('name','Admin')->first();
+        $employeeRole = Role::where('name','Employee')->first();
+        $customerRole = Role::where('name','Customer')->first();
+
 
 
         $admin = User::create([
-            'name' =>'Admin',
+            'name' =>'Andrew',
             'restaurant_name' =>NULL,
             'restaurant_address' =>NULL,
             'restaurant_telephone' =>NULL,
@@ -27,18 +29,18 @@ class UsersTableSeeder extends Seeder
             'email'=>'admin@hotmail.com',
             'password' => bcrypt('pass')
         ]);
-        $manager = User::create([
-            'name' =>'Manager',
+        $employee = User::create([
+            'name' =>'Nathan',
             'restaurant_name' =>NULL,
             'restaurant_address' =>NULL,
             'restaurant_telephone' =>NULL,
             'personal_address' =>'23 Meat Road, Huddersfield',
             'personal_telephone' =>'99437552',
-            'email'=>'manager@hotmail.com',
+            'email'=>'employee@hotmail.com',
             'password' => bcrypt('pass')
         ]);
-        User::create([
-            'name' =>'Customer',
+        $customer=User::create([
+            'name' =>'John',
             'restaurant_name' =>'Customer\'s Restaurant',
             'restaurant_address' =>'247 Manchester Road, Huddersfield',
             'restaurant_telephone' =>'25437561',
@@ -49,7 +51,8 @@ class UsersTableSeeder extends Seeder
         ]);
 
         $admin->roles()->attach($adminRole);
-        $manager->roles()->attach($managerRole);
+        $employee->roles()->attach($employeeRole);
+        $customer->roles()->attach($customerRole);
 
     }
 }

@@ -19,13 +19,10 @@
         <!--Filter Links-->
 
         <div  style="text-align: left; float: left;">
-            <a href="?kind=beef">Beef</a> |
-            <a href="?kind=lamb">Lamb</a> |
-            <a href="?kind=pork">Pork</a> |
-            <a href="?kind=poultry">Poultry</a> |
-            <a href="?kind=sausage">Sausage</a> |
-            <a href="?kind=steak">Steak</a> |
-            <a href="?kind=burger">Burger</a> |
+            <a href="?role=Admin">Admin</a> |
+            <a href="?role=Employee">Employee</a> |
+            <a href="?role=Customer">Customer</a> |
+
 
         </div>
 
@@ -50,6 +47,11 @@
 
         <!--Making the table where all the data for the meats will be displayed-->
         <div class="box">
+            @if(session()->has('added'))
+                <div class="notification is-primary">
+                    {{ session()->get('added') }}
+                </div>
+            @endif
             @if(session()->has('deleted'))
                 <div class="notification is-danger">
                     {{ session()->get('deleted') }}
@@ -61,9 +63,10 @@
 
                 <table class="table is-striped is-hoverable is-fullwidth">
                     <thead>
-                    <th>Kind</th>
-                    <th>Cut</th>
-                    <th>Price Per Kilo</th>
+                    <th>Role</th>
+                    <th>Name</th>
+                    <th>Personal Telephone</th>
+                    <th>Email</th>
                     <th>Details</th>
                     @if ((Auth::user()->hasAnyRole('admin')))
                     <th>Delete</th>
@@ -73,9 +76,11 @@
                     <tbody>
                     @foreach ($user as $u)
                         <tr>
+
+                            <td>{{ implode(', ',$u->roles()->get()->pluck('name')->toArray())}}</td>
                             <td>{{ $u -> name }}</td>
-                            <td>{{ $u -> cut }}</td>
-                            <td>£{{$u -> price_per_kg }}</td>
+                            <td>{{ $u -> personal_telephone }}</td>
+                            <td>{{$u -> email }}</td>
 
                             <!--View details button-->
                             <td>
@@ -102,7 +107,9 @@
                 <br>
                 <!--Add meat to database button-->
                 @if ((Auth::user()->hasAnyRole('admin')))
-                    <a style="margin:5px;" class="button is-link is-rounded" href="add_user/">Add New User</a>
+                        <a class="button is-link is-rounded" href="register">
+                            {{ __('Add New User') }}
+                        </a>
                 @endif
                 @endif
 

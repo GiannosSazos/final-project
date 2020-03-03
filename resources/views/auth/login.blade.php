@@ -62,9 +62,7 @@
                         </button>
 
 
-                        <a class="button is-secondary" href="{{ route('register') }}">
-                            {{ __('Register') }}
-                        </a>
+
                         <a class="btn btn-link" href="{{ route('password.request') }}">
                             {{ __('Forgot Password?') }}
                         </a>
