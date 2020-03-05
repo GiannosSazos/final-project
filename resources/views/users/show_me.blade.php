@@ -46,11 +46,15 @@
                         <td >E-Mail:</td>
                         <td style="word-break: break-all">{{ Auth::user()->email }}</td>
                     </tr>
+
+            <tr>
+                <td >Role:</td>
+                <td style="word-break: break-all">{{ implode(', ',$user->roles()->get()->pluck('name')->toArray()) }}</td>
+            </tr>
             </tbody>
 
         </table>
              <a class="button is-rounded is-link" href="/final-project/public/edit_my_profile">Edit Details</a>
-            <a class="button is-danger is-rounded" href="/final-project/public/delete_my_profile">Delete</a>
         <a class="button is-rounded" href="javascript:history.back()">Back</a>
     </div>
 

@@ -52,6 +52,11 @@
                     {{ session()->get('added') }}
                 </div>
             @endif
+                @if(session()->has('failure'))
+                    <div class="notification is-danger">
+                        {{ session()->get('failure') }}
+                    </div>
+                @endif
             @if(session()->has('deleted'))
                 <div class="notification is-danger">
                     {{ session()->get('deleted') }}

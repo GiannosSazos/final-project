@@ -130,12 +130,16 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        $roles=Role::all();
+
+        return view('users.show', compact('user','roles'));
 
     }
     public function showMe(User $user)
     {
-        return view('users.show_me', compact('user'));
+        $roles=Role::all();
+
+        return view('users.show_me', compact('user','roles'));
 
     }
 
@@ -178,6 +182,7 @@ class UsersController extends Controller
             $user->update(['personal_address' => $request->personal_address]);
             $user->update(['personal_telephone' => $request->personal_telephone]);
             $user->update(['email' => $request->email]);
+            $user->roles()->sync($request->role);
 
             return redirect("/user/{$id}")->with('success', "{$user->name}'s details have been updated");
         }else{
@@ -214,16 +219,15 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
+        if(Auth::user()->id==$user->id){
+            return back()->with('failure', 'You can\'t delete your own account');
+        }
+        $user->roles()->detach();
         $user->delete();
         return redirect()->action('UsersController@index')->with('deleted','User ' .$user-> name.  ' has been removed');
     }
 
-    public function destroyMe(User $user)
-    {
-        $user=User::where('id',Auth::user()->id);
-        $user->delete();
-        return redirect()->action('auth.login');
-    }
+
     public function __construct()
     {
 //        $this->middleware(['auth','verified']);

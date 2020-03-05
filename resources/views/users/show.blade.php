@@ -51,11 +51,18 @@
                         <td >E-Mail:</td>
                         <td style="word-break: break-all">{{ $user->email }}</td>
                     </tr>
+
+            <tr>
+                <td >Role:</td>
+                <td style="word-break: break-all">{{ implode(', ',$user->roles()->get()->pluck('name')->toArray()) }}</td>
+            </tr>
             </tbody>
 
         </table>
             <a class="button is-rounded is-link" href="/final-project/public/user/{{Auth::user()->id}}/edit">Edit Details</a>
+            @if(Auth::user()->id !== $user->id)
             <a class="button is-danger is-rounded" href="/final-project/public/user/{{ $user -> id }}/delete/">Delete</a>
+            @endif
             <a class="button is-rounded" href="javascript:history.back()">Back</a>
     </div>
 

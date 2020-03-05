@@ -51,7 +51,7 @@ Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth','auth.a
 Route::get ('/my_profile', 'UsersController@showMe');
 Route::get ('/edit_my_profile', 'UsersController@editMe');
 Route::post ('/edit_my_profile', 'UsersController@updateMe');
-Route::get ('/delete_my_profile', 'UsersController@destroyMe');
+
 
 
 Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth','auth.admin']);
