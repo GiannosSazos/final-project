@@ -21,6 +21,11 @@
                         {{ session()->get('failure') }}
                     </div>
                 @endif
+                @error('new_password')
+                <span class="notification is-danger">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                @enderror
 
                 <div class="card-body">
                 <form method="POST" action="">
@@ -136,27 +141,16 @@
                                 <span class="icon is-small is-left">
                             <ion-icon name="key"></ion-icon>
                           </span>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-
-
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="cnfrm_password" class="label">{{ __('Confirm New Password') }}</label>
+                            <label for="new_password_confirmation" class="label">{{ __('Confirm New Password') }}</label>
                             <div class="control has-icons-left">
-                                <input id="cnfrm_password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="cnfrm_password" >
+                                <input id="new_password_confirmation" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="new_password_confirmation" >
                                 <span class="icon is-small is-left">
                             <ion-icon name="key"></ion-icon>
                           </span>
-                                @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+
 
                             </div>
                         </div>
@@ -166,11 +160,6 @@
                             <span class="icon is-small is-left">
                             <ion-icon name="key"></ion-icon>
                           </span>
-                            @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                            @enderror
                         </div>
                     </div>
                     <br>

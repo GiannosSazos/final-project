@@ -20,6 +20,8 @@ class UsersController extends Controller
         'personal_telephone' => ['required'],
         'email' => ['required', 'string', 'email', 'max:255'],
         'current_password' => ['required'],
+        'new_password'=>['confirmed']
+
 
 
 
@@ -209,10 +211,17 @@ class UsersController extends Controller
             $user->update(['personal_address' => $request->personal_address]);
             $user->update(['personal_telephone' => $request->personal_telephone]);
             $user->update(['email' => $request->email]);
-            if(strcmp($request->get('current_password'),$request->get('new_password'))==0){
-                return redirect()->action('UsersController@editMe')->with('same_pass', 'New password cannot be the same as the current one');
+            if($request->get('new_password')!==NULL){
+                if (strcmp($request->get('current_password'), $request->get('new_password')) == 0) {
+                    return redirect()->action('UsersController@editMe')->with('same_pass', 'New password cannot be the same as the current one');
+                }else
+                $user->update(['password' => bcrypt($request->get('new_password'))]);
+
+
+
+                return redirect("my_profile")->with('success', 'Your details have been updated');
+
             }
-            $user->update(['password'=>bcrypt($request->get('new_password'))]);
 
 
             return redirect("my_profile")->with('success', 'Your details have been updated');
