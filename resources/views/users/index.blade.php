@@ -27,7 +27,7 @@
         </div>
 
         <!--Sort Links-->
-        <div style="text-align: right; overflow: hidden; ">
+        <div style="text-align: right; o ">
             Price:
             <a href="?price_per_kg=asc">Ascending</a> |
             <a href="?price_per_kg=desc">Descending</a><br>

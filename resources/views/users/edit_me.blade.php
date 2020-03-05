@@ -130,7 +130,11 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
-
+                            @if(session()->has('failure'))
+                                <div class="notification is-danger">
+                                    {{ session()->get('failure') }}
+                                </div>
+                            @endif
 
                         </div>
                     </div>

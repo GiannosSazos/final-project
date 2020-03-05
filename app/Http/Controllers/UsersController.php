@@ -165,10 +165,11 @@ class UsersController extends Controller
      */
     public function update(User $user, Request $request)
     {
+        $id=$user->id;
         if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
             $request->validate(self::RULES, self::MESSAGES);
 
-            $id=$user->id;
+
             $user->update(['restaurant_name' => $request->restaurant_name]);
             $user->update(['restaurant_address' => $request->restaurant_address]);
             $user->update(['restaurant_telephone' => $request->restaurant_telephone]);
@@ -176,9 +177,10 @@ class UsersController extends Controller
             $user->update(['personal_telephone' => $request->personal_telephone]);
             $user->update(['email' => $request->email]);
 
-            return redirect("user/{$id}")->with('success', 'Your details have been updated');
+            return redirect("/user/{$id}")->with('success', "{$user->name}'s details have been updated");
         }else{
-            return redirect()->action('UsersController@edit')->with('failure', 'Incorrect Password');
+
+            return redirect("/user/{$id}/edit")->with('failure', 'Incorrect Password');
         }
 
     }
@@ -197,7 +199,7 @@ class UsersController extends Controller
 
             return redirect("my_profile")->with('success', 'Your details have been updated');
         }else{
-            return redirect()->action('UsersController@edit')->with('failure', 'Incorrect Password');
+            return redirect()->action('UsersController@editMe')->with('failure', 'Incorrect Password');
         }
 
     }
