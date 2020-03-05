@@ -2,7 +2,7 @@
 
 @section ('page_heading')
     <center>
-        Edit your profile details
+        {{Auth::user()->name}}'s Profile
     </center>
 @endsection
 
@@ -117,6 +117,7 @@
                             @enderror
                         </div>
                     </div><br>
+                    @if (Auth::user()->id !== $user->id)
                     <div class="form-group row">
                         <label class="label">{{__('Role')}}</label>
                         @foreach($roles as $role)
@@ -124,8 +125,13 @@
                             {{$role->name}}&nbsp;
                         @endforeach
                     </div>
+                    @if(session()->has('failure'))
+                        <div class="notification is-danger">
+                            {{ session()->get('failure') }}
+                        </div>
+                    @endif
                     <br>
-
+                    @endif
                     <div class="form-group row">
                         <label for="password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
                         <div class="control has-icons-left">

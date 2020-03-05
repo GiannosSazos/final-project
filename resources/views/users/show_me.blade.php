@@ -6,13 +6,18 @@
 
 @section ('page_heading')
     <center>
-   {{Auth::user()->name}}'s Profile
+   Your Profile
     </center>
 @endsection
 
 @section ('content')
 
     <div class="box" style="width: 500px; margin: 0 auto;" align="center">
+        @if(session()->has('success'))
+            <div class="notification is-primary">
+                {{ session()->get('success') }}
+            </div>
+        @endif
         <table class="table is-striped is-fullwidth" >
             <tbody>
             <tr>
@@ -46,11 +51,6 @@
                         <td >E-Mail:</td>
                         <td style="word-break: break-all">{{ Auth::user()->email }}</td>
                     </tr>
-
-            <tr>
-                <td >Role:</td>
-                <td style="word-break: break-all">{{ implode(', ',$user->roles()->get()->pluck('name')->toArray()) }}</td>
-            </tr>
             </tbody>
 
         </table>

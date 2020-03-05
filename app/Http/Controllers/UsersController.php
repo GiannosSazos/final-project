@@ -16,10 +16,12 @@ class UsersController extends Controller
 
     const RULES = [
 
-        'personal_address' => 'required',
-        'personal_telephone' => 'required',
-        'email' => 'required',
-        'password' => 'required',
+        'personal_address' => ['required'],
+        'personal_telephone' => ['required'],
+        'email' => ['required', 'string', 'email', 'max:255'],
+        'current_password' => ['required'],
+
+
 
 
 
@@ -30,7 +32,7 @@ class UsersController extends Controller
         'personal_address.required' => 'The personal address is required',
         'personal_telephone.required' => 'The personal telephone is required',
         'email.required' => 'The email is required',
-        'password.required' => 'The password is required',
+        'current_password.required' => 'The password is required',
 
 
     ];
@@ -130,6 +132,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+
         $roles=Role::all();
 
         return view('users.show', compact('user','roles'));
@@ -151,6 +154,9 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        if (Auth::user()->id == $user->id){
+            return redirect()->action('UsersController@editMe');
+        }
         $roles=Role::all();
 
         return view('users.edit',compact('roles','user'));
@@ -171,29 +177,29 @@ class UsersController extends Controller
      */
     public function update(User $user, Request $request)
     {
+
+
         $id=$user->id;
-        if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
-            $request->validate(self::RULES, self::MESSAGES);
+            if (password_verify($password =$request->input('current_password'), Auth::user () ->  password)) {
+                $request->validate(self::RULES, self::MESSAGES);
 
 
-            $user->update(['restaurant_name' => $request->restaurant_name]);
-            $user->update(['restaurant_address' => $request->restaurant_address]);
-            $user->update(['restaurant_telephone' => $request->restaurant_telephone]);
-            $user->update(['personal_address' => $request->personal_address]);
-            $user->update(['personal_telephone' => $request->personal_telephone]);
-            $user->update(['email' => $request->email]);
-            $user->roles()->sync($request->role);
+                $user->update(['restaurant_name' => $request->restaurant_name]);
+                $user->update(['restaurant_address' => $request->restaurant_address]);
+                $user->update(['restaurant_telephone' => $request->restaurant_telephone]);
+                $user->update(['personal_address' => $request->personal_address]);
+                $user->update(['personal_telephone' => $request->personal_telephone]);
+                $user->update(['email' => $request->email]);
+                $user->roles()->sync($request->role);
 
-            return redirect("/user/{$id}")->with('success', "{$user->name}'s details have been updated");
-        }else{
-
-            return redirect("/user/{$id}/edit")->with('failure', 'Incorrect Password');
+                return redirect("/user/{$id}")->with('success', "{$user->name}'s details have been updated");
+            }else{
+                return redirect("/user/{$id}/edit")->with('failure', 'Incorrect Password');
+            }
         }
-
-    }
-    public function updateMe(User $user, Request $request)
+    public function updateMe(Request $request)
     {
-        if (password_verify($password =$request->input('password'), Auth::user () ->  password)) {
+        if (password_verify($password =$request->input('current_password'), Auth::user () ->  password)) {
             $request->validate(self::RULES, self::MESSAGES);
 
             $user=User::where('id',Auth::user()->id);
@@ -203,6 +209,11 @@ class UsersController extends Controller
             $user->update(['personal_address' => $request->personal_address]);
             $user->update(['personal_telephone' => $request->personal_telephone]);
             $user->update(['email' => $request->email]);
+            if(strcmp($request->get('current_password'),$request->get('new_password'))==0){
+                return redirect()->action('UsersController@editMe')->with('same_pass', 'New password cannot be the same as the current one');
+            }
+            $user->update(['password'=>bcrypt($request->get('new_password'))]);
+
 
             return redirect("my_profile")->with('success', 'Your details have been updated');
         }else{

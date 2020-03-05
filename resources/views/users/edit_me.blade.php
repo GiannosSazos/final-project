@@ -11,8 +11,18 @@
 
         <div class="box">
 
+            @if(session()->has('same_pass'))
+                <div class="notification is-danger">
+                    {{ session()->get('same_pass') }}
+                </div>
+            @endif
+                @if(session()->has('failure'))
+                    <div class="notification is-danger">
+                        {{ session()->get('failure') }}
+                    </div>
+                @endif
 
-            <div class="card-body">
+                <div class="card-body">
                 <form method="POST" action="">
                     @csrf
 
@@ -116,12 +126,43 @@
                                     </span>
                             @enderror
                         </div>
-                    </div>
-                    <br>
+                    </div><br>
+                    <div class="box">
                     <div class="form-group row">
-                        <label for="password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
+                        <div class="form-group row">
+                            <label for="new_password" class="label">{{ __('New Password') }}</label>
+                            <div class="control has-icons-left">
+                                <input id="new_password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="new_password" >
+                                <span class="icon is-small is-left">
+                            <ion-icon name="key"></ion-icon>
+                          </span>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="cnfrm_password" class="label">{{ __('Confirm New Password') }}</label>
+                            <div class="control has-icons-left">
+                                <input id="cnfrm_password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="cnfrm_password" >
+                                <span class="icon is-small is-left">
+                            <ion-icon name="key"></ion-icon>
+                          </span>
+                                @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                        </div>
+                        <label for="current_password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
                         <div class="control has-icons-left">
-                            <input id="password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="password" required>
+                            <input id="current_password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="current_password" required>
                             <span class="icon is-small is-left">
                             <ion-icon name="key"></ion-icon>
                           </span>
@@ -130,15 +171,10 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                             @enderror
-                            @if(session()->has('failure'))
-                                <div class="notification is-danger">
-                                    {{ session()->get('failure') }}
-                                </div>
-                            @endif
-
                         </div>
                     </div>
                     <br>
+
                     <button type="submit" class="button is-link is-rounded">
                         {{ __('Submit Changes') }}
                     </button>
@@ -146,8 +182,9 @@
                         {{ __('Back') }}
                     </a>
 
-
+                    </div>
                 </form>
+
             </div>
         </div>
     </div>
