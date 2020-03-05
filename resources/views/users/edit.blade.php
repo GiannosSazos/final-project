@@ -116,8 +116,16 @@
                                     </span>
                             @enderror
                         </div>
+                    </div><br>
+                    <div class="form-group row">
+                        <label class="label">{{__('Role')}}</label>
+                        @foreach($roles as $role)
+                            <input value="{{$role->id}}" name="role" class="role" type="radio" @if>
+                            {{$role->name}}&nbsp;
+                        @endforeach
                     </div>
-                        <br>
+                    <br>
+
                     <div class="form-group row">
                         <label for="password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
                         <div class="control has-icons-left">

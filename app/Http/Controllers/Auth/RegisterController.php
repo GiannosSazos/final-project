@@ -27,8 +27,8 @@ class RegisterController extends Controller
 
 
     public function show(){
-
-    return view('auth.register')->with(['roles'=>Role::all()]);
+        $roles=Role::all();
+    return view('auth.register',compact('roles'));
     }
 
     /**
@@ -55,6 +55,7 @@ class RegisterController extends Controller
             'personal_telephone' => ['required', 'integer'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+
         ]);
     }
 
@@ -66,7 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'restaurant_address' => $data['restaurant_address'],
             'restaurant_telephone' => $data['restaurant_telephone'],
@@ -74,6 +75,12 @@ class RegisterController extends Controller
             'personal_telephone' => $data['personal_telephone'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+
+
+
         ]);
+        $user->roles()->attach($data['role']);
+        return $user;
+
     }
 }

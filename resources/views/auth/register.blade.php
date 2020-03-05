@@ -5,7 +5,6 @@
         Register to Vendor Store
     </center>
 @endsection
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
 @section('content')
     <div class="container">
 
@@ -144,14 +143,11 @@
                         </div>
                     </div><br>
                     <div class="form-group row">
-                    <input value="Admin" name="admin" class="role-list" type="checkbox">Admin &nbsp;
-                    <input value="Employee" name="employee" class="role-list" type="checkbox">Employee &nbsp;
-                    <input value="Customer" name="customer" class="role-list"  type="checkbox">Customer &nbsp;
-                    <script type="text/javascript">
-                        $('.role-list').on('change', function() {
-                            $('.role-list').not(this).prop('checked', false);
-                        });
-                    </script>
+                        <label class="label">{{__('Role')}}</label>
+                    @foreach($roles as $role)
+                        <input value="{{$role->id}}" name="role" class="role" type="radio">
+                        {{$role->name}}&nbsp;
+                   @endforeach
                     </div>
                     <br>
                     <div class="form-group row mb-0">

@@ -147,7 +147,9 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        $roles=Role::all();
+
+        return view('users.edit',compact('roles','user'));
     }
 
     public function editMe(User $user)
