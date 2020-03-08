@@ -2,7 +2,7 @@
 
 @section ('page_heading')
     <center>
-        {{Auth::user()->name}}'s Profile
+        Edit {{$user -> name}}'s Details
     </center>
 @endsection
 
@@ -159,11 +159,10 @@
                             <a class="button is-rounded" href="javascript:history.back()">
                                 {{ __('Back') }}
                             </a>
-
-
                 </form>
             </div>
         </div>
+        @endsection
     </div>
 
-@endsection
+

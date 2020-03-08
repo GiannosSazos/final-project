@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 class MeatsController extends Controller
 {
 
-    const MEATS_PER_PAGE = 10;
+    const MEATS_PER_PAGE = 5;
 
     const RULES = [
         'kind' => 'required',

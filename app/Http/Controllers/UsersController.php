@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 class UsersController extends Controller
 {
 
-    const USERS_PER_PAGE = 10;
+    const USERS_PER_PAGE = 5;
 
     const RULES = [
 

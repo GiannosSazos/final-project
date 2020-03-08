@@ -64,12 +64,12 @@
             <a class="button is-danger is-rounded" href="/final-project/public/user/{{ $user -> id }}/delete/">Delete</a>
             @endif
             <a class="button is-rounded" href="javascript:history.back()">Back</a>
+            @endsection
     </div>
 
 
 
 
-@endsection
 
 
 

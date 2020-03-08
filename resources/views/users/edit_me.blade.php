@@ -163,20 +163,18 @@
                         </div>
                     </div>
                     <br>
-
                     <button type="submit" class="button is-link is-rounded">
                         {{ __('Submit Changes') }}
                     </button>
                     <a class="button is-rounded" href="javascript:history.back()">
                         {{ __('Back') }}
                     </a>
-
                     </div>
                 </form>
-
             </div>
         </div>
+        @endsection
     </div>
 
-@endsection
+
 

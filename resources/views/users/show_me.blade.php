@@ -52,16 +52,12 @@
                         <td style="word-break: break-all">{{ Auth::user()->email }}</td>
                     </tr>
             </tbody>
-
         </table>
              <a class="button is-rounded is-link" href="/final-project/public/edit_my_profile">Edit Details</a>
         <a class="button is-rounded" href="javascript:history.back()">Back</a>
+            @endsection
     </div>
 
-
-
-
-@endsection
 
 
 

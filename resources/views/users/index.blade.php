@@ -128,12 +128,10 @@
                         </a>
                 @endif
                 @endif
-
-        </div>
-        </div>
+                @endsection
         </div>
     </center>
-@endsection
+
 
 
 
