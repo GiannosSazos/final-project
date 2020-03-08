@@ -16,7 +16,8 @@
     <center>
         <!--Filter Links-->
         <div class="select is-rounded" style=" float: left;">
-            <select id="cut" name="cut" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+            <select id="cut" name="cut"
+                    onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                 <option value="">No Selection</option>
                 <option value="home">All</option>
                 <option value="?kind=beef">Beef</option>
@@ -32,26 +33,25 @@
         <!--Sort Links-->
         <div style="text-align: right;  ">
             Price:
-            <a href="?price_per_kg=asc">Ascending</a> |
-            <a href="?price_per_kg=desc">Descending</a><br>
+            <a href="home?kind=beef&price_per_kg=asc">Ascending</a> |
+            <a href="&price_per_kg=desc">Descending</a><br>
         </div>
 
 
         <!--Search Form-->
-        <form action="" method="POST">
-                @csrf
-                <div class="field has-addons">
-                    <div class="add-on">
-                <input style="text-align:center; width: 250px" class="input is-rounded" type="string" name="keyword"
-                       placeholder="Search Inventory">
-                    </div>
-                    <div class="add-on">
-                    <button style="margin:5px;" class="button is-link is-rounded" type="submit">
-                    <ion-icon name="search"></ion-icon>
-                </button>
-                    </div>
+        <form method="POST">
+            @csrf
+            <div class="field has-addons" style="position: absolute;left: 40%; top: 60px;">
+                <p class="control">
+                    <input class="input is-rounded" type="text" name="keyword" placeholder="Search Inventory">
+                </p>
+                <p class="control">
+                    <button class="button is-link is-rounded" type="submit">
+                        <ion-icon name="search"></ion-icon>
+                    </button>
+                </p>
 
-                </div>
+            </div>
         </form>
         <br>
 
@@ -120,36 +120,34 @@
                     @endforeach
                     </tbody>
                 </table>
-        </div>
-        <!--Display the numbers for the pages-->
 
-        {{$meat->links()}}
+                <!--Display the numbers for the pages-->
 
-        <br>
-        <!--Add meat to database button-->
-        @if ((Auth::user()->hasAnyRole('admin')))
-            <a style="margin:5px;" class="button is-link is-rounded" href="add/">Add Meat</a>
-        @endif
+                {{$meat->links()}}
 
-
-
-    <!--if there is not data in the database display this.-->
-        @else
+                <br>
+                <!--Add meat to database button-->
+                @if ((Auth::user()->hasAnyRole('admin')))
+                    <a class="button is-link is-rounded" href="add/">Add Meat</a>
+                @endif
 
 
-            <div class="notification is-dark">
-                <p>
-                    The inventroy is empty. Why not add a meat?
-                </p>
 
-            </div>
-            @if ((Auth::user()->hasAnyRole('admin')))
-                <a style="margin:5px;" class="button is-link is-rounded" href="add/">Add Meat</a>
+            <!--if there is not data in the database display this.-->
+            @else
+
+
+                <div class="notification is-dark">
+                    <p>The inventroy is empty. Why not add a meat?</p>
+                </div>
+                @if ((Auth::user()->hasAnyRole('admin')))
+                    <a  class="button is-link is-rounded" href="add/">Add Meat</a>
+                @endif
             @endif
-        @endif
-
+            @endsection
+        </div>
     </center>
-@endsection
+
 
 
 
