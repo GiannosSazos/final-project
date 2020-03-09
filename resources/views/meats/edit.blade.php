@@ -75,7 +75,7 @@
                         Cut
                     </label>
                     <div class="select is-rounded">
-                        <select name="cut" style="width: 250px;text-align-last: center;">
+                        <select name="cut" style="width: 250px;text-align-last: center;"  value="{{$meat -> cut}}">
                             <option>Round</option>
                             <option>Loin</option>
                             <option>Rib</option>

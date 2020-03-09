@@ -2,7 +2,7 @@
 
 @section ('page_heading')
     <center>
-        Register to Vendor Store
+        Add new user to Vendor Store
     </center>
 @endsection
 @section('content')
@@ -153,7 +153,7 @@
                     <div class="form-group row mb-0">
                         <div class="col-md-6 offset-md-4">
                             <button type="submit" class="button is-link" href="admin_panel">
-                                {{ __('Register') }}
+                                {{ __('Add User') }}
                             </button>
                             <a class="button is-secondary" href="admin_panel">
                                 {{ __('Back') }}

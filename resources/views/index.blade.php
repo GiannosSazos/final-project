@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 @extends ('layouts.app')
 
 @section ('page_title')
@@ -122,31 +121,28 @@
                 </table>
 
                 <!--Display the numbers for the pages-->
-
                 {{$meat->links()}}
-
                 <br>
                 <!--Add meat to database button-->
                 @if ((Auth::user()->hasAnyRole('admin')))
                     <a class="button is-link is-rounded" href="add/">Add Meat</a>
                 @endif
-
-
-
             <!--if there is not data in the database display this.-->
             @else
-
-
                 <div class="notification is-dark">
                     <p>The inventroy is empty. Why not add a meat?</p>
                 </div>
                 @if ((Auth::user()->hasAnyRole('admin')))
-                    <a  class="button is-link is-rounded" href="add/">Add Meat</a>
+                    <a class="button is-link is-rounded" href="add/">Add Meat</a>
                 @endif
             @endif
-            @endsection
         </div>
     </center>
+@endsection
+
+
+
+
 
 
 
