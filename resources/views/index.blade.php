@@ -14,7 +14,7 @@
 @section ('content')
     <center>
         <!--Filter Links-->
-        <div class="select is-rounded" style=" float: left;">
+        <div class="select is-rounded" style=" display: inline-block; margin-right: 950px;">
             <select id="cut" name="cut"
                     onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                 <option value="">No Selection</option>
@@ -30,7 +30,7 @@
         </div>
 
         <!--Sort Links-->
-        <div style="text-align: right;  ">
+        <div style="text-align: right; display: inline-block; margin-left: 950px; position:relative; bottom: 30px  ">
             Price:
             <a href="?price_per_kg=asc">Ascending</a> |
             <a href="?price_per_kg=desc">Descending</a><br>
