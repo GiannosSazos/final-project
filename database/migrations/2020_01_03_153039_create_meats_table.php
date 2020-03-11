@@ -18,6 +18,7 @@ class CreateMeatsTable extends Migration
             $table->string('kind') -> nullable(false);
             $table-> string ('cut') -> nullable (false);
             $table-> decimal ('price_per_kg') -> nullable (false);
+            $table-> decimal ('order_kg') -> nullable (true);
             $table-> text ('description') -> nullable (true);
 
             $table -> timestamps();

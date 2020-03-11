@@ -12,6 +12,7 @@ class Meats extends Model
         'kind',
         'cut',
         'price_per_kg',
+        'order_kg',
         'description',
 
     ];

@@ -12,7 +12,7 @@ use Illuminate\Http\Response;
 class MeatsController extends Controller
 {
 
-    const MEATS_PER_PAGE = 5;
+    const MEATS_PER_PAGE = 10;
 
     const RULES = [
         'kind' => 'required',
@@ -110,6 +110,7 @@ class MeatsController extends Controller
             'kind' => $request->input('kind'),
             'cut' => $request->input('cut'),
             'price_per_kg' => $request->input('price_per_kg'),
+            'order_kg' => 0,
             'description' => $request->input('description'),
             'user_id' => Auth::user()->id,
 
@@ -162,6 +163,16 @@ class MeatsController extends Controller
 
         return redirect("meat/{$id}")->with('updated', 'The details have been updated');
     }
+    public function increaseOrderKg(Meats $meat, Request $request){
+
+        $meat->update([$meat->increment('order_kg')]);
+        return redirect("basket");
+    }
+    public function decreaseOrderKg(Meats $meat, Request $request){
+
+        $meat->update([$meat->decrement('order_kg')]);
+        return redirect("basket");
+    }
 
     /**
      * Delete data
@@ -190,6 +201,7 @@ class MeatsController extends Controller
             return redirect()->action('MeatsController@index')->with('addBasket', $meat->kind . ' ' . $meat->cut . ' has been added to basket');
         }
     }
+
 
     public function showBasket()
     {

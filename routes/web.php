@@ -66,6 +66,9 @@ Route::get('/add_to_basket/{id}', [
 ])->middleware(['auth','auth.hasRestaurant']);
 
 
+Route::get ('/increase_kg/{meat}/', 'MeatsController@increaseOrderKg');
+Route::get ('/decrease_kg/{meat}/', 'MeatsController@decreaseOrderKg');
+
 
 
 
