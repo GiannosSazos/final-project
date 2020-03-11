@@ -20,7 +20,6 @@ class MeatsController extends Controller
         'price_per_kg' => 'required|numeric',
 
 
-
     ];
 
     const MESSAGES = [
@@ -66,7 +65,7 @@ class MeatsController extends Controller
 
             return view('index')->with(['meat' => $meat]);
         }
-        $meat= Meats::paginate(self::MEATS_PER_PAGE);
+        $meat = Meats::paginate(self::MEATS_PER_PAGE);
         return view('index')->with(['meat' => $meat]);
     }
 
@@ -87,7 +86,7 @@ class MeatsController extends Controller
 
         $search = $request->get('keyword');
         $meat = Meats::where('kind', 'LIKE', '%' . $search . '%')
-            ->orWhere('cut','LIKE','%'.$search.'%')
+            ->orWhere('cut', 'LIKE', '%' . $search . '%')
             ->paginate(self::MEATS_PER_PAGE)
             ->appends($search, request($search));
 
@@ -154,7 +153,7 @@ class MeatsController extends Controller
     {
         $request->validate(self::RULES, self::MESSAGES);
 
-        $id=$meat->id;
+        $id = $meat->id;
         $meat->update(['kind' => $request->kind]);
         $meat->update(['cut' => $request->cut]);
         $meat->update(['price_per_kg' => $request->price_per_kg]);
@@ -173,20 +172,37 @@ class MeatsController extends Controller
     public function destroy(Meats $meat)
     {
         $meat->delete();
-        return redirect()->action('MeatsController@index')->with('deleted', $meat-> kind.' ' .$meat->cut. ' has been deleted from the inventory');
+        return redirect()->action('MeatsController@index')->with('deleted', $meat->kind . ' ' . $meat->cut . ' has been deleted from the inventory');
     }
 
-    public function getAddToBasket(Request $request, $id){
+    public function getAddToBasket(Request $request, $id)
+    {
         $meat = Meats::find($id);
-        $oldBasket = Session::has('basket') ? Session::get('basket'):null;
-        $basket=new Basket($oldBasket);
-        $basket->add($meat, $meat->$id);
+        $oldBasket = Session::has('basket') ? Session::get('basket') : null;
+        $basket = new Basket($oldBasket);
+        $basket->add($meat,$meat->id);
 
         $request->session()->put('basket', $basket);
 //        dd($request->session()->get('basket'));
-        return redirect()->action('MeatsController@index') ->with('addBasket',$meat-> kind.' ' .$meat->cut.' has been added to basket');
+        if(session()->has('alreadyBasket')){
+            return redirect()->action('MeatsController@index');
+        }else {
+            return redirect()->action('MeatsController@index')->with('addBasket', $meat->kind . ' ' . $meat->cut . ' has been added to basket');
+        }
+    }
+
+    public function showBasket()
+    {
+        if (Session::has('basket')) {
+            $oldBasket = Session::get('basket');
+            $basket = new Basket($oldBasket);
+            return view('basket.index', ['meats' => $basket->basketItem]);
+        }
+        return redirect()->action('MeatsController@index')->with('noItems','Please add something to your basket in order to access it');
+
 
     }
+
 
     public function __construct()
     {

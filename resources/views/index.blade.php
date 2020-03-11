@@ -62,6 +62,12 @@
         <!--Making the table where all the data for the meats will be displayed-->
         <div class="box">
 
+            @if(session()->has('alreadyBasket'))
+                <div class="notification is-danger">
+                    {{ session()->get('alreadyBasket') }}
+                </div>
+            @endif
+
             @if(session()->has('added'))
                 <div class="notification is-primary">
                     {{ session()->get('added') }}

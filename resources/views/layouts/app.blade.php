@@ -23,19 +23,21 @@
 @if(Auth::check())
     <nav class="navbar is-dark is-fixed-top " role="navigation" aria-label="dropdown-navigation">
         <div class="navbar-start">
-            <a class="navbar-item" href="/final-project/public/home"><img src="{{ asset ('images/vendornavbar.png') }}"></a>
+            <a class="navbar-item" href="{{url('home')}}"><img src="{{ asset ('images/vendornavbar.png') }}"></a>
             <a class="navbar-item" href="/final-project/public/home">Home</a>
             <a class="navbar-item">Contact Us</a>
             <a class="navbar-item">Report an Issue</a>
             @if ((Auth::user()->hasAnyRole('admin')))
-                <a class="navbar-item" href="/final-project/public/admin_panel">Admin Panel</a>
+                <a class="navbar-item" href="{{url('admin_panel')}}">Admin Panel</a>
             @endif
         </div>
+        @if (Auth::user()->restaurant_name !=null)
 
         <a class="navbar-item" href="basket" >
             <ion-icon style="color:white; height: 35px; width: 35px;" size="large" name="basket"></ion-icon>
         <span class="badge" style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:''}}</span>
         </a>
+        @endif
 
         <div class="navbar-item is-hoverable has-dropdown">
             <a class="navbar-link is-arrowless">
