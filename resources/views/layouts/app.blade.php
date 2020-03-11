@@ -25,14 +25,14 @@
         <div class="navbar-start">
             <a class="navbar-item" href="/final-project/public/home"><img src="{{ asset ('images/vendornavbar.png') }}"></a>
             <a class="navbar-item" href="/final-project/public/home">Home</a>
-            <a class="navbar-item">About Us</a>
+            <a class="navbar-item">Contact Us</a>
             <a class="navbar-item">Report an Issue</a>
             @if ((Auth::user()->hasAnyRole('admin')))
                 <a class="navbar-item" href="/final-project/public/admin_panel">Admin Panel</a>
             @endif
         </div>
         <div class="navbar-item is-hoverable has-dropdown" >
-            <a class="navbar-link is-arrowless"><ion-icon style="color:white" size="large" name="person"></ion-icon></a>
+            <a class="navbar-link is-arrowless"><ion-icon style="color:white; height: 40px; width: 40px;" size="large" name="person"></ion-icon></a>
             <div class="navbar-dropdown is-right is-boxed ">
 
                 <a class="navbar-item" href="/final-project/public/my_profile/">Profile</a>

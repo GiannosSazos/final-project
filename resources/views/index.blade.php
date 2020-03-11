@@ -17,8 +17,8 @@
         <div class="select is-rounded" style=" display: inline-block; margin-right: 950px;">
             <select id="cut" name="cut"
                     onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                <option value="">No Selection</option>
-                <option value="home">All</option>
+                <option value="">Sort by Kind</option>
+                <option value="home">All Meats</option>
                 <option value="?kind=beef">Beef</option>
                 <option value="?kind=lamb">Lamb</option>
                 <option value="?kind=pork">Pork</option>
@@ -30,17 +30,22 @@
         </div>
 
         <!--Sort Links-->
-        <div style="text-align: right; display: inline-block; margin-left: 950px; position:relative; bottom: 30px  ">
-            Price:
-            <a href="?price_per_kg=asc">Ascending</a> |
-            <a href="?price_per_kg=desc">Descending</a><br>
+        <div class="select is-rounded" style="text-align: right; display: inline-block; margin-left: 950px; position:relative; bottom: 40px; ">
+            <select id="cut" name="cut"
+                    onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                <a>Price</a>
+                <option value="">Sort by Price</option>
+                <option value="home">Reset</option>
+            <option value="?price_per_kg=asc">Ascending</option> |
+            <option value="?price_per_kg=desc">Descending</option><br>
+            </select>
         </div>
 
 
         <!--Search Form-->
         <form method="POST">
             @csrf
-            <div class="field has-addons" style="position: absolute;left: 40%; top: 60px;">
+            <div class="field has-addons" style="position: absolute;left: 38%; top: 60px;">
                 <p class="control">
                     <input class="input is-rounded" type="text" name="keyword" placeholder="Search Inventory">
                 </p>
@@ -77,6 +82,10 @@
                     <th>Cut</th>
                     <th>Price Per Kilo</th>
                     <th>Details</th>
+                    @if (Auth::user()->restaurant_name !==(NULL))
+                        <th style="position:relative; right: 20px">Add to Basket</th>
+                        @endif
+
                     @if ((Auth::user()->hasAnyRole('admin')))
                         <th>Edit</th>
                         <th>Delete</th>
@@ -97,6 +106,16 @@
                                     <ion-icon name="eye"></ion-icon>
                                 </a>
                             </td>
+                            @if (Auth::user()->restaurant_name !==(NULL))
+
+                            <td>
+                                <a class="button"
+                                   href="basket">
+                                    <ion-icon name="basket"></ion-icon>
+                                </a>
+                            </td>
+                            @endif
+
 
                             <!--Edit details button-->
                             @if ((Auth::user()->hasAnyRole('admin')))
@@ -114,8 +133,10 @@
                                        href="meat/{{ $m -> id }}/delete/">
                                         <ion-icon name="trash"></ion-icon>
                                     </a></td>
-                        </tr>
+
+
                         @endif
+                        </tr>
                     @endforeach
                     </tbody>
                 </table>
