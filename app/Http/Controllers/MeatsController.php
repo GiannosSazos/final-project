@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Basket;
 use App\Meats;
+use Session;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Http\Response;
@@ -173,6 +175,19 @@ class MeatsController extends Controller
         $meat->delete();
         return redirect()->action('MeatsController@index')->with('deleted', $meat-> kind.' ' .$meat->cut. ' has been deleted from the inventory');
     }
+
+    public function getAddToBasket(Request $request, $id){
+        $meat = Meats::find($id);
+        $oldBasket = Session::has('basket') ? Session::get('basket'):null;
+        $basket=new Basket($oldBasket);
+        $basket->add($meat, $meat->$id);
+
+        $request->session()->put('basket', $basket);
+//        dd($request->session()->get('basket'));
+        return redirect()->action('MeatsController@index') ->with('addBasket',$meat-> kind.' ' .$meat->cut.' has been added to basket');
+
+    }
+
     public function __construct()
     {
 //        $this->middleware(['auth','verified']);

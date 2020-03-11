@@ -47,12 +47,9 @@ Auth::routes(['verify' => true]);
 
 Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth','auth.admin']);
 
-
 Route::get ('/my_profile', 'UsersController@showMe');
 Route::get ('/edit_my_profile', 'UsersController@editMe');
 Route::post ('/edit_my_profile', 'UsersController@updateMe');
-
-
 
 Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth','auth.admin']);
 Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth','auth.admin']);
@@ -60,6 +57,12 @@ Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth','auth.a
 Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth','auth.admin']);
 
 Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth','auth.admin']);
+
+/**Basket Route*/
+Route::get('/add_to_basket/{id}', [
+    'uses' => 'MeatsController@getAddToBasket',
+    'as' => 'meats.addToBasket'
+]);
 
 
 

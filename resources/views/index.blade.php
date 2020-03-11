@@ -67,6 +67,11 @@
                     {{ session()->get('added') }}
                 </div>
             @endif
+                @if(session()->has('addBasket'))
+                    <div class="notification is-primary">
+                        {{ session()->get('addBasket') }}
+                    </div>
+                @endif
             @if(session()->has('deleted'))
                 <div class="notification is-danger">
                     {{ session()->get('deleted') }}
@@ -110,7 +115,7 @@
 
                             <td>
                                 <a class="button"
-                                   href="basket">
+                                   href="{{route('meats.addToBasket', [$m -> id])}}">
                                     <ion-icon name="basket"></ion-icon>
                                 </a>
                             </td>
