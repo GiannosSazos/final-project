@@ -154,7 +154,7 @@
 
                 <!--Display the numbers for the pages-->
                 {{$meat->links()}}
-                <br>
+
                 <!--Add meat to database button-->
                 @if ((Auth::user()->hasAnyRole('admin')))
                     <a class="button is-link is-rounded" href="add/">Add Meat</a>
