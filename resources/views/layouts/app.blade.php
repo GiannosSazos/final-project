@@ -27,16 +27,18 @@
             <a class="navbar-item" href="/final-project/public/home">Home</a>
             <a class="navbar-item">Contact Us</a>
             <a class="navbar-item">Report an Issue</a>
-            @if ((Auth::user()->hasAnyRole('admin')))
+            @if (Auth::user()->hasAnyRole('admin'))
                 <a class="navbar-item" href="/final-project/public/admin_panel">Admin Panel</a>
             @endif
         </div>
+        @if (Auth::user()->hasAnyRole('customer'))
 
-        <a class="navbar-item" href="basket" >
-            <ion-icon style="color:white; height: 35px; width: 35px;" size="large" name="basket"></ion-icon>
-        <span class="badge" style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:''}}</span>
-        </a>
-
+            <a class="navbar-item" href="/final-project/public/basket">
+                <ion-icon style="color:white; height: 35px; width: 35px;" size="large" name="basket"></ion-icon>
+                <span class="badge"
+                      style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:''}}</span>
+            </a>
+        @endif
         <div class="navbar-item is-hoverable has-dropdown">
             <a class="navbar-link is-arrowless">
                 <ion-icon style="color:white; height: 40px; width: 40px;" size="large" name="person"></ion-icon>
@@ -52,7 +54,6 @@
                 <hr class="navbar-divider">
                 <a class="navbar-item" style="color:red" href="/final-project/public/logout">Log out</a>
             </div>
-
         </div>
     </nav>
     <br>

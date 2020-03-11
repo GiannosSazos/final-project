@@ -59,6 +59,9 @@ Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth','au
 Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth','auth.admin']);
 
 /**Basket Route*/
+
+Route::get ('/basket', 'MeatsController@showBasket')->middleware(['auth','auth.customer']);;
+
 Route::get('/add_to_basket/{id}', [
     'uses' => 'MeatsController@getAddToBasket',
     'as' => 'meats.addToBasket'
