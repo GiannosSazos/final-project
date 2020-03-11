@@ -1,1 +1,1 @@
-U1763660 - Giannos Sazos - Online Car Dealership
+U1763660 - Giannos Sazos - Enterprise Web App for Vendros
