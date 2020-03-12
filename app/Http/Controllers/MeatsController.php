@@ -181,11 +181,11 @@ class MeatsController extends Controller
         $meat = Meats::find($id);
         $oldBasket = Session::has('basket') ? Session::get('basket') : null;
         $basket = new Basket($oldBasket);
-        $basket->add($meat,$meat->id);
+        $basket->add($meat, $meat->id);
         $request->session()->put('basket', $basket);
-        if(session()->has('alreadyBasket')){
+        if (session()->has('alreadyBasket')) {
             return redirect()->action('MeatsController@index');
-        }else {
+        } else {
             return redirect()->action('MeatsController@index')->with('addBasket', $meat->kind . ' ' . $meat->cut . ' has been added to basket');
         }
     }
@@ -195,25 +195,40 @@ class MeatsController extends Controller
         $oldBasket = Session::has('basket') ? Session::get('basket') : null;
         $basket = new Basket($oldBasket);
         $basket->remove($id);
-       Session::put('basket',$basket);
-        if ($basket->totalQty==0){
-            return redirect()->action('MeatsController@index')->with('emptyBasket','Your basket is now empty');
+        Session::put('basket', $basket);
+        if ($basket->totalQty == 0) {
+            return redirect()->action('MeatsController@index')->with('emptyBasket', 'Your basket is now empty');
 
         }
-       return redirect()->action('MeatsController@showBasket');
+        return redirect()->action('MeatsController@showBasket')->with('removedItem', 'Item has been removed from your basket');;
     }
 
+public function increaseKgItem($id){
 
+    $oldBasket = Session::has('basket') ? Session::get('basket') : null;
+    $basket = new Basket($oldBasket);
+    $basket->increaseKg($id);
+    Session::put('basket', $basket);
+    return redirect()->action('MeatsController@showBasket');
+}
+    public function decreaseKgItem($id){
+
+        $oldBasket = Session::has('basket') ? Session::get('basket') : null;
+        $basket = new Basket($oldBasket);
+        $basket->decreaseKg($id);
+        Session::put('basket', $basket);
+        return redirect()->action('MeatsController@showBasket');
+    }
     public function showBasket()
     {
         if (Session::has('basket')) {
             $oldBasket = Session::get('basket');
             $basket = new Basket($oldBasket);
-            if ($basket->totalQty!=0) {
+            if ($basket->totalQty != 0) {
                 return view('basket.index', ['meats' => $basket->basketItem]);
             }
         }
-        return redirect()->action('MeatsController@index')->with('noItems','Please add something to your basket in order to access it');
+        return redirect()->action('MeatsController@index')->with('noItems', 'Please add something to your basket in order to access it');
     }
 
 

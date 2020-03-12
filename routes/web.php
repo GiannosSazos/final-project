@@ -9,19 +9,19 @@ Route::get('/', 'MeatsController@index');
 Route::get ('/meat/{meat}/', 'MeatsController@show');
 
 /** Redirects to the create.blade view where the user will be able to add a new item in the database*/
-Route::get ('/add/', 'MeatsController@create')->middleware(['auth','auth.admin']);
+Route::get ('/add/', 'MeatsController@create')->middleware(['auth.admin']);
 
 /**Executes the function where it gets the values given by the user and stores the new item in the database*/
-Route::post ('/add/', 'MeatsController@store')->middleware(['auth','auth.admin']);
+Route::post ('/add/', 'MeatsController@store')->middleware(['auth.admin']);
 
 /**Deletes a particular item*/
-Route::get ('/meat/{meat}/delete/', 'MeatsController@destroy')->middleware(['auth','auth.admin']);
+Route::get ('/meat/{meat}/delete/', 'MeatsController@destroy')->middleware(['auth.admin']);
 
 /**Redirect to the edit.blade view where the user can see all the details of a particular item*/
-Route::get ('/meat/{meat}/edit/','MeatsController@edit')->middleware(['auth','auth.admin']);
+Route::get ('/meat/{meat}/edit/','MeatsController@edit')->middleware(['auth.admin']);
 
 /**Edit the item's data*/
-Route::post ('/meat/{meat}/edit/', 'MeatsController@update')->middleware(['auth','auth.admin']);
+Route::post ('/meat/{meat}/edit/', 'MeatsController@update')->middleware(['auth.admin']);
 
 
 
@@ -45,27 +45,27 @@ Auth::routes(['verify' => true]);
 
 /**User Routes*/
 
-Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth','auth.admin']);
+Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth.admin']);
 
 Route::get ('/my_profile', 'UsersController@showMe');
 Route::get ('/edit_my_profile', 'UsersController@editMe');
 Route::post ('/edit_my_profile', 'UsersController@updateMe');
 
-Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth','auth.admin']);
-Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth','auth.admin']);
-Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth','auth.admin']);
-Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth','auth.admin']);
+Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth.admin']);
+Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth.admin']);
+Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth.admin']);
+Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth.admin']);
 
-Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth','auth.admin']);
+Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth.admin']);
 
 /**Basket Route*/
-Route::get('/basket','MeatsController@showBasket')->middleware(['auth','auth.hasRestaurant']);
-Route::get('/add_to_basket/{id}','MeatsController@addToBasket')->middleware(['auth','auth.hasRestaurant']);
+Route::get('/basket','MeatsController@showBasket')->middleware(['auth.hasRestaurant']);
+Route::get('/add_to_basket/{id}','MeatsController@addToBasket')->middleware(['auth.hasRestaurant']);
 
 
-Route::get ('/increase_kg/{id}/', 'MeatsController@increaseOrderKg');
-Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseOrderKg');
-Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket');
+Route::get ('/increase_kg/{id}/', 'MeatsController@increaseKgItem')->middleware(['auth.hasRestaurant']);;
+Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseKgItem')->middleware(['auth.hasRestaurant']);;
+Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket')->middleware(['auth.hasRestaurant']);;
 
 
 
