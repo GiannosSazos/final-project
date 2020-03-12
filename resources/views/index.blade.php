@@ -15,9 +15,9 @@
     <center>
         <!--Filter Links-->
         <div class="select is-rounded" style=" display: inline-block; margin-right: 950px;">
-            <select id="cut" name="cut"
+            <select id="xx"
                     onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
-                <option value="">Sort by Kind</option>
+                <option value="">Filter by Kind</option>
                 <option value="home">All Meats</option>
                 <option value="?kind=beef">Beef</option>
                 <option value="?kind=lamb">Lamb</option>
@@ -30,14 +30,17 @@
         </div>
 
         <!--Sort Links-->
-        <div class="select is-rounded" style="text-align: right; display: inline-block; margin-left: 950px; position:relative; bottom: 40px; ">
-            <select id="cut" name="cut"
-                    onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+        <div class="select is-rounded"
+             style="text-align: right; display: inline-block; margin-left: 950px; position:relative; bottom: 40px; ">
+            <select
+                onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
                 <a>Price</a>
                 <option value="">Sort by Price</option>
                 <option value="home">Reset</option>
-            <option value="?price_per_kg=asc">Ascending</option> |
-            <option value="?price_per_kg=desc">Descending</option><br>
+                <option value="?price_per_kg=asc">Ascending</option>
+                |
+                <option value="?price_per_kg=desc">Descending</option>
+                <br>
             </select>
         </div>
 
@@ -59,12 +62,17 @@
         </form>
         <br>
 
-        <!--Making the table where all the data for the meats will be displayed-->
+
         <div class="box">
 
             @if(session()->has('alreadyBasket'))
                 <div class="notification is-danger">
                     {{ session()->get('alreadyBasket') }}
+                </div>
+            @endif
+            @if(session()->has('noItems'))
+                <div class="notification is-danger">
+                    {{ session()->get('noItems') }}
                 </div>
             @endif
 
@@ -73,18 +81,24 @@
                     {{ session()->get('added') }}
                 </div>
             @endif
-                @if(session()->has('addBasket'))
-                    <div class="notification is-primary">
-                        {{ session()->get('addBasket') }}
-                    </div>
-                @endif
+
+            @if(session()->has('emptyBasket'))
+                <div class="notification is-danger">
+                    {{ session()->get('emptyBasket') }}
+                </div>
+            @endif
+            @if(session()->has('addBasket'))
+                <div class="notification is-primary">
+                    {{ session()->get('addBasket') }}
+                </div>
+            @endif
             @if(session()->has('deleted'))
                 <div class="notification is-danger">
                     {{ session()->get('deleted') }}
                 </div>
             @endif
-
-        <!--if there is data in the database, show the data...-->
+        <!--Making the table where all the data for the meats will be displayed-->
+            <!--if there is data in the database, show the data...-->
             @if (count ($meat) > 0)
 
                 <table class="table is-striped is-hoverable is-fullwidth">
@@ -95,7 +109,7 @@
                     <th>Details</th>
                     @if (Auth::user()->restaurant_name !==(NULL))
                         <th style="position:relative; right: 20px">Add to Basket</th>
-                        @endif
+                    @endif
 
                     @if ((Auth::user()->hasAnyRole('admin')))
                         <th>Edit</th>
@@ -119,16 +133,16 @@
                             </td>
                             @if (Auth::user()->restaurant_name !==(NULL))
 
-                            <td>
-                                <a class="button"
-                                   href="{{route('meats.addToBasket', [$m -> id])}}">
-                                    <ion-icon name="basket"></ion-icon>
-                                </a>
-                            </td>
+                                <td>
+                                    <a class="button"
+                                       href="add_to_basket/{{$m->id}}">
+                                        <ion-icon name="basket"></ion-icon>
+                                    </a>
+                                </td>
                             @endif
 
 
-                            <!--Edit details button-->
+                        <!--Edit details button-->
                             @if ((Auth::user()->hasAnyRole('admin')))
                                 <td>
                                     <a class="button"
@@ -146,7 +160,7 @@
                                     </a></td>
 
 
-                        @endif
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>
@@ -155,7 +169,7 @@
                 <!--Display the numbers for the pages-->
                 {{$meat->links()}}
 
-                <!--Add meat to database button-->
+            <!--Add meat to database button-->
                 @if ((Auth::user()->hasAnyRole('admin')))
                     <a class="button is-link is-rounded" href="add/">Add Meat</a>
                 @endif

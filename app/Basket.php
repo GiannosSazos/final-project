@@ -2,13 +2,15 @@
 
 namespace App;
 use App\Meats;
+use Illuminate\Http\Request;
 
 
 class Basket
 {
-    public $basketItem=null;
+    public $basketItem = null;
     public $totalQty = 0;
-    public $kg = null;
+    public $totalPrice = 0;
+
     public function __construct($oldBasket)
     {
         if ($oldBasket) {
@@ -17,14 +19,15 @@ class Basket
 
         }
     }
+
     public function add($item, $id)
     {
-        $meat=Meats::find($id);
-        $storedItem = [$id=$meat->id,'qty' => 0,  'item' => $item, 'kg'=>null];
+        $meat = Meats::find($id);
+        $storedItem = [$id = $meat->id, 'qty' => 0, 'item' => $item];
         if ($this->basketItem) {
             if (array_key_exists($id, $this->basketItem)) {
                 $storedItem = $this->basketItem[$id];
-                return redirect()->action('MeatsController@index')->with('alreadyBasket','This item is already in the basket');
+                return redirect()->action('MeatsController@index')->with('alreadyBasket', 'This item is already in the basket');
             }
         }
         $storedItem['qty']++;
@@ -33,6 +36,13 @@ class Basket
 
     }
 
+    public function remove($id)
+    {
+        $this->basketItem[$id]['qty']--;
+        $this->totalQty--;
+        unset($this->basketItem[$id]);
+
+    }
 }
 
 

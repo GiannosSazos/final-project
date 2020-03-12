@@ -32,25 +32,19 @@
             @endif
         </div>
         @if (Auth::user()->restaurant_name !=null)
-
-        <a class="navbar-item" href="basket" >
+            <a class="navbar-item" href="basket" >
             <ion-icon style="color:white; height: 35px; width: 35px;" size="large" name="basket"></ion-icon>
-        <span class="badge" style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:''}}</span>
+        <span class="badge" style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:'0'}}</span>
         </a>
         @endif
 
         <div class="navbar-item is-hoverable has-dropdown">
-            <a class="navbar-link is-arrowless">
-                <ion-icon style="color:white; height: 40px; width: 40px;" size="large" name="person"></ion-icon>
+            <a style="color: white" class="navbar-link is-arrowless"> <ion-icon style="color:white; height: 40px; width: 40px;" size="large" name="person"></ion-icon>{{Auth::user()->name}}
+
             </a>
             <div class="navbar-dropdown is-right is-boxed ">
 
                 <a class="navbar-item" href="/final-project/public/my_profile/">Profile</a>
-                @if (!(Auth::user()->restaurant_name == NULL))
-                    <a class="navbar-item" href="/final-project/public/basket"/>
-                    Basket
-                    </a>
-                @endif
                 <hr class="navbar-divider">
                 <a class="navbar-item" style="color:red" href="/final-project/public/logout">Log out</a>
             </div>

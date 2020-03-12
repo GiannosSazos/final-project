@@ -60,14 +60,12 @@ Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['aut
 
 /**Basket Route*/
 Route::get('/basket','MeatsController@showBasket')->middleware(['auth','auth.hasRestaurant']);
-Route::get('/add_to_basket/{id}', [
-    'uses' => 'MeatsController@getAddToBasket',
-    'as' => 'meats.addToBasket'
-])->middleware(['auth','auth.hasRestaurant']);
+Route::get('/add_to_basket/{id}','MeatsController@addToBasket')->middleware(['auth','auth.hasRestaurant']);
 
 
-Route::get ('/increase_kg/{meat}/', 'MeatsController@increaseOrderKg');
-Route::get ('/decrease_kg/{meat}/', 'MeatsController@decreaseOrderKg');
+Route::get ('/increase_kg/{id}/', 'MeatsController@increaseOrderKg');
+Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseOrderKg');
+Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket');
 
 
 

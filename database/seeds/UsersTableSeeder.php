@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
 
 
         $admin = User::create([
-            'name' =>'Andrew',
+            'name' =>'Andrew Sanders',
             'restaurant_name' =>NULL,
             'restaurant_address' =>NULL,
             'restaurant_telephone' =>NULL,
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('pass')
         ]);
         $employee = User::create([
-            'name' =>'Nathan',
+            'name' =>'Nathan Williams',
             'restaurant_name' =>NULL,
             'restaurant_address' =>NULL,
             'restaurant_telephone' =>NULL,
@@ -40,7 +40,7 @@ class UsersTableSeeder extends Seeder
             'password' => bcrypt('pass')
         ]);
         $customer=User::create([
-            'name' =>'John',
+            'name' =>'John Sazos',
             'restaurant_name' =>'Customer\'s Restaurant',
             'restaurant_address' =>'247 Manchester Road, Huddersfield',
             'restaurant_telephone' =>'25437561',
