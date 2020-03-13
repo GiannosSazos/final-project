@@ -30,7 +30,7 @@
             <th>Cut</th>
             <th>Price Per Kilo</th>
             <th>Kg</th>
-            <th>Total Price</th>
+            <th>Price</th>
             <th>Increase/Decrease Kg</th>
             <th>Details</th>
             <th>Remove from Basket</th>
@@ -70,14 +70,13 @@
                         <ion-icon name="trash"></ion-icon>
                     </a>
                 </td>
-
                 </tr>
-
             @endforeach
-            {{$basketPrice}}
             </tbody>
         </table>
 
+        Total Price: £{{$basketPrice}}
+        <a class="button is-link" style="position:relative;left: 67%" href="checkout">Checkout</a>
     </div>
 @endsection
 
