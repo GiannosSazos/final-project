@@ -242,6 +242,8 @@ class UsersController extends Controller
         if(Auth::user()->id==$user->id){
             return back()->with('failure', 'You can\'t delete your own account');
         }
+        Meats::where('user_id',$user->id)->delete();
+        Meats::where('updating_user_id',$user->id)->update(['updating_user_id'=> NULL]);
         $user->roles()->detach();
         $user->delete();
         return redirect()->action('UsersController@index')->with('deleted','User ' .$user-> name.  ' has been removed');
