@@ -225,7 +225,7 @@ public function increaseKgItem($id){
             $oldBasket = Session::get('basket');
             $basket = new Basket($oldBasket);
             if ($basket->totalQty != 0) {
-                return view('basket.index', ['meats' => $basket->basketItem]);
+                return view('basket.index', ['meats' => $basket->basketItem, 'basketPrice'=>$basket->basketPrice]);
             }
         }
         return redirect()->action('MeatsController@index')->with('noItems', 'Please add something to your basket in order to access it');

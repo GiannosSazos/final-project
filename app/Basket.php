@@ -10,7 +10,6 @@ class Basket
 {
     public $basketItem = null;
     public $totalQty = 0;
-
     public $basketPrice = 0;
 
     public function __construct($oldBasket)
@@ -18,6 +17,7 @@ class Basket
         if ($oldBasket) {
             $this->basketItem = $oldBasket->basketItem;
             $this->totalQty = $oldBasket->totalQty;
+            $this->basketPrice = $oldBasket->basketPrice;
 
         }
     }
@@ -25,7 +25,7 @@ class Basket
     public function add($item, $id)
     {
         $meat = Meats::find($id);
-        $storedItem = [$id = $meat->id, 'kg' => 0, 'totalPrice' => 0, 'price_per_kg' => $meat->price_per_kg, 'qty' => 0, 'item' => $item];
+        $storedItem = [$id = $meat->id, 'kg' => 0, $totalPrice='totalPrice' => 0, 'price_per_kg' => $meat->price_per_kg, 'qty' => 0, 'item' => $item];
         if ($this->basketItem) {
             if (array_key_exists($id, $this->basketItem)) {
                 $storedItem = $this->basketItem[$id];
@@ -35,6 +35,7 @@ class Basket
         $storedItem['qty']++;
         $this->basketItem[$id] = $storedItem;
         $this->totalQty++;
+        $this->basketPrice+=$item->totalPrice;
 
     }
 
@@ -43,13 +44,15 @@ class Basket
         $this->basketItem[$id]['qty']--;
         $this->totalQty--;
         unset($this->basketItem[$id]);
-
+        $this->basketPrice=$this->basketPrice-$this->basketItem[$id]['totalPrice'] ;
     }
 
     public function increaseKg($id)
     {
         $this->basketItem[$id]['kg']++;
         $this->basketItem[$id]['totalPrice'] = $this->basketItem[$id]['kg'] * $this->basketItem[$id]['price_per_kg'];
+        $add=1*$this->basketItem[$id]['price_per_kg'];
+        $this->basketPrice=$this->basketPrice+$add;
     }
 
     public function decreaseKg($id)
@@ -59,6 +62,8 @@ class Basket
         }
         $this->basketItem[$id]['kg']--;
         $this->basketItem[$id]['totalPrice'] = $this->basketItem[$id]['kg'] * $this->basketItem[$id]['price_per_kg'];
+        $subtract=1*$this->basketItem[$id]['price_per_kg'];
+        $this->basketPrice=$this->basketPrice-$subtract;
     }
 
 }

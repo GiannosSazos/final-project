@@ -74,8 +74,10 @@
                 </tr>
 
             @endforeach
+            {{$basketPrice}}
             </tbody>
         </table>
+
     </div>
 @endsection
 
