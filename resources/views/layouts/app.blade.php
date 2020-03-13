@@ -31,13 +31,14 @@
                 <a class="navbar-item" href="{{url('admin_panel')}}">Admin Panel</a>
             @endif
         </div>
+        <nav class="navbar-end">
         @if (Auth::user()->restaurant_name !=null)
             <a class="navbar-item" href="basket" >
             <ion-icon style="color:white; height: 35px; width: 35px;" size="large" name="basket"></ion-icon>
         <span class="badge" style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:'0'}}</span>
         </a>
         @endif
-
+        </nav>
         <div class="navbar-item is-hoverable has-dropdown">
             <a style="color: white" class="navbar-link is-arrowless"> <ion-icon style="color:white; height: 40px; width: 40px;" size="large" name="person"></ion-icon>{{Auth::user()->name}}
 

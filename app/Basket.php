@@ -43,8 +43,9 @@ class Basket
     {
         $this->basketItem[$id]['qty']--;
         $this->totalQty--;
-        unset($this->basketItem[$id]);
         $this->basketPrice=$this->basketPrice-$this->basketItem[$id]['totalPrice'] ;
+        unset($this->basketItem[$id]);
+
     }
 
     public function increaseKg($id)
