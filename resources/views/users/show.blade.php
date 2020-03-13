@@ -59,7 +59,7 @@
             </tbody>
 
         </table>
-            <a class="button is-rounded is-link" href="/final-project/public/user/{{Auth::user()->id}}/edit">Edit Details</a>
+            <a class="button is-rounded is-link" href="/final-project/public/user/{{$user->id}}/edit">Edit Details</a>
             @if(Auth::user()->id !== $user->id)
             <a class="button is-danger is-rounded" href="/final-project/public/user/{{ $user -> id }}/delete/">Delete</a>
             @endif

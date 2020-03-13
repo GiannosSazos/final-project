@@ -16,18 +16,18 @@ class UsersController extends Controller
 
     const RULES = [
 
-        'personal_address' => ['required'],
-        'personal_telephone' => ['required'],
-        'email' => ['required', 'string', 'email', 'max:255'],
-        'current_password' => ['required'],
-        'new_password'=>['confirmed']
+    'personal_address' => ['required'],
+    'personal_telephone' => ['required'],
+    'email' => ['required', 'string', 'email', 'max:255'],
+    'current_password' => ['required'],
+    'new_password'=>['confirmed']
 
 
 
 
 
 
-    ];
+];
 
     const MESSAGES = [
 
@@ -182,9 +182,8 @@ class UsersController extends Controller
 
 
         $id=$user->id;
-            if (password_verify($password =$request->input('current_password'), Auth::user () ->  password)) {
+            if (password_verify($request->input('current_password'), Auth::user () ->  password)) {
                 $request->validate(self::RULES, self::MESSAGES);
-
 
                 $user->update(['restaurant_name' => $request->restaurant_name]);
                 $user->update(['restaurant_address' => $request->restaurant_address]);
@@ -216,14 +215,8 @@ class UsersController extends Controller
                     return redirect()->action('UsersController@editMe')->with('same_pass', 'New password cannot be the same as the current one');
                 }else
                 $user->update(['password' => bcrypt($request->get('new_password'))]);
-
-
-
                 return redirect("my_profile")->with('success', 'Your details have been updated');
-
             }
-
-
             return redirect("my_profile")->with('success', 'Your details have been updated');
         }else{
             return redirect()->action('UsersController@editMe')->with('failure', 'Incorrect Password');

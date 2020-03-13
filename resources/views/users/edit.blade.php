@@ -125,17 +125,12 @@
                             {{$role->name}}&nbsp;
                         @endforeach
                     </div>
-                    @if(session()->has('failure'))
-                        <div class="notification is-danger">
-                            {{ session()->get('failure') }}
-                        </div>
-                    @endif
                     <br>
                     @endif
                     <div class="form-group row">
-                        <label for="password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
+                        <label for="password" class="label">{{ __('Please enter your password to confirm the changes') }}</label>
                         <div class="control has-icons-left">
-                            <input id="password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="password" required>
+                            <input id="current_password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="current_password" required>
                             <span class="icon is-small is-left">
                             <ion-icon name="key"></ion-icon>
                           </span>
