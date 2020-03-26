@@ -54,7 +54,8 @@ Route::post ('/edit_my_profile', 'UsersController@updateMe');
 Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth.admin']);
 Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth.admin']);
 Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth.admin']);
-Route::get ('/register', 'Auth\RegisterController@show')->middleware(['auth.admin']);
+Route::get ('/register', 'UsersController@create')->middleware(['auth.admin']);
+Route::post ('/register', 'UsersController@store')->middleware(['auth.admin']);
 
 Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth.admin']);
 

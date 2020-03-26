@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class UsersController extends Controller
 {
@@ -84,7 +86,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('meats.create');
+        $roles=Role::all();
+        return view('auth.register', compact('roles'));
     }
 
     /** Gets the string from the searchbar and displays the data of what the user searched for */
@@ -106,24 +109,35 @@ class UsersController extends Controller
      * @param Request $request
      * @return Response
      */
+    protected function validator(Request $request)
+    {
+        return Validator::make($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'personal_address' => ['required', 'string', 'max:255'],
+            'personal_telephone' => ['required', 'integer'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+        ]);
+    }
     public function store(Request $request)
     {
 
-        $request->validate(self::RULES, self::MESSAGES);
 
+        $user=User::create([
 
-        Meats::create([
-
-            'kind' => $request->input('kind'),
-            'cut' => $request->input('cut'),
-            'price_per_kg' => $request->input('price_per_kg'),
-            'description' => $request->input('description'),
-            'user_id' => Auth::user()->id,
+            'name' => $request->input('name'),
+            'restaurant_address' => $request->input('restaurant_address'),
+            'restaurant_telephone' => $request->input('restaurant_telephone'),
+            'personal_address' => $request->input('personal_address'),
+            'personal_telephone' => $request->input('personal_telephone'),
+            'email' => $request->input('email'),
+            'password' =>Hash::make($request->input('password')),
 
 
         ]);
-
-        return redirect()->action('MeatsController@index');
+        $user->roles()->attach($request->input('role'));
+        return redirect()->action('UsersController@index');
     }
 
     /**
@@ -168,6 +182,7 @@ class UsersController extends Controller
     {
         return view('users.edit_me', compact('user'));
     }
+
 
 
     /**

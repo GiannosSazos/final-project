@@ -145,7 +145,7 @@
                     <div class="form-group row">
                         <label class="label">{{__('Role')}}</label>
                     @foreach($roles as $role)
-                        <input value="{{$role->id}}" name="role" class="role" type="radio">
+                        <input value="{{$role->id}}" name="role" class="role" type="radio" required>
                         {{$role->name}}&nbsp;
                    @endforeach
                     </div>
