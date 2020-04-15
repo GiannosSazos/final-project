@@ -70,6 +70,11 @@
                     {{ session()->get('alreadyBasket') }}
                 </div>
             @endif
+                @if(session()->has('charged'))
+                    <div class="notification is-primary">
+                        {{ session()->get('charged') }}
+                    </div>
+                @endif
             @if(session()->has('noItems'))
                 <div class="notification is-danger">
                     {{ session()->get('noItems') }}

@@ -59,6 +59,7 @@
         @yield ('page_heading', 'Vendor Store')
     </h1>
     @yield ('content')
+    @yield('scripts')
 </div>
 </body>
 </html>

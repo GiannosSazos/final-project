@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Basket;
 use App\Meats;
+use http\Exception;
 use Session;
 use Illuminate\Http\Request;
 use Auth;
 use Illuminate\Http\Response;
+use Stripe\Charge;
+use Stripe\Stripe;
 
 class MeatsController extends Controller
 {
@@ -203,15 +206,18 @@ class MeatsController extends Controller
         return redirect()->action('MeatsController@showBasket')->with('removedItem', 'Item has been removed from your basket');;
     }
 
-public function increaseKgItem($id){
+    public function increaseKgItem($id)
+    {
 
-    $oldBasket = Session::has('basket') ? Session::get('basket') : null;
-    $basket = new Basket($oldBasket);
-    $basket->increaseKg($id);
-    Session::put('basket', $basket);
-    return redirect()->action('MeatsController@showBasket');
-}
-    public function decreaseKgItem($id){
+        $oldBasket = Session::has('basket') ? Session::get('basket') : null;
+        $basket = new Basket($oldBasket);
+        $basket->increaseKg($id);
+        Session::put('basket', $basket);
+        return redirect()->action('MeatsController@showBasket');
+    }
+
+    public function decreaseKgItem($id)
+    {
 
         $oldBasket = Session::has('basket') ? Session::get('basket') : null;
         $basket = new Basket($oldBasket);
@@ -219,13 +225,14 @@ public function increaseKgItem($id){
         Session::put('basket', $basket);
         return redirect()->action('MeatsController@showBasket');
     }
+
     public function showBasket()
     {
         if (Session::has('basket')) {
             $oldBasket = Session::get('basket');
             $basket = new Basket($oldBasket);
             if ($basket->totalQty != 0) {
-                return view('basket.index', ['meats' => $basket->basketItem, 'basketPrice'=>$basket->basketPrice]);
+                return view('basket.index', ['meats' => $basket->basketItem, 'basketPrice' => $basket->basketPrice]);
             }
         }
         return redirect()->action('MeatsController@index')->with('noItems', 'Please add something to your basket in order to access it');
@@ -237,18 +244,38 @@ public function increaseKgItem($id){
 //        $this->middleware(['auth','verified']);
         $this->middleware('auth');
     }
+
     public function checkout()
     {
+        if (!Session::has('basket')) {
+            return redirect()->action('MeatsController@showBasket');
+        }
         $oldBasket = Session::get('basket');
-        $basket= new Basket($oldBasket);
-        $total=$basket->basketPrice;
-        return view('basket.checkout',['total'=>$total]);
+        $basket = new Basket($oldBasket);
+        $total = $basket->basketPrice;
+        return view('basket.checkout', ['total' => $total]);
     }
-    public function postCheckout()
+
+    public function postCheckout(Request $request)
     {
+        if (!Session::has('basket')) {
+            return redirect()->action('MeatsController@showBasket');
+        }
         $oldBasket = Session::get('basket');
-        $basket= new Basket($oldBasket);
-        $total=$basket->basketPrice;
-        return view('basket.checkout',['total'=>$total]);
+        $basket = new Basket($oldBasket);
+
+        Stripe::setApiKey('sk_test_cyejsvLS17VWBD1sBHEU25ky00MUQzzbu0');
+        try {
+            Charge::create(array(
+                "amount" => $basket->basketPrice * 100,
+                "currency"=>"gbp",
+                "source"=>'tok_visa',
+                "description"=>"Test Charge"
+            ));
+        }catch(\Exception $e){
+            return redirect()->action('MeatsController@checkout')->with('error',$e->getMessage());
+        }
+        Session::forget('basket');
+        return redirect()->action('MeatsController@index')->with('charged','Your order has been placed');
     }
 }
