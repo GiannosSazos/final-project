@@ -237,4 +237,18 @@ public function increaseKgItem($id){
 //        $this->middleware(['auth','verified']);
         $this->middleware('auth');
     }
+    public function checkout()
+    {
+        $oldBasket = Session::get('basket');
+        $basket= new Basket($oldBasket);
+        $total=$basket->basketPrice;
+        return view('basket.checkout',['total'=>$total]);
+    }
+    public function postCheckout()
+    {
+        $oldBasket = Session::get('basket');
+        $basket= new Basket($oldBasket);
+        $total=$basket->basketPrice;
+        return view('basket.checkout',['total'=>$total]);
+    }
 }

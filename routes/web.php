@@ -64,9 +64,13 @@ Route::get('/basket','MeatsController@showBasket')->middleware(['auth.hasRestaur
 Route::get('/add_to_basket/{id}','MeatsController@addToBasket')->middleware(['auth.hasRestaurant']);
 
 
-Route::get ('/increase_kg/{id}/', 'MeatsController@increaseKgItem')->middleware(['auth.hasRestaurant']);;
-Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseKgItem')->middleware(['auth.hasRestaurant']);;
-Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket')->middleware(['auth.hasRestaurant']);;
+Route::get ('/increase_kg/{id}/', 'MeatsController@increaseKgItem')->middleware(['auth.hasRestaurant']);
+Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseKgItem')->middleware(['auth.hasRestaurant']);
+Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket')->middleware(['auth.hasRestaurant']);
+
+Route::get('/checkout/', 'MeatsController@checkout')->middleware(['auth.hasRestaurant']);
+Route::post('/checkout/', 'MeatsController@postCheckout')->middleware(['auth.hasRestaurant']);
+
 
 
 

@@ -14,7 +14,8 @@
         "laravel/framework": "^6.2",
         "laravel/telescope": "^3.0",
         "laravel/tinker": "^2.0",
-        "pelmered/fake-car": "^1.4"
+        "pelmered/fake-car": "^1.4",
+        "s"
     },
     "require-dev": {
         "facade/ignition": "^1.4",
