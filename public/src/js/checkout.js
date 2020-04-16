@@ -10,6 +10,7 @@ Stripe.card.createToken({
     exp_month: $('#card-month').val(),
     exp_year: $('#card-year').val(),
     name: $('#card-name').val(),
+    address: $('#restaurant-address').val()
 },stripeResponseHandler);
 return false;
 });

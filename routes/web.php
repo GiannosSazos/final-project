@@ -56,6 +56,7 @@ Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth.a
 Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth.admin']);
 Route::get ('/register', 'UsersController@create')->middleware(['auth.admin']);
 Route::post ('/register', 'UsersController@store')->middleware(['auth.admin']);
+Route::get('/my_orders','UsersController@myOrders')->middleware(['auth.hasRestaurant']);
 
 Route::get ('/user/{user}/delete/', 'UsersController@destroy')->middleware(['auth.admin']);
 

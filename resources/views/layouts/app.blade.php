@@ -46,8 +46,13 @@
             <div class="navbar-dropdown is-right is-boxed ">
 
                 <a class="navbar-item" href="/final-project/public/my_profile/">Profile</a>
+                @if (Auth::user()->restaurant_name !=null)
+                    <a class="navbar-item" href="/final-project/public/my_orders">My Orders</a>
+                @endif
+
                 <hr class="navbar-divider">
                 <a class="navbar-item" style="color:red" href="/final-project/public/logout">Log out</a>
+
             </div>
 
         </div>

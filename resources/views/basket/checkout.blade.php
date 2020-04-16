@@ -22,8 +22,12 @@
                 @endif
                 <div class="form-group" id="checkout-form">
                     <label>Card Holder Name</label>
-                    <input type="text" id="card-name" class="input is-rounded" required>
+                    <input type="text" id="card-name" class="input is-rounded" name="name" required>
                 </div>
+                    <div class="form-group" id="checkout-form">
+                        <label>Restaurant Address</label>
+                        <input type="text" id="restaurant-address" class="input is-rounded" name="restaurant_address" required>
+                    </div>
                 <div class="form-group">
                     <label>Card Number</label>
                     <input type="text" id="card-number" class="input is-rounded" required>

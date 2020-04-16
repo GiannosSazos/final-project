@@ -11,6 +11,7 @@ use Auth;
 use Illuminate\Http\Response;
 use Stripe\Charge;
 use Stripe\Stripe;
+use App\Order;
 
 class MeatsController extends Controller
 {
@@ -266,16 +267,24 @@ class MeatsController extends Controller
 
         Stripe::setApiKey('sk_test_cyejsvLS17VWBD1sBHEU25ky00MUQzzbu0');
         try {
-            Charge::create(array(
+            $charge = Charge::create(array(
                 "amount" => $basket->basketPrice * 100,
-                "currency"=>"gbp",
-                "source"=>'tok_visa',
-                "description"=>"Test Charge"
+                "currency" => "gbp",
+                "source" => 'tok_visa',
+                "description" => "Test Charge"
             ));
-        }catch(\Exception $e){
-            return redirect()->action('MeatsController@checkout')->with('error',$e->getMessage());
+            $order = new Order();
+            $order->basket = serialize($basket);
+            $order->restaurant_address = $request->input('restaurant_address');
+            $order->name = $request->input('name');
+            $order->payment_id = $charge->id;
+
+          Auth::user()->orders()->save($order);
+        } catch (\Exception $e) {
+            return redirect()->action('MeatsController@checkout')->with('error', $e->getMessage());
         }
+
         Session::forget('basket');
-        return redirect()->action('MeatsController@index')->with('charged','Your order has been placed');
+        return redirect()->action('MeatsController@index')->with('charged', 'Your order has been placed');
     }
 }
