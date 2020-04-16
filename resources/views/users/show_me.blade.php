@@ -53,8 +53,30 @@
                     </tr>
             </tbody>
         </table>
-             <a class="button is-rounded is-link" href="/final-project/public/edit_my_profile">Edit Details</a>
-        <a class="button is-rounded" href="javascript:history.back()">Back</a>
+            <a class="button is-rounded is-link" href="/final-project/public/edit_my_profile">Edit Details</a>
+            <a class="button is-rounded" href="javascript:history.back()">Back</a><br><br>
+
+                <b>My orders</b>
+                <hr style="border-top: 1px solid black;">
+                @foreach($orders as $order)
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <ul class="list-group">
+                    @foreach($order->basket->basketItem as $meat)
+
+                        <li class="list-group-item">
+                            <span class="badge">{{$meat['item']['kind']}} {{$meat['item']['cut']}} | £{{  $meat['totalPrice']}}</span>
+                        </li>
+                        @endforeach
+                        </ul>
+                        </div>
+                   <div class="panel-footer">
+                    <strong>Total Price: £{{$order->basket->basketPrice}}<br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
+                    </strong>
+                        <hr style="border-top: 1px solid black;">
+                   </div>
+                    </div>
+                @endforeach
             @endsection
     </div>
 

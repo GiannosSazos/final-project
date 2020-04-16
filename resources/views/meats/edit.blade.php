@@ -23,7 +23,7 @@
                     <tr>
                         <td class="table-row-label">Item Added By:</td>
                         <td>{{ $meat -> user-> name }}</td>
-                        <td class="table-row-label">on {{ $meat -> created_at-> format ('l jS F') }}
+                        <td class="table-row-label">on {{ $meat -> created_at-> format }}
                             at {{ $meat -> created_at-> format ('H:i') }} </td>
 
                     </tr>

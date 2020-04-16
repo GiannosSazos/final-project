@@ -33,7 +33,7 @@
         </div>
         <nav class="navbar-end">
         @if (Auth::user()->restaurant_name !=null)
-            <a class="navbar-item" href="basket" >
+            <a class="navbar-item" href="{{url('basket')}}" >
             <ion-icon style="color:white; height: 35px; width: 35px;" size="large" name="basket"></ion-icon>
         <span class="badge" style="color: white">{{Session::has('basket') ? Session::get('basket')->totalQty:'0'}}</span>
         </a>
@@ -46,10 +46,6 @@
             <div class="navbar-dropdown is-right is-boxed ">
 
                 <a class="navbar-item" href="/final-project/public/my_profile/">Profile</a>
-                @if (Auth::user()->restaurant_name !=null)
-                    <a class="navbar-item" href="/final-project/public/my_orders">My Orders</a>
-                @endif
-
                 <hr class="navbar-divider">
                 <a class="navbar-item" style="color:red" href="/final-project/public/logout">Log out</a>
 
