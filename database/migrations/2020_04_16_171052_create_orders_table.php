@@ -20,6 +20,8 @@ class CreateOrdersTable extends Migration
             $table->string('name');
             $table->text('basket');
             $table->text('restaurant_address');
+            $table->text('date');
+            $table->text('time');
             $table->string('payment_id');
 
         });

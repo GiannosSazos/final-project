@@ -68,8 +68,8 @@
         @if (isset($user -> restaurant_name))<br><br>
         <b>{{$user->name}} Orders</b>
         <hr style="border-top: 1px solid black;">
-            @if ($orders->contains('user_id',$user->id))
-        @foreach($orders as $order)
+        @if ($orders->contains('user_id',$user->id))
+            @foreach($orders as $order)
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <ul class="list-group">
@@ -80,6 +80,9 @@
                                         class="badge">{{$meat['item']['kind']}} {{$meat['item']['cut']}} | £{{  $meat['totalPrice']}}</span>
                                 </li>
                             @endforeach
+                            Delivery Address: {{$order->restaurant_address}}<br>
+                            Delivery Date:{{$order->date}}<br>
+                            Delivery Time:{{$order->time}}
                         </ul>
                     </div>
                     <div class="panel-footer">
@@ -89,9 +92,9 @@
                         <hr style="border-top: 1px solid black;">
                     </div>
                 </div>
-        @endforeach
-                @else No orders from this customer yet
-                @endif
+            @endforeach
+        @else No orders from this customer yet
+        @endif
         @endif
         @endsection
     </div>

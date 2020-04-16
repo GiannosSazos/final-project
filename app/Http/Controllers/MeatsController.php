@@ -277,6 +277,8 @@ class MeatsController extends Controller
             $order->basket = serialize($basket);
             $order->restaurant_address = $request->input('restaurant_address');
             $order->name = $request->input('name');
+            $order->date = $request->input('date');
+            $order->time = $request->input('time');
             $order->payment_id = $charge->id;
 
           Auth::user()->orders()->save($order);

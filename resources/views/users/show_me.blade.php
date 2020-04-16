@@ -67,6 +67,9 @@
                         <li class="list-group-item">
                             <span class="badge">{{$meat['item']['kind']}} {{$meat['item']['cut']}} | £{{  $meat['totalPrice']}}</span>
                         </li>
+                                    Delivery Address: {{$order->restaurant_address}}<br>
+                                    Delivery Date:{{$order->date}}<br>
+                                    Delivery Time:{{$order->time}}
                         @endforeach
                         </ul>
                         </div>

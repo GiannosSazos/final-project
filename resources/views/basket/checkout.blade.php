@@ -28,6 +28,14 @@
                         <label>Restaurant Address</label>
                         <input type="text" id="restaurant-address" class="input is-rounded" name="restaurant_address" required>
                     </div>
+                    <div class="form-group" id="checkout-form">
+                        <label>Delivery Date</label>
+                        <input type="text" id="date" class="input is-rounded" name="date" required>
+                    </div>
+                    <div class="form-group" id="checkout-form">
+                        <label>Delivery Time</label>
+                        <input type="text" id="time" class="input is-rounded" name="time"required>
+                    </div>
                 <div class="form-group">
                     <label>Card Number</label>
                     <input type="text" id="card-number" class="input is-rounded" required>
