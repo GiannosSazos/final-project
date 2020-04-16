@@ -98,6 +98,7 @@ class UsersController extends Controller
         $user = User::create([
 
             'name' => $request->input('name'),
+            'restaurant_name' => $request->input('restaurant_name'),
             'restaurant_address' => $request->input('restaurant_address'),
             'restaurant_telephone' => $request->input('restaurant_telephone'),
             'personal_address' => $request->input('personal_address'),
