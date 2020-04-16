@@ -44,22 +44,6 @@ class UsersController extends Controller
      */
     public function index()
     {
-
-        $columns = [
-            'role',
-
-        ];
-
-        /**Checks what column is sent in the request and filters the data.*/
-        foreach ($columns as $column) {
-            if (request()->has($column)) {
-                $user = user::where($column, request($column))
-                    ->paginate(self::USERS_PER_PAGE)
-                    ->appends($column, request($column));
-
-                return view('index')->with(['user' => $user]);
-            }
-        }
         $user = User::paginate(self::USERS_PER_PAGE);
         return view('users.index')->with(['user' => $user]);
     }
@@ -137,8 +121,12 @@ class UsersController extends Controller
     {
 
         $roles = Role::all();
-
-        return view('users.show', compact('user', 'roles'));
+        $orders = $user->orders;
+        $orders->transform(function ($order, $key) {
+            $order->basket = unserialize($order->basket);
+            return $order;
+        });
+        return view('users.show',['orders'=>$orders], compact('user', 'roles'));
 
     }
 
