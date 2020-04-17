@@ -127,7 +127,7 @@ class UsersController extends Controller
             $order->basket = unserialize($order->basket);
             return $order;
         });
-        return view('users.show',['orders'=>$orders], compact('user', 'roles'));
+        return view('users.show', ['orders' => $orders], compact('user', 'roles'));
 
     }
 
@@ -139,7 +139,7 @@ class UsersController extends Controller
             $order->basket = \Opis\Closure\unserialize($order->basket);
             return $order;
         });
-        return view('users.show_me',['orders'=>$orders], compact('user', 'roles'));
+        return view('users.show_me', ['orders' => $orders], compact('user', 'roles'));
 
     }
 
