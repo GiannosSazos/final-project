@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
+use App\Mail\OrderCancelled;
 use App\Mail\OrderConfirmed;
 use App\Meats;
 use http\Exception;
 use Illuminate\Support\Facades\Mail;
+use phpDocumentor\Reflection\Location;
 use Session;
 use Illuminate\Http\Request;
 use Auth;
@@ -239,6 +241,11 @@ class MeatsController extends Controller
             }
         }
         return redirect()->action('MeatsController@index')->with('noItems', 'Please add something to your basket in order to access it');
+    }
+    public function cancelOrder(Order $order){
+        $order->delete();
+        Mail::to($order->user->email)->send (new OrderCancelled($order));
+        return redirect()->action('UsersController@index')->with('orderCancelled','Order of '.$order->name.' has been cancelled');
     }
 
 

@@ -24,6 +24,11 @@
                         {{ session()->get('failure') }}
                     </div>
                 @endif
+                @if(session()->has('orderCancelled'))
+                    <div class="notification is-danger">
+                        {{ session()->get('orderCancelled') }}
+                    </div>
+                @endif
             @if(session()->has('deleted'))
                 <div class="notification is-danger">
                     {{ session()->get('deleted') }}
