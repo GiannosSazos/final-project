@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     <div class="container">
-        <label for="welcome" class="label">Welcome! If you do not have an account please contact us <u><a href='contact_us'>here</a></u>!</label>
+        <label for="welcome" class="label">Welcome! If you do not have an account please contact us at vendor@hotmail.com!</label>
         <div class="box">
             @if(session()->has('failed'))
                 <div class="notification is-danger">
