@@ -14,6 +14,26 @@
 
 @section ('content')
     <center>
+
+
+        <!--Filter Links-->
+
+        <div  style="text-align: left; float: left;">
+            <a href="?role=Admin">Admin</a> |
+            <a href="?role=Employee">Employee</a> |
+            <a href="?role=Customer">Customer</a> |
+
+
+        </div>
+
+        <!--Sort Links-->
+        <div style="text-align: right;  ">
+            Price:
+            <a href="?price_per_kg=asc">Ascending</a> |
+            <a href="?price_per_kg=desc">Descending</a><br>
+        </div>
+
+
         <!--Search Form-->
         <form action = "" method="POST">
             <fieldset>
