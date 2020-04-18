@@ -18,6 +18,11 @@
             {{ session()->get('negativeKg') }}
         </div>
     @endif
+    @if(session()->has('zeroPrice'))
+        <div class="notification is-danger">
+            {{ session()->get('zeroPrice') }}
+        </div>
+    @endif
     @if(session()->has('removedItem'))
         <div class="notification is-danger">
             {{ session()->get('removedItem') }}

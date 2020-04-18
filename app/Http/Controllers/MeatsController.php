@@ -257,6 +257,9 @@ class MeatsController extends Controller
         $oldBasket = Session::get('basket');
         $basket = new Basket($oldBasket);
         $total = $basket->basketPrice;
+        if ($basket->basketPrice==0){
+            return redirect()->action('MeatsController@showBasket')->with('zeroPrice','You cannot checkout whilst price is £0.');
+        }
         return view('basket.checkout', ['total' => $total]);
     }
 
