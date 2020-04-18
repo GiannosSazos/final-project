@@ -89,6 +89,7 @@
                         <strong>Total Price: £{{$order->basket->basketPrice}}
                             <br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
                         </strong><br>
+                        <a class="button is-rounded is-link" href="/final-project/public/delivered/order/{{$order->id}}">Delivered</a>
                         <a class="button is-rounded is-danger" href="/final-project/public/cancel/order/{{$order->id}}">Cancel Order</a>
                         <hr style="border-top: 1px solid black;">
                     </div>

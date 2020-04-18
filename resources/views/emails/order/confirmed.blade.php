@@ -7,6 +7,6 @@
 
     Thank you for choosing us!
     @component('mail::button', ['url' => 'http://localhost/final-project/public/my_profile/'])
-        Order
+        View My Order
     @endcomponent
 @endcomponent

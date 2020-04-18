@@ -69,6 +69,8 @@ Route::get ('/increase_kg/{id}/', 'MeatsController@increaseKgItem')->middleware(
 Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseKgItem')->middleware(['auth.hasRestaurant']);
 Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket')->middleware(['auth.hasRestaurant']);
 Route::get ('/cancel/order/{order}', 'MeatsController@cancelOrder')->middleware(['auth.admin']);
+Route::get ('/delivered/order/{order}', 'MeatsController@orderDelivered')->middleware(['auth.admin']);
+
 
 Route::get('/checkout/', 'MeatsController@checkout')->middleware(['auth.hasRestaurant']);
 Route::post('/checkout/', 'MeatsController@postCheckout')->middleware(['auth.hasRestaurant']);

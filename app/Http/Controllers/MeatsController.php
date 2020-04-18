@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Basket;
 use App\Mail\OrderCancelled;
 use App\Mail\OrderConfirmed;
+use App\Mail\OrderDelivered;
 use App\Meats;
 use http\Exception;
 use Illuminate\Support\Facades\Mail;
@@ -246,6 +247,11 @@ class MeatsController extends Controller
         $order->delete();
         Mail::to($order->user->email)->send (new OrderCancelled($order));
         return redirect()->action('UsersController@index')->with('orderCancelled','Order of '.$order->name.' has been cancelled');
+    }
+    public function orderDelivered(Order $order){
+        $order->delete();
+        Mail::to($order->user->email)->send (new OrderDelivered($order));
+        return redirect()->action('UsersController@index')->with('orderDelivered','Order of '.$order->name.' has been delivered');
     }
 
 
