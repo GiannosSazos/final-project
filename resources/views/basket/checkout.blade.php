@@ -22,11 +22,11 @@
                 @endif
                 <div class="form-group" id="checkout-form">
                     <label>Card Holder Name</label>
-                    <input type="text" id="card-name" class="input is-rounded" name="name" required>
+                    <input type="text" id="card-name" class="input is-rounded" name="name" value="{{Auth::user()->name}}"  required>
                 </div>
                     <div class="form-group" id="checkout-form">
                         <label>Restaurant Address</label>
-                        <input type="text" id="restaurant-address" class="input is-rounded" name="restaurant_address" required>
+                        <input type="text" id="restaurant-address" class="input is-rounded" name="restaurant_address" value="{{Auth::user()->restaurant_address}}" readonly required>
                     </div>
                     <div class="form-group" id="checkout-form">
                         <label>Delivery Date</label>

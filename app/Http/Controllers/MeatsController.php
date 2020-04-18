@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Basket;
+use App\Mail\OrderConfirmed;
 use App\Meats;
 use http\Exception;
+use Illuminate\Support\Facades\Mail;
 use Session;
 use Illuminate\Http\Request;
 use Auth;
@@ -251,6 +253,7 @@ class MeatsController extends Controller
         if (!Session::has('basket')) {
             return redirect()->action('MeatsController@showBasket');
         }
+
         $oldBasket = Session::get('basket');
         $basket = new Basket($oldBasket);
         $total = $basket->basketPrice;
@@ -287,6 +290,7 @@ class MeatsController extends Controller
         }
 
         Session::forget('basket');
+        Mail::to($order->user->email)->send (new OrderConfirmed($order));
         return redirect()->action('MeatsController@index')->with('charged', 'Your order has been placed');
     }
 }
