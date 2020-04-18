@@ -14,7 +14,18 @@
 
 @section ('content')
     <center>
-        <!--Making the table where all the data for the users will be displayed-->
+        <!--Search Form-->
+        <form action = "" method="POST">
+            <fieldset>
+                @csrf
+                <input style="text-align:center;" class="input is-rounded" type="string" name="keyword" placeholder="Search Inventory">
+                <button style="margin:5px;"  class="button is-link is-rounded"  type="submit"><ion-icon name="search"></ion-icon></button>
+                <a style="margin:5px;" class="button is-secondary is-rounded" href="/final-project/public/home"  >Show Full Inventory</a>
+            </fieldset>
+        </form>
+        <br>
+
+        <!--Making the table where all the data for the meats will be displayed-->
         <div class="box">
             @if(session()->has('added'))
                 <div class="notification is-primary">
