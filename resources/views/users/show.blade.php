@@ -88,12 +88,13 @@
                     <div class="panel-footer">
                         <strong>Total Price: £{{$order->basket->basketPrice}}
                             <br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
-                        </strong>
+                        </strong><br>
+                        <a class="button is-rounded is-danger" href="/final-project/public/cancel/order/{{$order->id}}">Cancel Order</a>
                         <hr style="border-top: 1px solid black;">
                     </div>
                 </div>
             @endforeach
-        @else No orders from this customer yet
+        @else No pending orders from this customer
         @endif
         @endif
         @endsection
