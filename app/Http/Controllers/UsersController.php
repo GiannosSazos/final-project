@@ -79,9 +79,9 @@ class UsersController extends Controller
      * @param Request $request
      * @return Response
      */
-    protected function validator(Request $request)
+    public function store(Request $request)
     {
-        return Validator::make($request, [
+        $request->validate( [
             'name' => ['required', 'string', 'max:255'],
             'personal_address' => ['required', 'string', 'max:255'],
             'personal_telephone' => ['required', 'integer'],
@@ -89,11 +89,6 @@ class UsersController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
 
         ]);
-    }
-
-    public function store(Request $request)
-    {
-
 
         $user = User::create([
 
