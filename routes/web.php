@@ -45,7 +45,7 @@ Auth::routes(['verify' => true]);
 
 /**User Routes*/
 
-Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth.admin']);
+Route::get ('/user/{user}/', 'UsersController@show')->middleware(['auth.adminEmployee']);
 
 Route::get ('/my_profile', 'UsersController@showMe');
 Route::get ('/edit_my_profile', 'UsersController@editMe');
@@ -53,7 +53,7 @@ Route::post ('/edit_my_profile', 'UsersController@updateMe');
 
 Route::get ('/user/{user}/edit', 'UsersController@edit')->middleware(['auth.admin']);
 Route::post ('/user/{user}/edit', 'UsersController@update')->middleware(['auth.admin']);
-Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth.admin']);
+Route::get ('/admin_panel', 'UsersController@index')->middleware(['auth.adminEmployee']);
 Route::get ('/register', 'UsersController@create')->middleware(['auth.admin']);
 Route::post ('/register', 'UsersController@store')->middleware(['auth.admin']);
 Route::get('/my_orders','UsersController@myOrders')->middleware(['auth.hasRestaurant']);
@@ -69,7 +69,7 @@ Route::get ('/increase_kg/{id}/', 'MeatsController@increaseKgItem')->middleware(
 Route::get ('/decrease_kg/{id}/', 'MeatsController@decreaseKgItem')->middleware(['auth.hasRestaurant']);
 Route::get ('/remove/{id}/', 'MeatsController@removeFromBasket')->middleware(['auth.hasRestaurant']);
 Route::get ('/cancel/order/{order}', 'MeatsController@cancelOrder')->middleware(['auth.admin']);
-Route::get ('/delivered/order/{order}', 'MeatsController@orderDelivered')->middleware(['auth.admin']);
+Route::get ('/delivered/order/{order}', 'MeatsController@orderDelivered')->middleware(['auth.adminEmployee']);
 
 
 Route::get('/checkout/', 'MeatsController@checkout')->middleware(['auth.hasRestaurant']);

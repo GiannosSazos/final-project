@@ -50,8 +50,10 @@
                     <th>Personal Telephone</th>
                     <th>Email</th>
                     <th>Details</th>
+                    @if ((Auth::user()->hasAnyRole('admin')))
                     <th>Edit</th>
                     <th>Delete</th>
+                        @endif
 
 
                     </thead>
@@ -72,8 +74,8 @@
                                 </a>
                             </td>
 
-                            <!--Delete meat from database button-->
 
+                            @if ((Auth::user()->hasAnyRole('admin')))
                                 <td>
                                     <a class="button"
                                        href="user/{{ $u -> id }}/edit">
@@ -82,12 +84,12 @@
                                 </td>
 
 
-                                <!--Delete meat from database button-->
                                 <td>
                                     <a class="button"
                                        href="user/{{ $u -> id }}/delete/">
                                         <ion-icon name="trash"></ion-icon>  </a></td>
                         </tr>
+                        @endif
 
                     @endforeach
                     </tbody>

@@ -25,7 +25,7 @@
         <div class="navbar-start">
             <a class="navbar-item" href="{{url('home')}}"><img src="{{ asset ('images/vendornavbar.png') }}"></a>
             <a class="navbar-item" href="/final-project/public/home">Home</a>
-            @if ((Auth::user()->hasAnyRole('admin')))
+            @if ((Auth::user()->hasAnyRoles(['employee','admin'])))
                 <a class="navbar-item" href="{{url('admin_panel')}}">Admin Panel</a>
             @endif
         </div>

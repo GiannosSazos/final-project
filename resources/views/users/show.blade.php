@@ -59,11 +59,13 @@
             </tbody>
 
         </table>
+            @if ((Auth::user()->hasAnyRole('admin')))
         <a class="button is-rounded is-link" href="/final-project/public/user/{{$user->id}}/edit">Edit Details</a>
         @if(Auth::user()->id !== $user->id)
             <a class="button is-danger is-rounded"
                href="/final-project/public/user/{{ $user -> id }}/delete/">Delete</a>
         @endif
+            @endif
         <a class="button is-rounded" href="javascript:history.back()">Back</a>
         @if (isset($user -> restaurant_name))<br><br>
         <b>{{$user->name}} Orders</b>
@@ -90,7 +92,9 @@
                             <br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
                         </strong><br>
                         <a class="button is-rounded is-link" href="/final-project/public/delivered/order/{{$order->id}}">Delivered</a>
+                        @if ((Auth::user()->hasAnyRole('admin')))
                         <a class="button is-rounded is-danger" href="/final-project/public/cancel/order/{{$order->id}}">Cancel Order</a>
+                        @endif
                         <hr style="border-top: 1px solid black;">
                     </div>
                 </div>

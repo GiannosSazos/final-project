@@ -79,6 +79,12 @@
                             <strong>Total Price: £{{$order->basket->basketPrice}}
                                 <br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
                             </strong><br>
+                            @if ((Auth::user()->hasAnyRoles(['employee','admin'])))
+                            <a class="button is-rounded is-link" href="/final-project/public/delivered/order/{{$order->id}}">Delivered</a>
+                            @endif
+                            @if ((Auth::user()->hasAnyRole('admin')))
+                            <a class="button is-rounded is-danger" href="/final-project/public/cancel/order/{{$order->id}}">Cancel Order</a>
+                            @endif
                             <hr style="border-top: 1px solid black;">
                         </div>
                     </div>
