@@ -243,22 +243,26 @@ class MeatsController extends Controller
         }
         return redirect()->action('MeatsController@index')->with('noItems', 'Please add something to your basket in order to access it');
     }
-    public function cancelOrder(Order $order){
+
+    public function cancelOrder(Order $order)
+    {
         $order->delete();
-        Mail::to($order->user->email)->send (new OrderCancelled($order));
-        return redirect()->action('UsersController@index')->with('orderCancelled','Order of '.$order->name.' has been cancelled');
+        Mail::to($order->user->email)->send(new OrderCancelled($order));
+        return redirect()->action('UsersController@index')->with('orderCancelled', 'Order of ' . $order->name . ' has been cancelled');
     }
-    public function orderDelivered(Order $order){
+
+    public function orderDelivered(Order $order)
+    {
         $order->delete();
-        Mail::to($order->user->email)->send (new OrderDelivered($order));
-        return redirect()->action('UsersController@index')->with('orderDelivered','Order of '.$order->name.' has been delivered');
+        Mail::to($order->user->email)->send(new OrderDelivered($order));
+        return redirect()->action('UsersController@index')->with('orderDelivered', 'Order of ' . $order->name . ' has been delivered');
     }
 
 
     public function __construct()
     {
-//        $this->middleware(['auth','verified']);
-        $this->middleware('auth');
+        $this->middleware(['auth', 'verified']);
+
     }
 
     public function checkout()
@@ -270,8 +274,8 @@ class MeatsController extends Controller
         $oldBasket = Session::get('basket');
         $basket = new Basket($oldBasket);
         $total = $basket->basketPrice;
-        if ($basket->basketPrice==0){
-            return redirect()->action('MeatsController@showBasket')->with('zeroPrice','You cannot checkout whilst price is £0.');
+        if ($basket->basketPrice == 0) {
+            return redirect()->action('MeatsController@showBasket')->with('zeroPrice', 'You cannot checkout whilst price is £0.');
         }
         return view('basket.checkout', ['total' => $total]);
     }
@@ -300,13 +304,13 @@ class MeatsController extends Controller
             $order->time = $request->input('time');
             $order->payment_id = $charge->id;
 
-          Auth::user()->orders()->save($order);
+            Auth::user()->orders()->save($order);
         } catch (\Exception $e) {
             return redirect()->action('MeatsController@checkout')->with('error', $e->getMessage());
         }
 
         Session::forget('basket');
-        Mail::to($order->user->email)->send (new OrderConfirmed($order));
+        Mail::to($order->user->email)->send(new OrderConfirmed($order));
         return redirect()->action('MeatsController@index')->with('charged', 'Your order has been placed');
     }
 }

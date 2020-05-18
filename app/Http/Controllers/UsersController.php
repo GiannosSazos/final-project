@@ -131,7 +131,7 @@ class UsersController extends Controller
         $roles = Role::all();
         $orders = Auth::user()->orders;
         $orders->transform(function ($order, $key) {
-            $order->basket = \Opis\Closure\unserialize($order->basket);
+            $order->basket = unserialize($order->basket);
             return $order;
         });
         return view('users.show_me',['orders'=>$orders], compact('user', 'roles'));
@@ -236,7 +236,7 @@ class UsersController extends Controller
 
     public function __construct()
     {
-//        $this->middleware(['auth','verified']);
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
+
     }
 }

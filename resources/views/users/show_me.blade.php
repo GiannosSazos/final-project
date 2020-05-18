@@ -55,10 +55,10 @@
         </table>
             <a class="button is-rounded is-link" href="/final-project/public/edit_my_profile">Edit Details</a>
             <a class="button is-rounded" href="javascript:history.back()">Back</a><br><br>
-            @if (isset($user -> restaurant_name))<br><br>
-            <b>{{$user->name}} Orders</b>
+            @if (isset(Auth::user() -> restaurant_name))<br><br>
+            <b>{{Auth::user()->name}} Orders</b>
             <hr style="border-top: 1px solid black;">
-            @if ($orders->contains('user_id',$user->id))
+            @if ($orders->contains('user_id',Auth::user()->id))
                 @foreach($orders as $order)
                     <div class="panel panel-default">
                         <div class="panel-body">
@@ -79,12 +79,13 @@
                             <strong>Total Price: £{{$order->basket->basketPrice}}
                                 <br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
                             </strong><br>
+                            <a class="button is-rounded is-link" href="/final-project/public/delivered/order/{{$order->id}}">Delivered</a>
                             <a class="button is-rounded is-danger" href="/final-project/public/cancel/order/{{$order->id}}">Cancel Order</a>
                             <hr style="border-top: 1px solid black;">
                         </div>
                     </div>
                 @endforeach
-            @else You do not have any pending orders.
+            @else No pending orders from this customer
             @endif
             @endif
             @endsection
