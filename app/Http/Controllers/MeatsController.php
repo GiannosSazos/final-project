@@ -7,9 +7,8 @@ use App\Mail\OrderCancelled;
 use App\Mail\OrderConfirmed;
 use App\Mail\OrderDelivered;
 use App\Meats;
-use http\Exception;
+use Hash;
 use Illuminate\Support\Facades\Mail;
-use phpDocumentor\Reflection\Location;
 use Session;
 use Illuminate\Http\Request;
 use Auth;
@@ -17,6 +16,7 @@ use Illuminate\Http\Response;
 use Stripe\Charge;
 use Stripe\Stripe;
 use App\Order;
+use Symfony\Component\Console\Input\Input;
 
 class MeatsController extends Controller
 {
@@ -251,11 +251,15 @@ class MeatsController extends Controller
         return redirect()->action('UsersController@index')->with('orderCancelled', 'Order of ' . $order->name . ' has been cancelled');
     }
 
-    public function orderDelivered(Order $order)
+    public function orderDelivered(Request $request, Order $order)
     {
-        $order->delete();
-        Mail::to($order->user->email)->send(new OrderDelivered($order));
-        return redirect()->action('UsersController@index')->with('orderDelivered', 'Order of ' . $order->name . ' has been delivered');
+        if (password_verify($password = $request->input('current_password'), $order->user->password)) {
+            $order->delete();
+            Mail::to($order->user->email)->send(new OrderDelivered($order));
+            return back()->with('orderDelivered', 'Order of ' . $order->name . ' has been delivered');
+        }else{
+            return back()->with('wrongPass', 'Wrong Password');
+        }
     }
 
 

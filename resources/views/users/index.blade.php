@@ -19,11 +19,7 @@
                     {{ session()->get('added') }}
                 </div>
             @endif
-                @if(session()->has('orderDelivered'))
-                    <div class="notification is-primary">
-                        {{ session()->get('orderDelivered') }}
-                    </div>
-                @endif
+
                 @if(session()->has('failure'))
                     <div class="notification is-danger">
                         {{ session()->get('failure') }}

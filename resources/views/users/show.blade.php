@@ -18,6 +18,16 @@
                 {{ session()->get('success') }}
             </div>
         @endif
+            @if(session()->has('orderDelivered'))
+                <div class="notification is-primary">
+                    {{ session()->get('orderDelivered') }}
+                </div>
+            @endif
+            @if(session()->has('wrongPass'))
+                <div class="notification is-danger">
+                    {{ session()->get('wrongPass') }}
+                </div>
+            @endif
         <table class="table is-striped is-fullwidth">
             <tbody>
             <tr>
@@ -91,19 +101,62 @@
                         <strong>Total Price: £{{$order->basket->basketPrice}}
                             <br>Date: {{$order->created_at->format('l jS F')}} at {{$order->created_at->format('H:i')}}
                         </strong><br>
-                        <a class="button is-rounded is-link" href="/final-project/public/delivered/order/{{$order->id}}">Delivered</a>
-                        @if ((Auth::user()->hasAnyRole('admin')))
+                        <form method="POST" action="/final-project/public/delivered/{{$order->id}}">
+                            @csrf
+                        <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+                        <div id="modal" class="modal">
+
+                            <div class="modal-background"></div>
+                            <div class="modal-content">
+                                <button class="modal-close is-large" aria-label="close"></button>
+
+                                <div class="box">
+
+                                    <label for="current_password" class="label">{{ __('Please enter your current password to confirm the changes') }}</label>
+                                    <div class="control has-icons-left">
+                                        <input id="current_password" type="password" class="input is-rounded @error('password') is-invalid @enderror" name="current_password" required>
+                                        <span class="icon is-small is-left">
+                            <ion-icon name="key"></ion-icon>
+                          </span>
+                                    </div>
+
+                                <br>
+                                <button type="submit" class="button is-link is-rounded">
+                                    {{ __('Confirm') }}
+                                </button>
+
+                                </div>
+                            </div>
+                                </div>
+                    </form>
+
+                            </div>
+
+                            <button class="modal-close is-large" aria-label="close"></button>
+
+                        </div>
+
+                        <button class="button is-rounded is-link" id="lanuchModal">Delivered</button>
+
+                        <script>
+                            $("#lanuchModal").click(function() {
+                                $(".modal").addClass("is-active");
+                            });
+                            $(".modal-close").click(function() {
+                                $(".modal").removeClass("is-active");
+                            });
+                        </script>
+                    @if ((Auth::user()->hasAnyRole('admin')))
                         <a class="button is-rounded is-danger" href="/final-project/public/cancel/order/{{$order->id}}">Cancel Order</a>
                         @endif
                         <hr style="border-top: 1px solid black;">
-                    </div>
-                </div>
             @endforeach
         @else No pending orders from this customer
         @endif
         @endif
-        @endsection
     </div>
+        @endsection
 
 
 
